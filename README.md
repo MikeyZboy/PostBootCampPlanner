@@ -56,13 +56,7 @@ As a user, I should be able to use the "Achievements" page to upload certificati
 - [ ] Linkedin Post direct from Achievements Board
 - [ ] Current Job Postings for Parent-Friendly Companies
 
-[Follow development here](https://trello.com/b/9lgCRRFy/parentplannerproject)
-
-<details>
-  <summary>Click to see the ParentPlannerProject Trello Board!</summary>
-
-![ParentPlannerProject]('https://trello.com/b/9lgCRRFy/parentplannerproject')
-</details>
+[Follow the Trello board for Future Updates](https://trello.com/b/9lgCRRFy/parentplannerproject)
 
 ***
 ### ERD/Mapping ###
