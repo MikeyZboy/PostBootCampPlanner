@@ -1,4 +1,4 @@
-# PostBootCampPlannerProject
+# PostBootCampPlanner
 ### 01/04/21
 ### Michael Zahuta
 
