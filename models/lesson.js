@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     category: DataTypes.STRING,
     link: DataTypes.STRING,
     complete: DataTypes.BOOLEAN,
-    accountID: {
+    accountId: {
       type: DataTypes.INTEGER,
       field: 'account_id',
       references: {

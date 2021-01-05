@@ -63,11 +63,11 @@ const createOne = async (req, res) => {
   const accountId = req.params.account_id;
   try {
     let resourceBody = {
-      accountID: accountId,
+      account_id: accountId,
       ...req.body,
     };
     let resourceLink = await Resource.create(resourceBody);
-    res.send(resourcelink);
+    res.send(resourceLink);
   } catch (error) {
     throw error;
   }

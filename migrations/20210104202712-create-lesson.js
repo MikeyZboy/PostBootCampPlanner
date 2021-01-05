@@ -20,7 +20,7 @@ module.exports = {
       complete: {
         type: Sequelize.BOOLEAN
       },
-      accountID: {
+      accountId: {
         type: Sequelize.INTEGER,
         field: 'account_id',
         references: {

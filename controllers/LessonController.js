@@ -5,7 +5,7 @@ const getAll = async (req, res) => {
   try {
     let entityId = parseInt(req.params.id);
     const lessons = await Lesson.findAll({
-      where: { id: entityId },
+      where: { account_id: entityId },
     });
     res.send(lessons);
     console.log(
@@ -22,7 +22,7 @@ const createOne = async (req, res) => {
   const accountId = req.params.account_id;
   try {
     let lessonBody = {
-      accountID: accountId,
+      account_id: accountId,
       ...req.body,
     };
     let lessonData = await Lesson.create(lessonBody);
@@ -46,7 +46,7 @@ const updateOne = async (req, res) => {
   try {
     let entity = parseInt(req.params.id);
     let updatedEntity = await Lesson.update(req.body, {
-      where: { id: entity },
+      where: { account_id: entity },
       returning: true,
     });
     res.send(updatedEntity);

@@ -1,5 +1,6 @@
 const { Account } = require('../models')
 
+//not sure we want to get all accounts...
 const getAll = async (req, res) => {
     console.log('AccountController, req.body:', req.body)
     try { 
