@@ -19,7 +19,14 @@ const getAll = async (req, res) => {
 };
 
 const createOne = async (req, res) => {
+  const accountId = req.params.account_id;
   try {
+    let lessonBody = {
+      accountID: accountId,
+      ...req.body,
+    };
+    let lessonData = await Lesson.create(lessonBody);
+    res.send(lessonData);
   } catch (error) {
     throw error;
   }

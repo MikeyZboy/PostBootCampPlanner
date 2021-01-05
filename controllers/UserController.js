@@ -11,14 +11,10 @@ const createUser = async (req, res) => {
     await newUser.save();
     res.send(newUser);
     console.log('USERCONTROLLER,createUser() created:', newUser)
+    // if there's an error above - consider switching build to create <-- build was a Ted call
   } catch (error) {
-    // if (error instanceof ValidationError) {
-    //   return console.error(
-    //     "Captured validation error: ",
-    //     error.errors[0].message
-    //   );
-    }
     throw error;
+  }
 };
 
 const signInUser = async (req, res, next) => {

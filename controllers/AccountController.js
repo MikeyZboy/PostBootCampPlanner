@@ -1,4 +1,4 @@
-const { Account, Lesson, Resource } = require('../models')
+const { Account } = require('../models')
 
 const getAll = async (req, res) => {
     console.log('AccountController, req.body:', req.body)
