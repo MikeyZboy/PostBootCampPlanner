@@ -9,10 +9,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       account_id: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        field: 'account_id',
+        references: {
+          model: 'accounts',
+          key: 'id'
+        }
       },
       lesson_id: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        field: 'lesson_id',
+        references: {
+          model: 'lessons',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

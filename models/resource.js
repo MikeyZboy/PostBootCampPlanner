@@ -4,20 +4,27 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Resource extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      // define association here
+      Resource.belongsTo(models.Account, {
+        foreignKey: 'account_id',
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
+      })
     }
   };
   Resource.init({
     title: DataTypes.STRING,
     link: DataTypes.STRING,
     topic: DataTypes.STRING,
-    account_id: DataTypes.STRING
+    account_id: {
+      type: DataTypes.STRING,
+      field: 'account_id',
+      references: {
+        model: 'account',
+        key: 'id'
+      }
+    }
   }, {
     sequelize,
     modelName: 'Resource',

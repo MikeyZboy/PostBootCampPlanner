@@ -18,7 +18,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       account_id: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        field: 'account_id',
+        references: {
+          model: 'accounts',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,
