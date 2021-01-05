@@ -7,6 +7,6 @@ Router.get('/', (req, res) => res.send('This is root!*'))
 
 Router.use('/accounts', AccountRouter)
 Router.use('/lessons', LessonRouter)
-Router.use('resources', ResourceRouter)
+Router.use('/resources', ResourceRouter)
 
 module.exports = Router
