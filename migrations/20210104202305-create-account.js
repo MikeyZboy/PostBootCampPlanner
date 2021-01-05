@@ -20,9 +20,6 @@ module.exports = {
       goal: {
         type: Sequelize.STRING
       },
-      connections: {
-        type: Sequelize.STRING
-      },
       userId: {
         type: Sequelize.INTEGER,
         field: 'user_id',

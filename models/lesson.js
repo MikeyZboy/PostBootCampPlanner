@@ -4,20 +4,28 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Lesson extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      Lesson.belongsToMany(models.Account, { through: models.Account_Lesson })
+      Lesson.belongsTo(models.Account, {
+        foreignKey: 'account_id',
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
+      })
     }
   };
   Lesson.init({
     title: DataTypes.STRING,
     category: DataTypes.STRING,
     link: DataTypes.STRING,
-    complete: DataTypes.BOOLEAN
+    complete: DataTypes.BOOLEAN,
+    accountID: {
+      type: DataTypes.INTEGER,
+      field: 'account_id',
+      references: {
+        model: 'account',
+        key: 'id'
+      }
+    }
   }, {
     sequelize,
     modelName: 'Lesson',

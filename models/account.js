@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'cascade',
         onUpdate: 'cascade'
       })
-      //don't know if this is necessary beacuse we'll be doing an assoc on Resource
       Account.hasMany(models.Resource, {
         foreignKey: 'accountId',
         as: 'resources',
@@ -33,9 +32,8 @@ module.exports = (sequelize, DataTypes) => {
     lastName: DataTypes.STRING,
     bootcamp: DataTypes.STRING,
     goal: DataTypes.STRING,
-    connections: DataTypes.STRING,
     userId: {   
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       field: 'user_id',
       references: {
         model: 'user',

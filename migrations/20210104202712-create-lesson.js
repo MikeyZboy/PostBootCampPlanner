@@ -20,6 +20,14 @@ module.exports = {
       complete: {
         type: Sequelize.BOOLEAN
       },
+      accountID: {
+        type: Sequelize.INTEGER,
+        field: 'account_id',
+        references: {
+          model: 'accounts',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
