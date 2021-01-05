@@ -1,12 +1,21 @@
 import React from 'react'
+import SignOut from '../components/SignOut'
 
-const Home = () => {
+export default (props) => {
+    const { account, onClickSignOut, setNeedsRefresh } = props;
 
+  if (account !== null && account !== undefined) {
     return(
         <div>
-            {/* Home Page */}
+            <div>
+                <h1>Welcome back, {account.firstName}</h1>
+            </div>
+            <div>
+                <SignOut onClick={onClickSignOut}/>
+            </div>
         </div>
     )
+} else {
+    <div>Looking for your profile...</div>;
 }
-
-export default Home
+}
