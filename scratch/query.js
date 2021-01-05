@@ -1,6 +1,5 @@
-const { User } = require('./models/user')
-const Sequelize = require("sequelize");
-// const Op = Sequelize.Op;
+const { User, Account } = require('../models')
+const {Sequelize, Op, QueryTypes } = require("sequelize");
 
 const allUsers = async () => {
     const users = await User.findAll()
@@ -9,16 +8,24 @@ const allUsers = async () => {
 
 const createNewUser = async () => {
   const newUser = await User.create({
-    firstName: "Jane",
-    lastName: "Doe",
     email: "jane@jane.com",
     password: "123456789",
   });
   console.log('New User Created:', newUser) // works
 };
 
+const createNewAccount = async () => {
+  const newAccount = await Account.create({
+    firstName: 'Jane',
+    lastName: 'Doe',
+    bootcamp: 'Flatiron School',
+    goal: 'Full Stack Engineering'
+  })
+  console.log('New Account Created:', newAccount)
+}
+
 const changeSmith = async () => {
-  await User.update({ lastName: 'Smith'},{
+  await Account.update({ lastName: 'Smith'},{
     where: {
       lastName: 'Doe'
     }
@@ -27,7 +34,7 @@ const changeSmith = async () => {
 }
 
 const deleteJanes = async () => {
-  await User.destroy({
+  await Account.destroy({
     where: {
       firstName: 'Jane'
     }
@@ -37,8 +44,9 @@ const deleteJanes = async () => {
 
 const run = async () => {
     try {
-        await allUsers(),
+        // await allUsers(),
         await createNewUser(),
+        await createNewAccount(),
         await changeSmith(),
         await deleteJanes()
     } catch (err) {

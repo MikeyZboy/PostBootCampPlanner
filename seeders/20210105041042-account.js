@@ -8,7 +8,6 @@ module.exports = {
       lastName: 'Schmoe',
       bootcamp: 'General Assembly',
       goal: 'Full Stack Confidence',
-      connections: null,
       createdAt: new Date(),
       updatedAt: new Date()
     }])

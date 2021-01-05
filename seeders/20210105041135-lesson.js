@@ -7,6 +7,7 @@ module.exports = {
       category: 'Javascript',
       link: 'https://www.codecademy.com/learn/introduction-to-javascript',
       complete: true,
+      account_id: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     }])
