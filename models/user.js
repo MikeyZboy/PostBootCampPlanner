@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       User.hasOne(models.Account, {
-        foreignKey: 'user_id',
+        foreignKey: 'userId',
+        as: 'user_id',
         onDelete: 'cascade',
         onUpdate: 'cascade'
       })  

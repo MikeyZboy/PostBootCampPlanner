@@ -17,8 +17,8 @@ module.exports = {
       topic: {
         type: Sequelize.STRING
       },
-      account_id: {
-        type: Sequelize.STRING,
+      accountId: {
+        type: Sequelize.INTEGER,
         field: 'account_id',
         references: {
           model: 'accounts',

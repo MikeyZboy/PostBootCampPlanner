@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     link: DataTypes.STRING,
     topic: DataTypes.STRING,
-    account_id: {
-      type: DataTypes.STRING,
+    accountId: {
+      type: DataTypes.INTEGER,
       field: 'account_id',
       references: {
         model: 'account',

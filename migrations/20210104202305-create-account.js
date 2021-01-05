@@ -8,14 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
-        type: Sequelize.STRING,
-        field: 'user_id',
-        references: {
-          model: 'users',
-          key: 'id'
-        }
-      },
       firstName: {
         type: Sequelize.STRING
       },
@@ -30,6 +22,14 @@ module.exports = {
       },
       connections: {
         type: Sequelize.STRING
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        field: 'user_id',
+        references: {
+          model: 'users',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

@@ -8,19 +8,20 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Account.belongsTo(models.User, {
-        foreignKey: 'user_id',
+        foreignKey: 'userId',
+        as: 'user_id',
         onDelete: 'cascade',
         onUpdate: 'cascade'
       })
       //don't know if this is necessary beacuse we'll be doing an assoc on Resource
       Account.hasMany(models.Resource, {
-        foreignKey: 'account_id',
+        foreignKey: 'accountId',
         as: 'resources',
         onDelete: "cascade",
         onUpdate: "cascade",
       });
       Account.hasMany(models.Lesson, {
-        foreignKey: 'account_id',
+        foreignKey: 'accountId',
         as: 'lessons',
         onDelete: 'cascade',
         onUpdate: 'cascade'

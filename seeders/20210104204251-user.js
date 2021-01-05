@@ -7,7 +7,7 @@ module.exports = {
       [
         {
           email: "demo@demo.com",
-          password_digest: "$321!pass!123$",
+          password: "$321!pass!123$",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
