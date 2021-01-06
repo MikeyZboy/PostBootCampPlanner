@@ -59,11 +59,7 @@ const SignIn = (props) => {
           </label>
         </div>
         <div>
-          <button
-            className="btns"
-            buttonStyle="btn--outline"
-            buttonSize="btn--large"
-          >
+          <button>
             Submit
           </button>
         </div>

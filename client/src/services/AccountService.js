@@ -8,6 +8,7 @@ export const __GetProfile = async (user_id) => {
   console.log("UserService, __GETPROFILE:", user_id);
   try {
     const res = await ApiClient.get(`/accounts/${user_id}`);
+    console.log('__GetProfile res:',res)
     return res.data;
   } catch (error) {
     throw error;

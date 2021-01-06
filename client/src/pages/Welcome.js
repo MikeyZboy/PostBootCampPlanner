@@ -13,7 +13,7 @@ const Welcome = () => {
       <div className="landing-btns">
         <NavLink
           to="/signup"
-          activeclassName="nav-active"
+          // activeclassName="nav-active"
           onClick={handleClick}
         >
           <button>Get Started</button>

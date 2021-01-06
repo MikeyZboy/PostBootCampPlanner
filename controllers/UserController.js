@@ -1,4 +1,5 @@
-const { User } = require('../models/User')
+const { User, Account } = require('../models')
+// const { Account } = require('../models/Account')
 
 const createUser = async (req, res) => {
   try {
@@ -6,8 +7,8 @@ const createUser = async (req, res) => {
       ...req.body,
     };
     console.log('USERCONTROLLER: req.body:', entityBody)
-    const newUser = User.build(entityBody);
-    // await newAccount.validate();
+    const newUser = await User.create(entityBody);
+    await newUser.validate();
     await newUser.save();
     res.send(newUser);
     console.log('USERCONTROLLER,createUser() created:', newUser)
@@ -21,7 +22,7 @@ const signInUser = async (req, res, next) => {
   const accountEmail = req.body.email;
   const accountPassword = req.body.password;
   try {
-    const account = await Account.findOne({
+    const account = await User.findOne({ //<-- should this be Account.find or Account.findByPk
       where: {
         email: accountEmail,
         password: accountPassword,

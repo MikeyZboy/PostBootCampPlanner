@@ -14,6 +14,8 @@ export default function Router() {
     const localAccountId = localStorage.getItem("account_id");
 
     const retrieveAccount = async (account_id) => {
+      console.log('retrieveAccount, account_id:', account_id)
+      console.log('retrieveAccount localAccountId:', localAccountId)
       try {
         const thisAccount = await __GetProfile(parseInt(localAccountId));
         setAccount(thisAccount);
