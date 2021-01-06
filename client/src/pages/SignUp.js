@@ -49,8 +49,10 @@ const SignUp = (props) => {
       bootcamp: bootcamp,
       goal: goal,
     };
+    console.log('handleSubmit SignUp,formState:', formState)
     try {
       const accountResponse = await __RegisterUser(formState);
+      console.log('handleSubmitSignUp, accountResponse:',accountResponse)
       props.setAccount(accountResponse);
       props.history.push("/home");
     } catch (error) {
@@ -66,9 +68,10 @@ const SignUp = (props) => {
           <label htmlFor="firstName">
             First Name
             <TextInput
-              type="text"
-              name="firstName"
               className="form-input"
+              placeholder="First Name"
+              name="firstName"
+              type="text"
               onChange={formFieldChange}
             />
           </label>
@@ -77,9 +80,10 @@ const SignUp = (props) => {
           <label htmlFor="lastName">
             Last Name
             <TextInput
-              type="text"
-              name="lastName"
               className="form-input"
+              placeholder="Last Name"
+              name="lastName"
+              type="text"
               onChange={formFieldChange}
             />
           </label>
@@ -88,9 +92,10 @@ const SignUp = (props) => {
           <label htmlFor="email" className="form-label">
             Email
             <TextInput
-              type="text"
-              name="email"
               className="form-input"
+              placeholder="Email"
+              name="email"
+              type="text"
               onChange={formFieldChange}
             />
           </label>
@@ -99,9 +104,10 @@ const SignUp = (props) => {
           <label htmlFor="password" className="form-label">
             Password
             <TextInput
-              type="text"
-              name="password"
               className="form-input"
+              placeholder="Password"
+              name="password"
+              type="text"
               onChange={formFieldChange}
             />
           </label>
@@ -110,9 +116,10 @@ const SignUp = (props) => {
           <label htmlFor="bootcamp" className="form-label">
             Bootcamp
             <TextInput
-              type="text"
-              name="bootcamp"
               className="form-input"
+              placeholder="Bootcamp/School"
+              name="bootcamp"
+              type="text"
               onChange={formFieldChange}
             />
           </label>
@@ -121,9 +128,10 @@ const SignUp = (props) => {
           <label htmlFor="goal" className="form-label">
             End Goal
             <TextInput
-              type="text"
-              name="goal"
               className="form-input"
+              placeholder="Your End Goal"
+              name="goal"
+              type="text"
               onChange={formFieldChange}
             />
           </label>
@@ -131,8 +139,6 @@ const SignUp = (props) => {
         <div>
           <button
             className="btns"
-            // buttonStyle="btn--outline"
-            // buttonSize="btn--large"
           >
             Submit
           </button>

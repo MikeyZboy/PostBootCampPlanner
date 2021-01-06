@@ -21,6 +21,8 @@ const SignIn = (props) => {
     try {
       const userData = { email: loginValue, password: passwordValue };
       const loginResponse = await __LoginUser(userData);
+      console.log('handleSubmitSignIn: loginResponse:', loginResponse)
+      // this is returning both the user table data, and the account details keyed on "user_id"
       if (loginResponse !== "") {
         setAccount(loginResponse);
         props.history.push("/home");

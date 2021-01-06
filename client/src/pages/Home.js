@@ -8,7 +8,7 @@ export default (props) => {
     return(
         <div>
             <div>
-                <h1>Welcome back, {account.firstName}</h1>
+                <h1>Welcome back, {account.id.firstName}</h1>
             </div>
             <div>
                 <SignOut onClick={onClickSignOut}/>
