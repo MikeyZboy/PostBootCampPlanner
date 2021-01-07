@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import ProtectedRoute from "../components/ProtectedRoute";
 import Home from "../pages/Home";
@@ -11,28 +11,26 @@ import { __GetProfile } from "../services/AccountService";
 export default function Router() {
   const [account, setAccount] = useState(null);
   const [needsRefresh, setNeedsRefresh] = useState(false);
-
-  const localAccountId = localStorage.getItem("account_id");
-
-  const retrieveAccount = async (account_id) => {
-    console.log("retrieveAccount, account_id:", account_id);
-    console.log("retrieveAccount localAccountId:", localAccountId);
+  
+  const retrieveAccount = async () => {
+    const localAccountId = localStorage.getItem("account_id");
     try {
       const thisAccount = await __GetProfile(parseInt(localAccountId));
-      setAccount(thisAccount);
+      setAccount(thisAccount)
+      console.log(thisAccount);
       return thisAccount;
     } catch (error) {}
   };
 
-  if ((account === null && localAccountId !== null) || needsRefresh) {
-    setNeedsRefresh(false);
-    const retrievedAccount = retrieveAccount(localAccountId);
-    setAccount(retrievedAccount);
-  }
+ useEffect(()=>{
+   retrieveAccount()
+ },[])
 
   const clearAccount = () => {
     setAccount(null);
   };
+
+
 
   return (
     <main>
@@ -68,7 +66,6 @@ export default function Router() {
               {...props}
               account={account}
               onClickSignOut={clearAccount}
-              setNeedsRefresh={setNeedsRefresh}
             />
           )}
         />

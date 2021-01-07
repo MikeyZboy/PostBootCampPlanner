@@ -34,7 +34,6 @@ const LessonForm = (props) => {
 
   const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log('submit hit',e)
     try {
     let formState = {
       title: title,
@@ -44,21 +43,18 @@ const LessonForm = (props) => {
       account_id: accountId
     };
     console.log('insideHandleSubmit,formState:', formState)
-      const addLesson = await __CreateLesson(formState);
-      setNeedsRefresh(true)
+      const newLesson = await __CreateLesson(formState);
+      props.addLesson(newLesson)
       setComplete(false)
-      //what if i fire off a get request here...
-      const getLessons = await __GetLessons()
-      props.setLessons([getLessons])
-      props.history.push(`/lessons`);
     } catch (error) {
+        console.log(error)
       setFormError(true);
     }
   };
-
+  console.log(props)
     return (
      <div>   
-      <form setNeedsRefresh={setNeedsRefresh} onSubmit={(e) => handleSubmit(e)} >
+      <form onSubmit={handleSubmit} >
         <TextInput
           placeholder="Lesson Name"
           type="text"

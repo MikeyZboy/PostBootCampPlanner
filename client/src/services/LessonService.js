@@ -4,25 +4,19 @@ const setLocalAccountId = (account_id) => {
   localStorage.setItem("account_id", account_id);
 };
 
-export const __GetLessons = async () => {
-  const accountId = localStorage.getItem("account_id");
+export const __GetLessons = async (accountId) => {
   try {
-    // const res = await ApiClient.get(`/accounts/${accountId}/todos`);
-    const res = await ApiClient.get(`/lessons/${accountId}`)
-    return res.data.lessons;
+    const res = await ApiClient.get(`/lessons/view/${accountId}`)
+    return res.data;
   } catch (error) {
     throw error;
   }
 };
 // /accounts/${accountId}
 export const __CreateLesson = async (formData) => {
-    console.log('__CreateLesson HIT, formData:', formData)
-//   const accountId = localStorage.getItem("account_id");
   try {
-    console.log('inside __CreateLesson HIT')
     const res = await ApiClient.post(`/lessons/`, formData);
-    console.log('res',res, 'formData:', formData)
-    res.save()
+    console.log('res.data return:', res.data)
     return res.data;
   } catch (error) {
     throw error;
