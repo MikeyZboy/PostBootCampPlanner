@@ -4,11 +4,12 @@ const setLocalAccountId = (account_id) => {
   localStorage.setItem("account_id", account_id);
 };
 
-export const __GetProfile = async (user_id) => {
-  console.log("UserService, __GETPROFILE:", user_id);
+export const __GetProfile = async (account_id) => {
+  console.log("UserService, __GETPROFILE:", account_id);
   try {
-    const res = await ApiClient.get(`/accounts/${user_id}`);
-    console.log('__GetProfile res:',res)
+    const res = await ApiClient.get(`/accounts/${account_id}`);
+    // setLocalAccountId(res.data.id);
+    // console.log('__GetProfile res:',res.data)
     return res.data;
   } catch (error) {
     throw error;

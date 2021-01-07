@@ -19,6 +19,7 @@ const getAll = async (req, res) => {
 };
 
 const createOne = async (req, res) => {
+  console.log('LessonController, createOne HIT:', req.body)
   const accountId = req.params.account_id;
   try {
     let lessonBody = {
