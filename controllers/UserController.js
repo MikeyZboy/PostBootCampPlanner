@@ -1,22 +1,21 @@
-const { User, Account } = require('../models')
+const { Account } = require('../models')
 const { ValidationError } = require("sequelize");
 
-const createUser = async (req, res) => {
+const createAccount = async (req, res) => {
   try {
     let entityBody = {
       ...req.body,
     };
     console.log('USERCONTROLLER: req.body:', entityBody)
-    const newUser = await User.create(entityBody);
-    await newUser.validate();
-    await newUser.save();
-    const newAccount = await Account.create(entityBody)
-    await newAccount.validate()
-    await newAccount.save()
-    // res.send(newUser, newAccount); <-- express said this is deprecated?
-    res.status(newUser).send(newUser);
-    res.status(newAccount).send(newAccount)
-    console.log('USERCONTROLLER,createUser() created:', newUser, 'newAccount:',newAccount)
+    const newAccount = Account.build(entityBody);
+    // await newAccount.validate();
+    await newAccount.save();
+    // const newAccount = await Account.create(entityBody)
+    // await newAccount.validate()
+    // await newAccount.save()
+    res.send(newAccount); // <-- express said this is deprecated?
+    // res.status(newAccount).send(newAccount) <-- this is the new way?
+    console.log('USERCONTROLLER,createAccount:',newAccount)
     // if there's an error above - consider switching build to create <-- build was a Ted call
   } catch (error) {
     if (error instanceof ValidationError) {
@@ -29,12 +28,12 @@ const createUser = async (req, res) => {
   }
 };
 
-const signInUser = async (req, res, next) => {
+const signIn = async (req, res, next) => {
   const accountEmail = req.body.email;
   const accountPassword = req.body.password;
   console.log('signInUser, req.body:',req.body)
   try {
-    const account = await User.findOne({ //<-- should this be Account.find or Account.findByPk
+    const account = await Account.findOne({ //<-- should this be Account.find or Account.findByPk
       where: {
         email: accountEmail,
         password: accountPassword,
@@ -55,6 +54,6 @@ const signInUser = async (req, res, next) => {
 };
 
 module.exports = {
-    createUser,
-    signInUser
+    createAccount,
+    signIn
 }

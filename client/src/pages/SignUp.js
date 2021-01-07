@@ -49,10 +49,10 @@ const SignUp = (props) => {
       bootcamp: bootcamp,
       goal: goal,
     };
-    console.log('handleSubmit SignUp,formState:', formState)
+    // console.log('handleSubmit SignUp,formState:', formState)
     try {
       const accountResponse = await __RegisterUser(formState);
-      console.log('handleSubmitSignUp, accountResponse:',accountResponse)
+      // console.log('handleSubmitSignUp, accountResponse:',accountResponse)
       props.setAccount(accountResponse);
       props.history.push("/home");
     } catch (error) {

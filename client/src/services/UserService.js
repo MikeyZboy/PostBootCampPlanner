@@ -13,7 +13,7 @@ import ApiClient from "./ApiClient";
 export const __RegisterUser = async (formData) => {
     console.log("UserService, __RegisterUser:", formData);
   try {
-    const res = await ApiClient.post(`/users/signup`, formData);
+    const res = await ApiClient.post(`/signup`, formData);
     console.log('__RegisterUser res:', res)
     return res.data;
   } catch (error) {
@@ -24,7 +24,7 @@ export const __RegisterUser = async (formData) => {
 export const __LoginUser = async (userData) => {
     console.log("UserService, __LoginUser:", userData);
   try {
-    const res = await ApiClient.post(`/users/signin`, userData);
+    const res = await ApiClient.post(`/signin`, userData);
     return res.data;
   } catch (error) {
     throw error;

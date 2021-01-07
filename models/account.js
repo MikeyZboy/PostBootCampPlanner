@@ -7,12 +7,12 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-      Account.belongsTo(models.User, {
-        foreignKey: 'userId',
-        as: 'user_id',
-        onDelete: 'cascade',
-        onUpdate: 'cascade'
-      })
+      // Account.belongsTo(models.User, {
+      //   foreignKey: 'userId',
+      //   as: 'user_id',
+      //   onDelete: 'cascade',
+      //   onUpdate: 'cascade'
+      // })
       Account.hasMany(models.Resource, {
         foreignKey: 'accountId',
         as: 'resources',
@@ -32,14 +32,16 @@ module.exports = (sequelize, DataTypes) => {
     lastName: DataTypes.STRING,
     bootcamp: DataTypes.STRING,
     goal: DataTypes.STRING,
-    userId: {   
-      type: DataTypes.INTEGER,
-      field: 'user_id',
-      references: {
-        model: 'user',
-        key: 'id'
-      }
-    }
+    email: DataTypes.STRING,
+    password: DataTypes.STRING
+    // userId: {   
+    //   type: DataTypes.INTEGER,
+    //   field: 'user_id',
+    //   references: {
+    //     model: 'user',
+    //     key: 'id'
+    //   }
+    // }
   }, {
     sequelize,
     modelName: 'Account',

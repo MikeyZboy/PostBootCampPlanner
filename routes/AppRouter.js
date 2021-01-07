@@ -6,7 +6,7 @@ const UserRouter = require('./UserRouter')
 
 Router.get('/', (req, res) => res.send('This is root!*'))
 
-Router.use('/users', UserRouter)
+Router.use('/', UserRouter)
 Router.use('/accounts', AccountRouter) //works with /api/accounts/1 <-- Joe Schmoe and all his resources, lessons
 Router.use('/lessons', LessonRouter) // works with /api/lessons/1 <-- just the lesson with id 1
 Router.use('/resources', ResourceRouter) // 

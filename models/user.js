@@ -6,12 +6,12 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
 
     static associate(models) {
-      User.hasOne(models.Account, {
-        foreignKey: 'userId',
-        as: 'user_id',
-        onDelete: 'cascade',
-        onUpdate: 'cascade'
-      })  
+      // User.hasOne(models.Account, {
+      //   foreignKey: 'userId',
+      //   as: 'user_id',
+      //   onDelete: 'cascade',
+      //   onUpdate: 'cascade'
+      // })  
     }
   };
   User.init({
