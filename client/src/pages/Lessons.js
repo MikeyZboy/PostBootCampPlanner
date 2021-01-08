@@ -38,10 +38,13 @@ const Lessons = (props) => {
     setLessons(updatedLessons)
     getLessons()
 }
+// may need to use a sort in the above function - they're returning randomly...
 
-  const removeLesson = async (index) => {
-    // console.log(index)
-    // how do i pass this to __DeleteLesson with the index?
+  const removeLesson = async (lesson) => {
+    let id = lesson.id
+    const newLessons = await __DeleteLesson(id)
+    setLessons(newLessons)
+    getLessons()
   }
   
   console.log(lessons)
@@ -60,14 +63,14 @@ const Lessons = (props) => {
                   <h4>{lesson.category}</h4>
                   <a href={lesson.link}>{lesson.title}</a>
                   <p>COMPLETED</p>
-                  <button onClick={()=> removeLesson(index)}>DELETE</button>
+                  <button onClick={()=> removeLesson(lesson)}>DELETE</button>
                 </div>
               ) : (
                 <div key={index}>
                   <h4>{lesson.category}</h4>
                   <a href={lesson.link}>{lesson.title}</a>
                   <button onClick={()=> markComplete(index)}>MARK COMPLETE</button>
-                  <button onClick={()=> removeLesson(index)}>DELETE</button>
+                  <button onClick={()=> removeLesson(lesson)}>DELETE</button>
                 </div>
               )}
             </div>

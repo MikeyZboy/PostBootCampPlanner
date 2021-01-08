@@ -32,8 +32,8 @@ export const __UpdateLesson = async (id, formData) => {
   }
 };
 
-export const __DeleteLesson = async (id, index) => {
-  console.log('__DeleteLesson id:', id, index)
+export const __DeleteLesson = async (id) => {
+  console.log('__DeleteLesson id:', id)
   try {
     const res = await ApiClient.delete(`/lessons/${id}`);
     return res.data;
