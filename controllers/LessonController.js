@@ -19,7 +19,7 @@ const getAll = async (req, res) => {
 };
 
 const createOne = async (req, res) => {
-  console.log('LessonController, createOne HIT:', req.body)
+  console.log("LessonController, createOne HIT:", req.body);
   const accountId = req.params.account_id;
   try {
     let lessonBody = {
@@ -57,6 +57,7 @@ const updateOne = async (req, res) => {
 };
 
 const deleteOne = async (req, res) => {
+  console.log('deleteOne:', req)
   try {
     let entityId = parseInt(req.params.id);
     await Lesson.destroy({

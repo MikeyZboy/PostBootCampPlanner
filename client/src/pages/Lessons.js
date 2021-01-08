@@ -1,27 +1,50 @@
 import React, { useState, useEffect } from "react";
-import Card from "../components/Card";
 import LessonForm from "../components/LessonForm";
-import { __GetLessons } from '../services/LessonService'
+import { __DeleteLesson, __GetLessons, __UpdateLesson } from "../services/LessonService";
 
 const Lessons = (props) => {
-
   const { account } = props;
   const [lessons, setLessons] = useState([]);
   console.log("Lessons page, account:", account);
 
   const getLessons = async () => {
-      let userLessons = await __GetLessons(account.id)
-        setLessons(userLessons)
-  }
+    let userLessons = await __GetLessons(account.id);
+    setLessons(userLessons);
+  };
 
   const addLesson = (lesson) => {
-      console.log('fired')
-    setLessons([ ...lessons, lesson ]);
+    setLessons([...lessons, lesson]);
   };
 
   useEffect(() => {
+    getLessons();
+  }, []);
+
+  // update Lesson - if user wants to update title, link, or category?
+  // const updateLesson = () => {
+  // }
+
+  // struggling to grab a value that will mark that lesson complete
+  const markComplete = async (lesson) => {
+    console.log('markComplete click: index>', lesson)
+    let id = account.id
+    let formData = { 
+      title: lesson.title,
+      category: lesson.category,
+      link: lesson.link,
+      complete: true
+  }
+    let updatedLessons = await __UpdateLesson(id, formData)
+    setLessons(updatedLessons)
     getLessons()
-}, []);
+}
+
+  const removeLesson = async (index) => {
+    // console.log(index)
+    // how do i pass this to __DeleteLesson with the index?
+  }
+  
+  console.log(lessons)
 
   return (
     <div>
@@ -30,15 +53,21 @@ const Lessons = (props) => {
         {lessons.length ? (
           lessons.map((lesson, index) => (
             <div key={index}>
-              <h4>{lesson.category}</h4>
-              <a href={lesson.link}>{lesson.title}</a>
+              {/* <h4>{lesson.category}</h4>
+              <a href={lesson.link}>{lesson.title}</a> */}
               {lesson.complete === true ? (
-                <div>
+                <div key={index}>
+                  <h4>{lesson.category}</h4>
+                  <a href={lesson.link}>{lesson.title}</a>
                   <p>COMPLETED</p>
+                  <button onClick={()=> removeLesson(index)}>DELETE</button>
                 </div>
               ) : (
-                <div>
-                  <button>MARK COMPLETE</button>
+                <div key={index}>
+                  <h4>{lesson.category}</h4>
+                  <a href={lesson.link}>{lesson.title}</a>
+                  <button onClick={()=> markComplete(index)}>MARK COMPLETE</button>
+                  <button onClick={()=> removeLesson(index)}>DELETE</button>
                 </div>
               )}
             </div>

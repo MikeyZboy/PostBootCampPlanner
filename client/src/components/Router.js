@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import ProtectedRoute from "../components/ProtectedRoute";
 import Home from "../pages/Home";
-import Lessons from '../pages/Lessons'
+import Lessons from "../pages/Lessons";
 import Welcome from "../pages/Welcome";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
@@ -11,26 +11,24 @@ import { __GetProfile } from "../services/AccountService";
 export default function Router() {
   const [account, setAccount] = useState(null);
   const [needsRefresh, setNeedsRefresh] = useState(false);
-  
+
   const retrieveAccount = async () => {
     const localAccountId = localStorage.getItem("account_id");
     try {
       const thisAccount = await __GetProfile(parseInt(localAccountId));
-      setAccount(thisAccount)
+      setAccount(thisAccount);
       console.log(thisAccount);
       return thisAccount;
     } catch (error) {}
   };
 
- useEffect(()=>{
-   retrieveAccount()
- },[])
+  useEffect(() => {
+    retrieveAccount();
+  }, []);
 
   const clearAccount = () => {
     setAccount(null);
   };
-
-
 
   return (
     <main>
