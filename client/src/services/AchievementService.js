@@ -2,7 +2,7 @@ import ApiClient from "./ApiClient";
 
 export const __GetAchievements = async () => {
   try {
-    const res = await ApiClient.get("/people");
+    const res = await ApiClient.get("/achievements");
     return res.data;
   } catch (error) {
     console.log(error)
@@ -12,7 +12,7 @@ export const __GetAchievements = async () => {
 
 export const __CreateAchievement = async (formData) => {
   try {
-    const res = await ApiClient.post("/people", formData);
+    const res = await ApiClient.post("/achievements", formData);
     return res.data;
   } catch (error) {
     console.log(error)

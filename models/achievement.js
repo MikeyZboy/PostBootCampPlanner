@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   };
-  Achievements.init({
+  Achievement.init({
     name: DataTypes.STRING,
     achievementImage: {
       type: DataTypes.TEXT,

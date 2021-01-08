@@ -6,6 +6,7 @@ import Lessons from "../pages/Lessons";
 import Welcome from "../pages/Welcome";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
+import Achievements from '../pages/Achievements'
 import { __GetProfile } from "../services/AccountService";
 
 export default function Router() {
@@ -61,6 +62,17 @@ export default function Router() {
           path="/lessons"
           component={(props) => (
             <Lessons
+              {...props}
+              account={account}
+              onClickSignOut={clearAccount}
+            />
+          )}
+        />
+        <ProtectedRoute
+          authenticated={account !== null}
+          path="/achievements"
+          component={(props) => (
+            <Achievements
               {...props}
               account={account}
               onClickSignOut={clearAccount}
