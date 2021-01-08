@@ -71,6 +71,7 @@ const deleteOne = async (req, res) => {
       },
     });
   } catch (error) {
+    console.log(error)
     throw error;
   }
 };

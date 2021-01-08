@@ -6,13 +6,6 @@ module.exports = (sequelize, DataTypes) => {
   class Account extends Model {
 
     static associate(models) {
-      // define association here
-      // Account.belongsTo(models.User, {
-      //   foreignKey: 'userId',
-      //   as: 'user_id',
-      //   onDelete: 'cascade',
-      //   onUpdate: 'cascade'
-      // })
       Account.hasMany(models.Resource, {
         foreignKey: 'accountId',
         as: 'resources',
@@ -25,6 +18,12 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'cascade',
         onUpdate: 'cascade'
       })
+      Account.hasMany(models.Achievement, {
+        foreignKey: 'accountId',
+        as: 'achievements',
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
+      })
     }
   };
   Account.init({
@@ -34,14 +33,6 @@ module.exports = (sequelize, DataTypes) => {
     goal: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING
-    // userId: {   
-    //   type: DataTypes.INTEGER,
-    //   field: 'user_id',
-    //   references: {
-    //     model: 'user',
-    //     key: 'id'
-    //   }
-    // }
   }, {
     sequelize,
     modelName: 'Account',
