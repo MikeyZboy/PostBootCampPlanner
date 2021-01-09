@@ -1,4 +1,9 @@
 .achievement-image {
-    max-width: 10px;
-    max-height: 25px;
+    max-width: 200px;
+    max-height: 400px;
+}
+
+.achievement-div {
+    width: 25px;
+    height: 40px;
 }

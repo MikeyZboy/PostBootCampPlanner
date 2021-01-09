@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {  __GetAchievements, __CreateAchievement } from '../services/AchievementService'
-
+import {  __GetAchievements, __CreateAchievement, __DeleteAchievement } from '../services/AchievementService'
+import Nav from '../components/Nav'
+import '../styles/Achievements.css'
 
 const Achievements = (props) => {
     console.log('achievements, props:',props)
@@ -37,12 +38,23 @@ const Achievements = (props) => {
     });
   };
 
-  const handleDelete = () => {
-      console.log('clicked delete')
+  const handleDelete = async (achievement) => {
+      console.log('clicked delete', achievement.id)
+      let id = achievement.id
+      const updatedAchievements = await __DeleteAchievement(id)
+      console.log(updatedAchievements)
+      setAchievements(updatedAchievements)
+      fetchAchievements()
   }
 
   return (
-    <div className="App">
+    <div>
+      <div>
+        <h1>Great Success {account.firstName}!</h1>
+      </div>
+      <div>
+        <Nav />
+      </div>
       <div>
         <form onSubmit={handleSubmit}>
           <input
@@ -62,14 +74,14 @@ const Achievements = (props) => {
         </form>
       </div>
       {achievements.length ? (
-        achievements.map((achievement) => (
-          <div key={achievement.id}>
+        achievements.map((achievement, index) => (
+          <div key={index}>
             <h4>{achievement.name}</h4>
             <img
               className="achievement-image"
               src={achievement.achievementImage}
             />
-            <button onClick={handleDelete}>Delete</button>
+            <button onClick={() => handleDelete(achievement)}>Delete</button>
           </div>
         ))
       ) : (

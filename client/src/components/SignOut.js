@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router";
 
-export default ({ children, type, onClick, buttonStyle, buttonSize }) => {
+export default () => {
   const [signedOut, setSignedOut] = useState(false);
 
   const clearAccount = () => {
-    localStorage.clear("account_id");
-    onClick();
+    localStorage.clear("account_id");;
     setSignedOut(true);
   };
 
@@ -14,7 +13,7 @@ export default ({ children, type, onClick, buttonStyle, buttonSize }) => {
     <Redirect to="/" push={true} />;
   } else {
     return (
-      <button className={"btn-list"} onClick={(e) => clearAccount()}>
+      <button className={"btn-list"} onClick={clearAccount}>
         Sign Out
       </button>
     );

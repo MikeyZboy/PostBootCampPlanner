@@ -1,21 +1,25 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import SignOut from '../components/SignOut'
 
 const Nav = () => {
   return (
     <header className="newnav">
       <nav>
-        <NavLink activeClassName="nav-active" to="/home">
+        <NavLink to="/home">
           Home
         </NavLink>
-        <NavLink activeClassName="nav-active" to="/lessons">
+        <NavLink to="/lessons">
           Lessons
         </NavLink>
-        <NavLink activeClassName="nav-active" to="/resources">
+        <NavLink to="/resources">
           Resources
         </NavLink>
-        <NavLink activeClassName="nav-active" to="/achievements">
+        <NavLink to="/achievements">
           Achievements
+        </NavLink>
+        <NavLink to ="/">
+          <SignOut />
         </NavLink>
       </nav>
     </header>

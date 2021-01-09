@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Nav from '../components/Nav'
 import LessonForm from "../components/LessonForm";
 import { __DeleteLesson, __GetLessons, __UpdateLesson } from "../services/LessonService";
 
@@ -52,25 +53,31 @@ const Lessons = (props) => {
   return (
     <div>
       <div>
+        <h1>Keep Grinding {account.firstName}!</h1>
+      </div>
+      <div>
+        <Nav />
+      </div>
+      <div>
         <h3>What have you learned?</h3>
         {lessons.length ? (
           lessons.map((lesson, index) => (
             <div key={index}>
-              {/* <h4>{lesson.category}</h4>
-              <a href={lesson.link}>{lesson.title}</a> */}
               {lesson.complete === true ? (
                 <div key={index}>
                   <h4>{lesson.category}</h4>
                   <a href={lesson.link}>{lesson.title}</a>
                   <p>COMPLETED</p>
-                  <button onClick={()=> removeLesson(lesson)}>DELETE</button>
+                  <button onClick={() => removeLesson(lesson)}>DELETE</button>
                 </div>
               ) : (
                 <div key={index}>
                   <h4>{lesson.category}</h4>
                   <a href={lesson.link}>{lesson.title}</a>
-                  <button onClick={()=> markComplete(index)}>MARK COMPLETE</button>
-                  <button onClick={()=> removeLesson(lesson)}>DELETE</button>
+                  <button onClick={() => markComplete(index)}>
+                    MARK COMPLETE
+                  </button>
+                  <button onClick={() => removeLesson(lesson)}>DELETE</button>
                 </div>
               )}
             </div>

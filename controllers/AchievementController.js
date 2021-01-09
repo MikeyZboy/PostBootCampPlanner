@@ -25,14 +25,15 @@ const getAll = async (req, res) => {
 const deleteOne = async (req, res) => {
   console.log(req.body)
   try {
-    let id = parseInt(req.params.achievement_id)
+    let id = parseInt(req.params.id)
     await Achievement.destroy({
-      where: { achievement_id: id },
+      where: { id: id },
     })
     res.send({
-      message: `deleted lesson with id of ${id}`
+      message: `deleted achievement with id of ${id}`
     })
   } catch (error) {
+    console.log(error)
     throw error
   }
 }

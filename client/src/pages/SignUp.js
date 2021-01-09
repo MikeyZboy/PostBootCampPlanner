@@ -63,7 +63,7 @@ const SignUp = (props) => {
   return (
     <div className="form-container">
       <form className="form-content-right" onSubmit={(e) => handleSubmit(e)}>
-        <h1>Sign Up</h1>
+        <h1>Create Your Profile</h1>
         <div className="form-inputs">
           <label htmlFor="firstName">
             First Name

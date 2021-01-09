@@ -49,34 +49,34 @@ export default function Router() {
           authenticated={account !== null}
           path="/home"
           component={(props) => (
-            <Home
-              {...props}
-              account={account}
-              onClickSignOut={clearAccount}
-              setNeedsRefresh={setNeedsRefresh}
-            />
+              <Home
+                {...props}
+                account={account}
+                onClickSignOut={clearAccount}
+                setNeedsRefresh={setNeedsRefresh}
+              />
           )}
         />
         <ProtectedRoute
           authenticated={account !== null}
           path="/lessons"
           component={(props) => (
-            <Lessons
-              {...props}
-              account={account}
-              onClickSignOut={clearAccount}
-            />
+              <Lessons
+                {...props}
+                account={account}
+                onClickSignOut={clearAccount}
+              />
           )}
         />
         <ProtectedRoute
           authenticated={account !== null}
           path="/achievements"
           component={(props) => (
-            <Achievements
-              {...props}
-              account={account}
-              onClickSignOut={clearAccount}
-            />
+              <Achievements
+                {...props}
+                account={account}
+                onClickSignOut={clearAccount}
+              />
           )}
         />
       </Switch>
