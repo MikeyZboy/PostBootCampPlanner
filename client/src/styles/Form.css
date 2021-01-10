@@ -1,0 +1,93 @@
+.form-container {
+  width: 100%;
+  position: relative;
+  border-radius: 10px;
+  height: .5vh;
+  display: grid;
+}
+
+.form-content {
+  padding: 20px;
+  margin-top: 20px;
+  margin: 50px auto;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: center;
+}
+
+.form-div:hover {
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+    box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form h1 {
+  font-size: 1rem;
+  text-align: start;
+  width: 80%;
+  margin-bottom: 1rem;
+  color:white;
+}
+
+/* .form-inputs {
+  display: flex;
+  align-content: flex-end;
+  margin-bottom: 0.5rem;
+  width: 100%;
+} */
+
+.form-input {
+  align-content: flex-start;
+  display: block;
+  padding: 10px;
+  outline: none;
+  border-radius: 2px;
+  height: 40px;
+  width: 100%;
+  border: none;
+}
+
+input {
+  height: 30px;
+  min-width: 50%;
+  max-width: 75%;
+  padding: 0;
+  border-radius: 0;
+  background-color: transparent;
+  color: white;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #ffffff;
+  text-align: center;
+}
+
+.focus-placeholder::placeholder {
+  color: white;
+  text-align: center;
+}
+
+.todo-form {
+  color: white;
+}
+
+.todo-form input[type="text"] {
+  color: white;
+}
+
+textarea {
+  color: white;
+}

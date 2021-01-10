@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
-import {  __GetAchievements, __CreateAchievement, __DeleteAchievement } from '../services/AchievementService'
-import Nav from '../components/Nav'
-import '../styles/Achievements.css'
+import {
+  __GetAchievements,
+  __CreateAchievement,
+  __DeleteAchievement,
+} from "../services/AchievementService";
+import Nav from "../components/Nav";
+import "../styles/Achievements.css";
 
 const Achievements = (props) => {
-    console.log('achievements, props:',props)
-    const { account } = props
+  const { account } = props;
   const [achievements, setAchievements] = useState([]);
-  const [newAchievement, setNewAchievement] = useState({ name: "", achievementImage: "" });
+  const [newAchievement, setNewAchievement] = useState({
+    name: "",
+    achievementImage: "",
+  });
   const [fileName, setFilename] = useState(""); //<-- what is this?
-  
+
   const fetchAchievements = async () => {
     const data = await __GetAchievements();
     setAchievements(data);
@@ -20,32 +26,30 @@ const Achievements = (props) => {
   }, []);
 
   const handleSubmit = async (e) => {
-      e.preventDefault()
-      let formData = new FormData()
-      formData.append('name', newAchievement.name)
-      formData.append('achievementImage', newAchievement.achievementImage)
-      formData.append('accountId', account.id )
-      console.log(formData)
-      let achievement = await __CreateAchievement(formData)
-      console.log(achievement)
+    e.preventDefault();
+    let formData = new FormData();
+    formData.append("name", newAchievement.name);
+    formData.append("achievementImage", newAchievement.achievementImage);
+    formData.append("accountId", account.id);
+    let achievement = await __CreateAchievement(formData);
+    fetchAchievements();
   };
 
   const handleChange = (e) => {
     setNewAchievement({
       ...newAchievement,
       [e.target.name]:
-        e.target.type === "file" ? e.target.files[0] : e.target.value
+        e.target.type === "file" ? e.target.files[0] : e.target.value,
     });
   };
 
   const handleDelete = async (achievement) => {
-      console.log('clicked delete', achievement.id)
-      let id = achievement.id
-      const updatedAchievements = await __DeleteAchievement(id)
-      console.log(updatedAchievements)
-      setAchievements(updatedAchievements)
-      fetchAchievements()
-  }
+    console.log("clicked delete", achievement.id);
+    let id = achievement.id;
+    const updatedAchievements = await __DeleteAchievement(id);
+    setAchievements(updatedAchievements);
+    fetchAchievements();
+  };
 
   return (
     <div>
@@ -70,7 +74,7 @@ const Achievements = (props) => {
             name="achievementImage"
             onChange={handleChange}
           />
-          <button>Post Achievement</button>
+          <button>Upload</button>
         </form>
       </div>
       {achievements.length ? (

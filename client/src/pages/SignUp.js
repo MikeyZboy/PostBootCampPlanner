@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import TextInput from "../components/TextInput";
 import { __RegisterUser } from '../services/UserService' 
-
+import "../styles/Form.css"
+import "../styles/Buttons.css"
 
 const SignUp = (props) => {
   const [firstName, setFirstName] = useState("");
@@ -49,10 +50,8 @@ const SignUp = (props) => {
       bootcamp: bootcamp,
       goal: goal,
     };
-    // console.log('handleSubmit SignUp,formState:', formState)
     try {
       const accountResponse = await __RegisterUser(formState);
-      // console.log('handleSubmitSignUp, accountResponse:',accountResponse)
       props.setAccount(accountResponse);
       props.history.push("/home");
     } catch (error) {
@@ -62,11 +61,10 @@ const SignUp = (props) => {
 
   return (
     <div className="form-container">
-      <form className="form-content-right" onSubmit={(e) => handleSubmit(e)}>
+      <form className="form-content form-div" onSubmit={(e) => handleSubmit(e)}>
         <h1>Create Your Profile</h1>
-        <div className="form-inputs">
+        <div className="form-input">
           <label htmlFor="firstName">
-            First Name
             <TextInput
               className="form-input"
               placeholder="First Name"
@@ -76,9 +74,8 @@ const SignUp = (props) => {
             />
           </label>
         </div>
-        <div className="form-inputs">
+        <div className="form-input">
           <label htmlFor="lastName">
-            Last Name
             <TextInput
               className="form-input"
               placeholder="Last Name"
@@ -88,9 +85,8 @@ const SignUp = (props) => {
             />
           </label>
         </div>
-        <div className="form-inputs">
+        <div className="form-input">
           <label htmlFor="email" className="form-label">
-            Email
             <TextInput
               className="form-input"
               placeholder="Email"
@@ -100,9 +96,8 @@ const SignUp = (props) => {
             />
           </label>
         </div>
-        <div className="form-inputs">
+        <div className="form-input">
           <label htmlFor="password" className="form-label">
-            Password
             <TextInput
               className="form-input"
               placeholder="Password"
@@ -112,9 +107,8 @@ const SignUp = (props) => {
             />
           </label>
         </div>
-        <div className="form-inputs">
+        <div className="form-input">
           <label htmlFor="bootcamp" className="form-label">
-            Bootcamp
             <TextInput
               className="form-input"
               placeholder="Bootcamp/School"
@@ -124,9 +118,8 @@ const SignUp = (props) => {
             />
           </label>
         </div>
-        <div className="form-inputs">
+        <div className="form-input">
           <label htmlFor="goal" className="form-label">
-            End Goal
             <TextInput
               className="form-input"
               placeholder="Your End Goal"
@@ -136,12 +129,8 @@ const SignUp = (props) => {
             />
           </label>
         </div>
-        <div>
-          <button
-            className="btns"
-          >
-            Submit
-          </button>
+        <div className="submit-button">
+          <button className="submit-button">Submit</button>
         </div>
         <div>
           <NavLink to="/signin" activeclassName="nav-active">

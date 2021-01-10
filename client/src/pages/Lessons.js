@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Nav from '../components/Nav'
+import Nav from "../components/Nav";
 import LessonForm from "../components/LessonForm";
-import { __DeleteLesson, __GetLessons, __UpdateLesson } from "../services/LessonService";
+import {
+  __DeleteLesson,
+  __GetLessons,
+  __UpdateLesson,
+} from "../services/LessonService";
 
 const Lessons = (props) => {
   const { account } = props;
   const [lessons, setLessons] = useState([]);
-  console.log("Lessons page, account:", account);
 
   const getLessons = async () => {
     let userLessons = await __GetLessons(account.id);
@@ -21,34 +24,26 @@ const Lessons = (props) => {
     getLessons();
   }, []);
 
-  // update Lesson - if user wants to update title, link, or category?
-  // const updateLesson = () => {
-  // }
-
-  // struggling to grab a value that will mark that lesson complete
   const markComplete = async (lesson) => {
-    console.log('markComplete click: index>', lesson)
-    let id = account.id
-    let formData = { 
+    let id = account.id;
+    let formData = {
       title: lesson.title,
       category: lesson.category,
       link: lesson.link,
-      complete: true
-  }
-    let updatedLessons = await __UpdateLesson(id, formData)
-    setLessons(updatedLessons)
-    getLessons()
-}
-// may need to use a sort in the above function - they're returning randomly...
+      complete: true,
+    };
+    let updatedLessons = await __UpdateLesson(id, formData);
+    setLessons(updatedLessons);
+    getLessons();
+  };
+  // may need to use a sort in the above function - they're returning randomly...
 
   const removeLesson = async (lesson) => {
-    let id = lesson.id
-    const newLessons = await __DeleteLesson(id)
-    setLessons(newLessons)
-    getLessons()
-  }
-  
-  console.log(lessons)
+    let id = lesson.id;
+    const newLessons = await __DeleteLesson(id);
+    setLessons(newLessons);
+    getLessons();
+  };
 
   return (
     <div>

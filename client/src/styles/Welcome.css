@@ -1,0 +1,33 @@
+.welcome-container {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  display: grid;
+}
+
+.welcome-div:hover {
+  color: white;
+  transition: all 0.5s ease;
+}
+
+.welcome-div {
+  position: relative;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-card {
+    height: 100%;
+    width: 50%;
+    padding: 15px;
+  border: 1px solid black;
+  text-align: center;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.2);
+}

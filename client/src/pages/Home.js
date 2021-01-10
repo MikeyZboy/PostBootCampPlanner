@@ -2,19 +2,24 @@ import React from 'react'
 import Nav from '../components/Nav'
 import Goal from '../components/Goal'
 import DateTime from '../components/DateTime'
-import SignOut from '../components/SignOut'
+import CustomTimeLine from '../components/CustomTimeLine'
+import "../styles/Layout.css"
+
 
 export default (props) => {
-    const { account, onClickSignOut, setNeedsRefresh } = props;
+    const { account, setNeedsRefresh } = props;
 
   if (account !== null && account !== undefined) {
     return(
-        <div>
+        <div className="main-container">
             <div>
                 <h1>Welcome back, {account.firstName}</h1>
             </div>
-            <div>
+            <div className="nav">
                 <Nav />
+            </div>
+            <div>
+                <CustomTimeLine />
             </div>   
             <div>
                 <Goal 
@@ -24,9 +29,6 @@ export default (props) => {
             </div>
             <div>
                 <DateTime />
-            </div>
-            <div>
-                <SignOut onClick={onClickSignOut}/>
             </div>
         </div>
     )

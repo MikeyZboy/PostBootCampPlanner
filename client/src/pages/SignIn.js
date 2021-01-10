@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import TextInput from '../components/TextInput'
 import { __LoginUser } from '../services/UserService' 
+import '../styles/Buttons.css'
+import '../styles/Form.css'
+
 
 const SignIn = (props) => {
   const { setAccount } = props;
@@ -34,36 +37,32 @@ const SignIn = (props) => {
 
   return (
     <div className="form-container">
-      <form className="form-content-right" onSubmit={(e) => handleSubmit(e)}>
+      <form className="form-content form-div" onSubmit={(e) => handleSubmit(e)}>
         <h1>Sign In</h1>
-        <div className="form-inputs">
+        <div className="form-input">
           <label htmlFor="email" className="form-label">
-            Email
             <TextInput
               className="form-input"
-              placeholder="email"
+              placeholder="Email"
               name="email"
               type="email"
               onChange={emailField}
             />
           </label>
         </div>
-        <div className="form-inputs">
+        <div className="form-input">
           <label htmlFor="password" className="form-label">
-            Password
             <TextInput
               className="form-input"
-              placeholder="password"
+              placeholder="Password"
               name="password"
               type="password"
               onChange={passwordField}
             />
           </label>
         </div>
-        <div>
-          <button>
-            Submit
-          </button>
+        <div className="submit-button">
+          <button className="submit-button">Submit</button>
         </div>
       </form>
     </div>

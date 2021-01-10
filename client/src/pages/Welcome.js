@@ -1,23 +1,21 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-// import "../styles/LandingPage.css";
+import "../styles/Welcome.css";
 
 const Welcome = () => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
   return (
-    <div className="landing-container">
-      <h1>Post BootCamp Planner</h1>
-      <p>“A browser based planner for nonstop learning!”</p>
-      <div className="landing-btns">
-        <NavLink
-          to="/signup"
-          // activeclassName="nav-active"
-          onClick={handleClick}
-        >
-          <button>Get Started</button>
-        </NavLink>
+    <div className="welcome-container">
+      <div className="welcome-div">
+        <div className="welcome-card">
+          <h1>Post BootCamp Planner</h1>
+          <p>“A browser based planner for nonstop learning!”</p>
+          <NavLink to="/signup" onClick={handleClick}>
+            <button className="submit-button">Get Started</button>
+          </NavLink>
+        </div>
       </div>
     </div>
   );
