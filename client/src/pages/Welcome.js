@@ -7,7 +7,7 @@ const Welcome = () => {
   const handleClick = () => setClick(!click);
 
   return (
-    <div className="welcome-container">
+    <div className="welcome-container">  
       <div className="welcome-div">
         <div className="welcome-card">
           <h1>Post BootCamp Planner</h1>

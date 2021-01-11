@@ -26,6 +26,7 @@ const updateOne = async (req, res) => {
 };
 
 const deleteOne = async (req, res) => {
+  console.log('deleteOne hit:', req.body)
   try {
     let entityId = parseInt(req.params.id);
     await Resource.destroy({

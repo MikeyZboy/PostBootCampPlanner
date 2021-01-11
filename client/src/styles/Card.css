@@ -9,6 +9,10 @@
   margin-right: 2em;
 }
 
+.mini {
+  size: inherit; 
+}
+
 .card:hover {
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.4);
 }
