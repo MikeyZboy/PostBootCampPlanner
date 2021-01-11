@@ -4,31 +4,23 @@ import Goal from '../components/Goal'
 import DateTime from '../components/DateTime'
 import CustomTimeLine from '../components/CustomTimeLine'
 import "../styles/Layout.css"
-
+import "../styles/Main.css"
+import "../styles/Nav.css"
 
 export default (props) => {
     const { account, setNeedsRefresh } = props;
 
   if (account !== null && account !== undefined) {
     return(
-        <div className="main-container">
-            <div>
+        <div>
+            <header className="header">
                 <h1>Welcome back, {account.firstName}</h1>
-            </div>
-            <div className="nav">
-                <Nav />
-            </div>
-            <div>
-                <CustomTimeLine />
-            </div>   
+            </header>
             <div>
                 <Goal 
                 account={props.account}
                 setNeedsRefresh={setNeedsRefresh}
                 />
-            </div>
-            <div>
-                <DateTime />
             </div>
         </div>
     )

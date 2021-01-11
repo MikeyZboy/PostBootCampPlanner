@@ -12,7 +12,7 @@ export const DateTime = () => {
   });
 
   return (
-    <div className="home-grid-center-bottom">
+    <div className="grid-bottom">
       <h4>{date.toLocaleDateString()}</h4>
       <h4>{date.toLocaleTimeString()}</h4>
     </div>

@@ -6,6 +6,7 @@ import {
 } from "../services/AchievementService";
 import Nav from "../components/Nav";
 import "../styles/Achievements.css";
+import '../styles/Main.css'
 
 const Achievements = (props) => {
   const { account } = props;
@@ -53,9 +54,9 @@ const Achievements = (props) => {
 
   return (
     <div>
-      <div>
+      <header className="header">
         <h1>Great Success {account.firstName}!</h1>
-      </div>
+      </header>
       <div>
         <Nav />
       </div>

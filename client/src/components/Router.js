@@ -6,8 +6,9 @@ import Lessons from "../pages/Lessons";
 import Welcome from "../pages/Welcome";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
-import Achievements from '../pages/Achievements'
+import Achievements from "../pages/Achievements";
 import { __GetProfile } from "../services/AccountService";
+import Layout from "../components/Layout";
 
 export default function Router() {
   const [account, setAccount] = useState(null);
@@ -49,34 +50,40 @@ export default function Router() {
           authenticated={account !== null}
           path="/home"
           component={(props) => (
+            <Layout>
               <Home
                 {...props}
                 account={account}
                 onClickSignOut={clearAccount}
                 setNeedsRefresh={setNeedsRefresh}
               />
+            </Layout>
           )}
         />
         <ProtectedRoute
           authenticated={account !== null}
           path="/lessons"
           component={(props) => (
+            <Layout>
               <Lessons
                 {...props}
                 account={account}
                 onClickSignOut={clearAccount}
               />
+            </Layout>
           )}
         />
         <ProtectedRoute
           authenticated={account !== null}
           path="/achievements"
           component={(props) => (
+            <Layout>
               <Achievements
                 {...props}
                 account={account}
                 onClickSignOut={clearAccount}
               />
+            </Layout>
           )}
         />
       </Switch>

@@ -6,6 +6,7 @@ import {
   __GetLessons,
   __UpdateLesson,
 } from "../services/LessonService";
+import '../styles/Main.css'
 
 const Lessons = (props) => {
   const { account } = props;
@@ -47,9 +48,9 @@ const Lessons = (props) => {
 
   return (
     <div>
-      <div>
+      <header className="header">
         <h1>Keep Grinding {account.firstName}!</h1>
-      </div>
+      </header>
       <div>
         <Nav />
       </div>
