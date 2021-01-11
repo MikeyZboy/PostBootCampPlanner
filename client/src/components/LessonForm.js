@@ -70,7 +70,7 @@ const LessonForm = (props) => {
           name="link"
           onChange={handleChange}
         />
-        <button>Add Lesson</button>
+        <button>Add</button>
       </form>
     </div>
   );

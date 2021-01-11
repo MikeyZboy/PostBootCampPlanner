@@ -75,10 +75,9 @@ const Achievements = (props) => {
       </div>
       {achievements.length ? (
         achievements.map((achievement, index) => (
-          <div key={index} className="achievement-image">
+          <div key={index} className="card">
             <h4>{achievement.name}</h4>
             <img
-              className="achievement-image"
               src={achievement.achievementImage}
             />
             <button onClick={() => handleDelete(achievement)}>Delete</button>

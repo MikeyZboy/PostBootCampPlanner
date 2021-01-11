@@ -6,6 +6,7 @@ import {
   __UpdateLesson,
 } from "../services/LessonService";
 import '../styles/Layout.css'
+import '../styles/Card.css'
 
 const Lessons = (props) => {
   const { account } = props;
@@ -53,26 +54,27 @@ const Lessons = (props) => {
       <div className="main">
         <h3>What have you learned?</h3>
         {lessons.length ? (
-          lessons.map((lesson, index) => (
-            <div key={index}>
+          lessons.map((lesson, category, index) => (
+            <div key={category} className="card">
+              <h4>{lesson.category}</h4>
               {lesson.complete === true ? (
                 <div key={index}>
-                  <h4>{lesson.category}</h4>
+                  {/* <h4>{lesson.category}</h4> */}
                   <a href={lesson.link}>{lesson.title}</a>
                   <p>COMPLETED</p>
                   <button onClick={() => removeLesson(lesson)}>DELETE</button>
                 </div>
               ) : (
                 <div key={index}>
-                  <h4>{lesson.category}</h4>
-                  <a href={lesson.link}>{lesson.title}</a>
+                  {/* <h4>{lesson.category}</h4> */}
+                  <li> <a href={lesson.link}>{lesson.title}</a></li>
                   <button onClick={() => markComplete(index)}>
                     MARK COMPLETE
                   </button>
                   <button onClick={() => removeLesson(lesson)}>DELETE</button>
                 </div>
               )}
-            </div>
+            </div>  
           ))
         ) : (
           <div>

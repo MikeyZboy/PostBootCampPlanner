@@ -1,14 +1,15 @@
 const { Resource } = require("../models");
 
-const getOne = async (req, res) => {
-  const entityId = req.params.id;
-  try {
-    const entity = await Resource.findByPk(entityId);
-    res.send(entity);
-  } catch (error) {
-    throw error;
-  }
-};
+// const getOne = async (req, res) => {
+//   const entityId = req.params.id;
+//   try {
+//     const entity = await Resource.findByPk(entityId);
+//     res.send(entity);
+//   } catch (error) {
+//     console.log(error);
+//     throw error;
+//   }
+// };
 
 const updateOne = async (req, res) => {
   try {
@@ -19,6 +20,7 @@ const updateOne = async (req, res) => {
     });
     res.send(updatedEntity);
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };
@@ -37,6 +39,7 @@ const deleteOne = async (req, res) => {
       },
     });
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };
@@ -55,6 +58,7 @@ const getAll = async (req, res) => {
       resources
     );
   } catch (error) {
+    console.log(error)
     throw error;
   }
 };
@@ -69,6 +73,7 @@ const createOne = async (req, res) => {
     let resourceLink = await Resource.create(resourceBody);
     res.send(resourceLink);
   } catch (error) {
+    console.log(error)
     throw error;
   }
 };
@@ -76,7 +81,6 @@ const createOne = async (req, res) => {
 module.exports = {
   getAll,
   createOne,
-  getOne,
   updateOne,
   deleteOne,
 };

@@ -19,3 +19,14 @@
   grid-area: main;
   background-color: white;
 }
+
+h1, h3{
+  color: gray;
+  font-style: italic;
+}
+
+.background {
+  background-image: url("https://imgur.com/RXT6Akc");
+  background-attachment: fixed;
+  background-size: cover;
+} 

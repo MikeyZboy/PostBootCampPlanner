@@ -1,13 +1,12 @@
 import React from 'react'
 
-const Card = (lesson) => {
-    console.log('card lesson:', lesson)
+const Card = (props) => {
+    console.log('card lesson:', props.account)
     return (
         <div>
-            <h2>Lessons</h2>
-            <h4>{lesson.category}</h4>
-            <a href={lesson.link}>{lesson.title}</a>
-            { lesson.complete === true ? (
+            {/* <h4>{lesson.category}</h4>
+            <a href={props.link}>{props.title}</a>
+            { props.complete === true ? (
                 <div>
                     <p>COMPLETED</p>
                 </div>
@@ -15,7 +14,7 @@ const Card = (lesson) => {
                 <div>
                    <button>MARK COMPLETE</button>
                 </div>    
-            )}
+            )} */}
         </div>
     )
 }

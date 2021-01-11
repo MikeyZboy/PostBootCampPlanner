@@ -3,13 +3,15 @@ import Goal from '../components/Goal'
 import DateTime from '../components/DateTime'
 import CustomTimeLine from '../components/CustomTimeLine'
 import "../styles/Layout.css"
+// import Mountains from '../assets/mountains-noborders.png'
 
 export default (props) => {
     const { account, setNeedsRefresh } = props;
 
   if (account !== null && account !== undefined) {
     return(
-        <div>
+        <div className="background">
+        {/* <img src={Mountains} alt="mountains"/> */}
                 <header className="head">
                 <h1>Welcome back, {account.firstName}</h1>
                 </header>
