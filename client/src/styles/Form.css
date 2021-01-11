@@ -32,7 +32,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-    box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .form h1 {
@@ -42,13 +42,6 @@
   margin-bottom: 1rem;
   color:white;
 }
-
-/* .form-inputs {
-  display: flex;
-  align-content: flex-end;
-  margin-bottom: 0.5rem;
-  width: 100%;
-} */
 
 .form-input {
   align-content: flex-start;
@@ -80,14 +73,17 @@ input {
   text-align: center;
 }
 
-.todo-form {
-  color: white;
+.inapp-form {
+display: inline-grid;
+position: relative;
+margin: 0 auto;  
 }
 
-.todo-form input[type="text"] {
+.inapp-form input[type="text"] {
   color: white;
-}
+} 
 
 textarea {
   color: white;
 }
+

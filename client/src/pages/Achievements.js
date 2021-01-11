@@ -4,9 +4,7 @@ import {
   __CreateAchievement,
   __DeleteAchievement,
 } from "../services/AchievementService";
-import Nav from "../components/Nav";
 import "../styles/Achievements.css";
-import '../styles/Main.css'
 
 const Achievements = (props) => {
   const { account } = props;
@@ -54,14 +52,11 @@ const Achievements = (props) => {
 
   return (
     <div>
-      <header className="header">
+      <header className="head">
         <h1>Great Success {account.firstName}!</h1>
       </header>
-      <div>
-        <Nav />
-      </div>
-      <div>
-        <form onSubmit={handleSubmit}>
+      <div className="form-container form-div">
+        <form className="inapp-form" onSubmit={handleSubmit}>
           <input
             type="text"
             value={newAchievement.name}
@@ -80,7 +75,7 @@ const Achievements = (props) => {
       </div>
       {achievements.length ? (
         achievements.map((achievement, index) => (
-          <div key={index}>
+          <div key={index} className="achievement-image">
             <h4>{achievement.name}</h4>
             <img
               className="achievement-image"

@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import SignOut from '../components/SignOut'
-import "../styles/Nav.css";
 
 const Nav = () => {
   return (

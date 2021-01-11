@@ -50,8 +50,8 @@ const LessonForm = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="form-container form-div">
+      <form className="inapp-form" onSubmit={handleSubmit}>
         <TextInput
           placeholder="Lesson Name"
           type="text"

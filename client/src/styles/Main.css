@@ -1,9 +1,0 @@
-.header {
- grid-column-start: 1;
- grid-column-end: 4;
- grid-row: 1;
-}
-
-.timeline {
-grid-area: 1 / col4-start / last-line / 6;
-}

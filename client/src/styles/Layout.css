@@ -7,11 +7,15 @@
   "sidebar main main main"
   "sidebar main main main"
   "sidebar main main main";
+  height: 100vh;
 }
 
-.grid-bottom{
-  grid-column: 1;
-  grid-row: 3;
-  text-align: center;
-  padding-top: 1em;
+.head {
+  grid-area: head;
+  box-shadow: 0 1px 0 0 #eaedf3;
+}
+
+.main {
+  grid-area: main;
+  background-color: white;
 }

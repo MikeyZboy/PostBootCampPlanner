@@ -1,11 +1,8 @@
 import React from 'react'
-import Nav from '../components/Nav'
 import Goal from '../components/Goal'
 import DateTime from '../components/DateTime'
 import CustomTimeLine from '../components/CustomTimeLine'
 import "../styles/Layout.css"
-import "../styles/Main.css"
-import "../styles/Nav.css"
 
 export default (props) => {
     const { account, setNeedsRefresh } = props;
@@ -13,18 +10,21 @@ export default (props) => {
   if (account !== null && account !== undefined) {
     return(
         <div>
-            <header className="header">
+                <header className="head">
                 <h1>Welcome back, {account.firstName}</h1>
-            </header>
-            <div>
+                </header>
+            <div className="main">
                 <Goal 
                 account={props.account}
                 setNeedsRefresh={setNeedsRefresh}
                 />
             </div>
+            <div className="main">
+                Future Calendar integration here
+            </div>
         </div>
     )
 } else {
-    <div>Looking for your profile...</div>;
+    <div>Searching for your profile...</div>;
 }
 }

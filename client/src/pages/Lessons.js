@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../components/Nav";
 import LessonForm from "../components/LessonForm";
 import {
   __DeleteLesson,
   __GetLessons,
   __UpdateLesson,
 } from "../services/LessonService";
-import '../styles/Main.css'
+import '../styles/Layout.css'
 
 const Lessons = (props) => {
   const { account } = props;
@@ -48,13 +47,10 @@ const Lessons = (props) => {
 
   return (
     <div>
-      <header className="header">
+      <header className="head">
         <h1>Keep Grinding {account.firstName}!</h1>
       </header>
-      <div>
-        <Nav />
-      </div>
-      <div>
+      <div className="main">
         <h3>What have you learned?</h3>
         {lessons.length ? (
           lessons.map((lesson, index) => (
@@ -84,7 +80,7 @@ const Lessons = (props) => {
           </div>
         )}
       </div>
-      <div>
+      <div className="main">
         <h3>What do you plan to learn?</h3>
         <LessonForm account={account} addLesson={addLesson} />
       </div>
