@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import DateTime from '../components/DateTime'
 import { NavLink } from 'react-router-dom'
+import SignOut from '../components/SignOut'
 
 const SidebarContainer = styled.div`
   display: flex;
@@ -44,7 +45,13 @@ const SidebarMenuItemLabel = styled.p`
   text-align: left;
 `;
 
+
 const Sidebar = () => {
+  
+  const clearAccount = () => {
+     localStorage.clear("account_id");
+  };
+
   return (
       <div>
         <SidebarContainer>
@@ -75,6 +82,7 @@ const Sidebar = () => {
               </SidebarMenuItem>
             </NavLink>
           </SidebarMenu>
+          <SignOut onClick={clearAccount}/>         
         </SidebarContainer>
       </div>
   );

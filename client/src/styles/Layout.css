@@ -18,6 +18,8 @@
 .main {
   grid-area: main;
   background-color: white;
+  margin: 0 auto;
+  padding: 10px;
 }
 
 h1, h3{
@@ -30,3 +32,10 @@ h1, h3{
   background-attachment: fixed;
   background-size: cover;
 } 
+
+.upload-container {
+  position: relative;
+  grid-column-start: 2;
+  margin-top: 8em;
+  padding: 10px;
+}

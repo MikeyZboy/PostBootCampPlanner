@@ -2,21 +2,26 @@ import React, { useState, useEffect } from "react";
 import { __UpdateGoal } from "../services/AccountService";
 
 const Goal = (props) => {
-  const { setNeedsRefresh } = props;
+  console.log('goal props:', props)
+  const { account } = props;
   const [ goalValue, setGoalValue] = useState(null);
+  
+  const getGoalValue = () => {
+
+  }
 
   useEffect(() => {
-    if (goalValue === null) {
-      setGoalValue(props.account.goal);
-    }
-  });
+    // if (goalValue === null) {
+    //   setGoalValue(props.account.goal);
+    // }
+    getGoalValue()
+  }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       const sentGoals = { goal: goalValue };
       const updatedGoal = await __UpdateGoal(sentGoals);
-      setNeedsRefresh(true);
     } catch (error) {
       throw error;
     }
@@ -28,10 +33,11 @@ const Goal = (props) => {
   };
 
   const clearGoal = async (e) => {
+    console.log('clicked')
     e.preventDefault();
     try {
       const updatedGoal = await __UpdateGoal({ goal: "" });
-      setNeedsRefresh(true);
+      setGoalValue(updatedGoal)
     } catch (error) {
       throw error;
     }
@@ -42,13 +48,13 @@ const Goal = (props) => {
   } else if (props.account.goal === null || props.account.goal === "") {
     return (
       <div className="">
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form onSubmit={(e)=>handleSubmit(e)}>
           <input
-            className=""
+            className="goal-input"
             type="text"
             name="goal"
             value={goalValue}
-            placeholder="What's your focus for today?"
+            placeholder="What's your goal now?"
             onChange={handleChange}
           />
         </form>
@@ -57,7 +63,7 @@ const Goal = (props) => {
   } else {
     return (
       <div>
-        <h4>Your Goal:</h4>
+        <h4>Your Goal at {props.account.bootcamp}:</h4>
         <p>
         {props.account.goal}
         </p>

@@ -70,11 +70,12 @@ const Achievements = (props) => {
             name="achievementImage"
             onChange={handleChange}
           />
-          <button>Upload</button>
+          <button>Add</button>
         </form>
       </div>
+      <div className="upload-container">
       {achievements.length ? (
-        achievements.map((achievement, index) => (
+        achievements.map((achievement, index) => (  
           <div key={index} className="card">
             <h4>{achievement.name}</h4>
             <img
@@ -86,6 +87,7 @@ const Achievements = (props) => {
       ) : (
         <h3>No Achievements Yet</h3>
       )}
+      </div>
     </div>
   );
 };

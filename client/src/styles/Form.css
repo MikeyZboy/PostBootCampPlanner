@@ -22,6 +22,7 @@
 }
 
 .form {
+  background-color: #729c62;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -62,25 +63,30 @@ input {
   border-radius: 0;
   background-color: transparent;
   color: white;
+  font-size: large;
   border: none;
   outline: none;
   border-bottom: 2px solid #ffffff;
   text-align: center;
 }
 
-.focus-placeholder::placeholder {
-  color: white;
-  text-align: center;
+.goal-input {
+  color: seagreen;
+}
+
+.bottom-form{
+  position: relative;
+  margin-top: 10em;
 }
 
 .inapp-form {
 display: inline-grid;
 position: relative;
-margin: 0 auto;  
+margin: 0 auto;
 }
 
 .inapp-form input[type="text"] {
-  color: white;
+  color: rgb(87, 82, 82);
 } 
 
 textarea {

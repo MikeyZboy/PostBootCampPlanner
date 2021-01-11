@@ -2,3 +2,8 @@
     padding: 5px;
     margin: 5px;
 }
+
+.signout-button{
+    position: relative;
+    margin-top: 25em;
+}

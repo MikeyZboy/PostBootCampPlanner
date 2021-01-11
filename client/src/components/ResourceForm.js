@@ -44,28 +44,30 @@ const ResourceForm = (props) => {
     };
 
     return (
-      <div className="form-container form-div">
-        <form className="inapp-form" onSubmit={handleSubmit}>
-          <TextInput
-            placeholder="Name"
-            type="text"
-            name="title"
-            onChange={handleChange}
-          />
-          <TextInput
-            placeholder="Topic"
-            type="text"
-            name="topic"
-            onChange={handleChange}
-          />
-          <TextInput
-            placeholder="URL"
-            type="text"
-            name="link"
-            onChange={handleChange}
-          />
-          <button>Add</button>
-        </form>
+      <div className="bottom-form">
+        <div className="form-container form-div">
+          <form className="inapp-form" onSubmit={handleSubmit}>
+            <TextInput
+              placeholder="Name"
+              type="text"
+              name="title"
+              onChange={handleChange}
+            />
+            <TextInput
+              placeholder="Topic"
+              type="text"
+              name="topic"
+              onChange={handleChange}
+            />
+            <TextInput
+              placeholder="URL"
+              type="text"
+              name="link"
+              onChange={handleChange}
+            />
+            <button>Add</button>
+          </form>
+        </div>
       </div>
     );
 }
