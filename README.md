@@ -62,6 +62,7 @@ As a user, I should be able to use the "Achievements" page to upload certificati
 
 - HTML
 - CSS
+- AWS S3
 - React
 - Express
 - Node
@@ -75,4 +76,5 @@ PostBootCampPlanner is under the MIT license.
 
 ***
 #### Credits ####
-Cloudinary
+AWS
+projekt202
