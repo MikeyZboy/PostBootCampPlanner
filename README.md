@@ -25,11 +25,6 @@ Simply navigate to the PostBootCampPlanner website and sign up or log in:
  - Post your achievements - keep building yourself up!
 
 ***
-### Wireframe
-
-![Home]('./../assets/HomeWire.png)
-
-***
 ### User Stories ###
 
 As a user, I should be able to land on the home page and understand what the PostBootCampPlanner is intended for.
@@ -58,9 +53,9 @@ As a user, I should be able to use the "Achievements" page to upload certificati
 ***
 ### ERD/Mapping ###
 
-![ERD]('./../assets/PostBootCampPlannerERD.png)
+![ERD]('./../client/src/styles/assets/PostBootCampPlannerERD.png)
 
-![Hierarchy]('./../assets/PostBootcampPlanner(hierarchy).png)
+![Hierarchy]('./../client/src/styles/assets/PostBootcampPlanner(hierarchy).png)
 
 ***
 ### Technologies Used ###
