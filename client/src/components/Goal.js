@@ -11,9 +11,6 @@ const Goal = (props) => {
   }
 
   useEffect(() => {
-    // if (goalValue === null) {
-    //   setGoalValue(props.account.goal);
-    // }
     getGoalValue()
   }, []);
 

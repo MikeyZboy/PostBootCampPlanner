@@ -13,7 +13,6 @@ const Achievements = (props) => {
     name: "",
     achievementImage: "",
   });
-  const [fileName, setFilename] = useState(""); //<-- what is this?
 
   const fetchAchievements = async () => {
     const data = await __GetAchievements();

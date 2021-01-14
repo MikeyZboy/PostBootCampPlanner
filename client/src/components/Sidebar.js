@@ -81,8 +81,8 @@ const Sidebar = () => {
                 <SidebarMenuItemLabel>Achievements</SidebarMenuItemLabel>
               </SidebarMenuItem>
             </NavLink>
-          </SidebarMenu>
           <SignOut onClick={clearAccount}/>         
+          </SidebarMenu>
         </SidebarContainer>
       </div>
   );

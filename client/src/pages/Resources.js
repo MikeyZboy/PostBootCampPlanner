@@ -3,13 +3,11 @@ import { __GetResources, __DeleteResource } from '../services/ResourceService'
 import ResourceForm from '../components/ResourceForm'
 
 const Resources = (props) => {
-    console.log('resources props', props)
 const { account } = props
 const [resources, setResources] = useState([])
 
 const getResources = async () => {
     let userResources = await __GetResources(account.id)
-    console.log('getResources',userResources)
     setResources(userResources)
 }
 

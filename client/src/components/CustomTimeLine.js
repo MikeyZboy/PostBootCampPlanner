@@ -8,7 +8,6 @@ import TimelineContent from "@material-ui/lab/TimelineContent";
 import TimelineOppositeContent from "@material-ui/lab/TimelineOppositeContent";
 import TimelineDot from "@material-ui/lab/TimelineDot";
 import FreeBreakfastIcon from "@material-ui/icons/FreeBreakfast";
-import FastfoodIcon from "@material-ui/icons/Fastfood";
 import LaptopMacIcon from "@material-ui/icons/LaptopMac";
 import HotelIcon from "@material-ui/icons/Hotel";
 import RepeatIcon from "@material-ui/icons/Repeat";
