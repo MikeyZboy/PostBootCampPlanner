@@ -7,11 +7,12 @@ export default () => {
 
   const clearAccount = async () => {
     localStorage.clear("account_id");;
+    console.log('account cleared')
     setSignedOut(true);
   };
 
   if (signedOut) {
-    <Redirect component={<Welcome />} push={true} />;
+    <Redirect path="/welcome" push={true} />;
   } else {
     return (
       <button className="signout-button" onClick={clearAccount}>

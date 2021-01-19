@@ -37,6 +37,7 @@ export default function Router() {
     <main>
       <Switch>
         <Route exact path="/" component={() => <Welcome />} />
+        <Route path="/welcome" component={() => <Welcome />} />
         <Route
           exact
           path="/signup"

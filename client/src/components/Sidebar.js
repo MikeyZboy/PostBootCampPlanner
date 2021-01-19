@@ -50,6 +50,7 @@ const Sidebar = () => {
   
   const clearAccount = () => {
      localStorage.clear("account_id");
+     console.log('clearAccount on Sidebar.js hit')
   };
 
   return (
@@ -81,7 +82,9 @@ const Sidebar = () => {
                 <SidebarMenuItemLabel>Achievements</SidebarMenuItemLabel>
               </SidebarMenuItem>
             </NavLink>
+            <NavLink to="/welcome">
           <SignOut onClick={clearAccount}/>         
+            </NavLink>
           </SidebarMenu>
         </SidebarContainer>
       </div>
