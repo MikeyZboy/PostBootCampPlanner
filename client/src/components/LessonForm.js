@@ -44,6 +44,7 @@ const LessonForm = (props) => {
       const newLesson = await __CreateLesson(formState);
       props.addLesson(newLesson);
       setComplete(false);
+      e.target.reset()
     } catch (error) {
       setFormError(true);
     }
@@ -56,18 +57,21 @@ const LessonForm = (props) => {
           placeholder="Lesson Name"
           type="text"
           name="title"
+          value={props.value}
           onChange={handleChange}
         />
         <TextInput
           placeholder="Category"
           type="text"
           name="category"
+          value={props.value}
           onChange={handleChange}
         />
         <TextInput
           placeholder="URL"
           type="text"
           name="link"
+          value={props.value}
           onChange={handleChange}
         />
         <button>Add</button>

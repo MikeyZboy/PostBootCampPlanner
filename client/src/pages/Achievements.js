@@ -25,12 +25,18 @@ const Achievements = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let formData = new FormData();
-    formData.append("name", newAchievement.name);
-    formData.append("achievementImage", newAchievement.achievementImage);
-    formData.append("accountId", account.id);
-    let achievement = await __CreateAchievement(formData);
-    fetchAchievements();
+    try {
+      let formData = new FormData();
+      formData.append("name", newAchievement.name);
+      formData.append("achievementImage", newAchievement.achievementImage);
+      formData.append("accountId", account.id);
+      let achievement = await __CreateAchievement(formData);
+      e.target.reset()
+      fetchAchievements();
+    }
+    catch (error) {
+      console.log(error)
+    }
   };
 
   const handleChange = (e) => {

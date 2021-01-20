@@ -12,8 +12,9 @@ const getResources = async () => {
 }
 
 const addResource = (resource) => {
-    let moreResources = [...resources, resource]
-    setResources(moreResources)
+    // let moreResources = [...resources, resource]
+    // setResources(moreResources)
+    setResources([...resources, resource])
     getResources()
 }
 

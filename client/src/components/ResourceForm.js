@@ -38,6 +38,7 @@ const ResourceForm = (props) => {
         };
         const newResource = await __CreateResource(formState);
         props.addResource(newResource);
+        e.target.reset()
         } catch (error) {
         throw error
         }
