@@ -4,22 +4,22 @@ import { __CreateResource } from '../services/ResourceService'
 
 
 const ResourceForm = (props) => {
-    console.log('resourceForm, props:', props)
+    // console.log('resourceForm, props:', props)
     
     const [ title, setTitle ] = useState('')
-    const [ category, setCategory ] = useState('')
+    const [ topic, setTopic ] = useState('')
     const [ link, setLink ] = useState('')
     const [ accountId, setAccountId ] = useState(props.account.id)
 
     const handleChange = (e) => {
         const fieldName = e.target.name
-        const fieldValue = e.target.fieldValue
+        const fieldValue = e.target.value
         switch (fieldName) {
           case "title":
             setTitle(fieldValue);
             break;
-          case "category":
-            setCategory(fieldValue);
+          case "topic":
+            setTopic(fieldValue);
             break;
           case "link":
             setLink(fieldValue);
@@ -33,13 +33,15 @@ const ResourceForm = (props) => {
         let formState = {
             link: link,
             title: title,
-            topic: category,
+            topic: topic,
             account_id: accountId,
         };
+        console.log('ResourceForm, formState:', formState)
         const newResource = await __CreateResource(formState);
         props.addResource(newResource);
         e.target.reset()
         } catch (error) {
+          console.log(error)
         throw error
         }
     };

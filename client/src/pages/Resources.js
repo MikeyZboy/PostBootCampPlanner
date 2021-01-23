@@ -7,19 +7,19 @@ const { account } = props
 const [resources, setResources] = useState([])
 
 const getResources = async () => {
-    let userResources = await __GetResources(account.id)
-    setResources(userResources)
+  let userResources = await __GetResources(account.id)
+  setResources(userResources)
 }
 
 const addResource = (resource) => {
-    // let moreResources = [...resources, resource]
-    // setResources(moreResources)
-    setResources([...resources, resource])
-    getResources()
+  // let moreResources = [...resources, resource]
+  // setResources(moreResources)
+  setResources([...resources, resource])
+  getResources()
 }
 
 useEffect(()=> {
-    getResources()
+  getResources()
 },[])
 
 const removeResource = async (resource) => {
@@ -29,13 +29,14 @@ const removeResource = async (resource) => {
   getResources();
 };
 
+console.log(resources)
 return (
   <div>
     <header className="head">
       <h1>Resources</h1>
     </header>
     <div className="upload-container">
-      {resources.length >= 1 ? (
+      {resources.length ? (
         resources.map((resource, index) => (
           <div key={index} className="card mini">
             <ul>
@@ -46,6 +47,7 @@ return (
         ))
       ) : (
         <div className="main">
+          <span>Add Some Favorite Sites</span>
         </div>
       )}
     </div>

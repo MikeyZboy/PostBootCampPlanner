@@ -11,6 +11,7 @@ export const __GetResources = async (accountId) => {
 }
 
 export const __CreateResource = async (formData) => {
+    console.log('__CreateResource formData:', formData)
     try {
         const res = await ApiClient.post(`/resources`, formData)
         return res.data
