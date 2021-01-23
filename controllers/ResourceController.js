@@ -46,18 +46,12 @@ const deleteOne = async (req, res) => {
 };
 
 const getAll = async (req, res) => {
-  console.log("ResourceController, getAll, req.body:", req.body);
   try {
-    let entityId = parseInt(req.params.id);
+    let accountId = parseInt(req.params.id);
     const resources = await Resource.findAll({
-      where: { id: entityId },
+      where: { account_id: accountId },
     });
     res.send(resources);
-    console.log(
-      "ResourceController,getAll, entityId,resources:",
-      entityId,
-      resources
-    );
   } catch (error) {
     console.log(error)
     throw error;

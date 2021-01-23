@@ -41,7 +41,7 @@ return (
           <div key={index} className="card mini">
             <ul>
               <a href={resource.link}>{resource.title}</a>
-              <button onClick={() => removeResource(resource)}>-</button>
+              <button onClick={() => removeResource(resource)}>Delete</button>
             </ul>
           </div>
         ))
