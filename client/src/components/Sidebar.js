@@ -34,6 +34,7 @@ const Icon = styled.svg`
   width: 20px;
   height: 20px;
 `;
+
 const SidebarMenuItemLabel = styled.p`
   margin-top: 0;
   font-family: "Open Sans", sans-serif;

@@ -1,15 +1,32 @@
 const { Resource } = require("../models");
 
-// const getOne = async (req, res) => {
-//   const entityId = req.params.id;
-//   try {
-//     const entity = await Resource.findByPk(entityId);
-//     res.send(entity);
-//   } catch (error) {
-//     console.log(error);
-//     throw error;
-//   }
-// };
+const getAll = async (req, res) => {
+  try {
+    let accountId = parseInt(req.params.id);
+    const resources = await Resource.findAll({
+      where: { account_id: accountId },
+    });
+    res.send(resources);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const createOne = async (req, res) => {
+  const accountId = req.params.account_id;
+  try {
+    let resourceBody = {
+      account_id: accountId,
+      ...req.body,
+    };
+    let resourceLink = await Resource.create(resourceBody);
+    res.send(resourceLink);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
 
 const updateOne = async (req, res) => {
   try {
@@ -26,7 +43,7 @@ const updateOne = async (req, res) => {
 };
 
 const deleteOne = async (req, res) => {
-  console.log('deleteOne hit:', req.body)
+  console.log("deleteOne hit:", req.body);
   try {
     let entityId = parseInt(req.params.id);
     await Resource.destroy({
@@ -41,34 +58,6 @@ const deleteOne = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    throw error;
-  }
-};
-
-const getAll = async (req, res) => {
-  try {
-    let accountId = parseInt(req.params.id);
-    const resources = await Resource.findAll({
-      where: { account_id: accountId },
-    });
-    res.send(resources);
-  } catch (error) {
-    console.log(error)
-    throw error;
-  }
-};
-
-const createOne = async (req, res) => {
-  const accountId = req.params.account_id;
-  try {
-    let resourceBody = {
-      account_id: accountId,
-      ...req.body,
-    };
-    let resourceLink = await Resource.create(resourceBody);
-    res.send(resourceLink);
-  } catch (error) {
-    console.log(error)
     throw error;
   }
 };

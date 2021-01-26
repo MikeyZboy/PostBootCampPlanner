@@ -39,3 +39,12 @@ h1, h3{
   margin-top: 8em;
   padding: 10px;
 }
+
+.favicon {
+  size: 16px;
+  min-height: 12px;
+  min-width: 12px;
+  max-height: 24px;
+  max-width: 24px;
+  padding: 1px 5px 1px 2px;
+}

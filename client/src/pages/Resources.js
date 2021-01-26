@@ -29,7 +29,6 @@ const removeResource = async (resource) => {
   getResources();
 };
 
-console.log(resources)
 return (
   <div>
     <header className="head">
@@ -40,8 +39,15 @@ return (
         resources.map((resource, index) => (
           <div key={index} className="card mini">
             <ul>
-              <a href={resource.link}>{resource.title}</a>
-              <button onClick={() => removeResource(resource)}>Delete</button>
+              <p>{resource.topic}</p>
+              <a href={`https://${resource.link}`}>
+                <img
+                  class="favicon"
+                  src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
+                />
+                {resource.title}
+              </a>
+              <button onClick={() => removeResource(resource)}>X</button>
             </ul>
           </div>
         ))

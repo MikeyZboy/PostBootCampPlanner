@@ -31,8 +31,9 @@ const Achievements = (props) => {
       formData.append("achievementImage", newAchievement.achievementImage);
       formData.append("accountId", account.id);
       let achievement = await __CreateAchievement(formData);
-      e.target.reset()
       fetchAchievements();
+      setNewAchievement()
+      e.target.reset()
     }
     catch (error) {
       console.log(error)
@@ -48,7 +49,6 @@ const Achievements = (props) => {
   };
 
   const handleDelete = async (achievement) => {
-    console.log("clicked delete", achievement.id);
     let id = achievement.id;
     const updatedAchievements = await __DeleteAchievement(id);
     setAchievements(updatedAchievements);
@@ -63,19 +63,18 @@ const Achievements = (props) => {
       <div className="form-container form-div">
         <form className="inapp-form" onSubmit={handleSubmit}>
           <input
-            type="text"
-            value={newAchievement.name}
-            name="name"
-            placeholder="Name of Achievement"
-            onChange={handleChange}
-          />
-          <input
             type="file"
             placeholder="Upload A File"
             name="achievementImage"
             onChange={handleChange}
           />
-          <button>Add</button>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name of Achievement"
+            onChange={handleChange}
+          />
+          <button>Post</button>
         </form>
       </div>
       <div className="upload-container">

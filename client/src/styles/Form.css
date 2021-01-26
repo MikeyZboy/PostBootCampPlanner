@@ -89,7 +89,10 @@ margin: 0 auto;
   color: rgb(87, 82, 82);
 } 
 
+.inapp-form input[type="file"] {
+  color: rgb(87, 82, 82);
+}
+
 textarea {
   color: white;
 }
-
