@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { __UpdateGoal } from "../services/AccountService";
+import { __GetProfile, __UpdateGoal } from "../services/AccountService";
 
 const Goal = (props) => {
-  console.log('goal props:', props)
   const { account } = props;
-  const [ goalValue, setGoalValue] = useState(null);
+  const [ goalValue, setGoalValue] = useState('');
   
-  const getGoalValue = () => {
-
+  const fetchGoal = async () => {
+    let accountData = await __GetProfile(account.id)
+    setGoalValue(accountData.goal)
   }
 
   useEffect(() => {
-    getGoalValue()
+    fetchGoal()
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const sentGoals = { goal: goalValue };
-      const updatedGoal = await __UpdateGoal(sentGoals);
+      const sentGoal = { goal: goalValue };
+      const updatedGoal = await __UpdateGoal(sentGoal);
+      setGoalValue(updatedGoal)
+      fetchGoal()
     } catch (error) {
       throw error;
     }
@@ -30,7 +32,6 @@ const Goal = (props) => {
   };
 
   const clearGoal = async (e) => {
-    console.log('clicked')
     e.preventDefault();
     try {
       const updatedGoal = await __UpdateGoal({ goal: "" });
@@ -40,37 +41,35 @@ const Goal = (props) => {
     }
   };
 
-  if (props.account === null || props.account === undefined) {
-    return null;
-  } else if (props.account.goal === null || props.account.goal === "") {
     return (
       <div className="">
+        { !account.goal ? 
+        (
         <form onSubmit={(e)=>handleSubmit(e)}>
           <input
             className="goal-input"
             type="text"
             name="goal"
             value={goalValue}
-            placeholder="What's your goal now?"
+            placeholder="What are you focusing on these days?"
             onChange={handleChange}
-          />
+          />     
         </form>
+        ) : (
+        <div>
+          <h4>Your Goal at {props.account.bootcamp}:</h4>
+          <p>
+            {props.account.goal}
+          </p>
+          <button 
+            onClick={clearGoal}>
+            Clear and Reset
+          </button>
+        </div>
+        )
+      }
       </div>
     );
-  } else {
-    return (
-      <div>
-        <h4>Your Goal at {props.account.bootcamp}:</h4>
-        <p>
-        {props.account.goal}
-        </p>
-        <button 
-        onClick={clearGoal}>
-        Clear and Reset
-        </button>
-      </div>
-    );
-  }
 };
 
 export default Goal;
