@@ -31,43 +31,19 @@ const Goal = (props) => {
     setGoalValue(e.target.value);
   };
 
-  const clearGoal = async (e) => {
-    e.preventDefault();
-    try {
-      const updatedGoal = await __UpdateGoal({ goal: "" });
-      setGoalValue(updatedGoal)
-    } catch (error) {
-      throw error;
-    }
-  };
-
     return (
       <div className="">
-        { !account.goal ? 
-        (
-        <form onSubmit={(e)=>handleSubmit(e)}>
+        <p>What's your goal after {account.bootcamp}?</p>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <input
             className="goal-input"
             type="text"
             name="goal"
             value={goalValue}
-            placeholder="What are you focusing on these days?"
+            placeholder="__________________"
             onChange={handleChange}
-          />     
+          />
         </form>
-        ) : (
-        <div>
-          <h4>Your Goal at {props.account.bootcamp}:</h4>
-          <p>
-            {props.account.goal}
-          </p>
-          <button 
-            onClick={clearGoal}>
-            Clear and Reset
-          </button>
-        </div>
-        )
-      }
       </div>
     );
 };
