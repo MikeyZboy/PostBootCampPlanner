@@ -24,6 +24,8 @@ const SignIn = (props) => {
     try {
       const userData = { email: loginValue, password: passwordValue };
       const loginResponse = await __LoginUser(userData);
+      // ref: Mern-Fullstack->> this.props.toggleAuthenticated(true, loginResponse.user, () => 
+      // this.props.history.push('/home'))
       if (loginResponse !== "") {
         setAccount(loginResponse);
         props.history.push("/home");

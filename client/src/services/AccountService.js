@@ -9,16 +9,6 @@ export const __GetProfile = async (account_id) => {
   }
 };
 
-export const __CheckSession = async () => {
-  try {
-    console.log("__CheckSession HIT")
-    const res = await ApiClient.get("/accounts/refresh/session");
-    return res.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
 export const __UpdateGoal = async (userData) => {
   console.log("accountservice hit, __updategoal userdata:",userData)
   const accountId = localStorage.getItem("account_id");

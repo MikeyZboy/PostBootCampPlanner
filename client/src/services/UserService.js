@@ -26,3 +26,13 @@ export const __LoginUser = async (userData) => {
     throw error;
   }
 };
+
+export const __CheckSession = async () => {
+  try {
+    console.log("__CheckSession HIT");
+    const res = await ApiClient.get("/refresh/session");
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};

@@ -41,7 +41,7 @@ const SignUp = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+// could I put formState here as a declared useState value up top for clean code?
     const formState = {
       firstName: firstName,
       lastName: lastName,
