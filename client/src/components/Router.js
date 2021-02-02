@@ -13,11 +13,10 @@ import { __CheckSession } from '../services/UserService'
 import Layout from "../components/Layout";
 
 const Router = () => {
+
   const [account, setAccount] = useState(null);
   const [needsRefresh, setNeedsRefresh] = useState(false);
-  const [authenticated, setAuthenticated] = useState(false)
-  const [currentUser, setCurrentUser] = useState(null)
-  const [pageLoading, setPageLoading] = useState(true)
+  // const [authenticated, setAuthenticated] = useState(false)
 
   const retrieveAccount = async () => {
     const localAccountId = localStorage.getItem("account_id");
@@ -30,38 +29,39 @@ const Router = () => {
   };
 
   useEffect(() => {
-    verifyTokenValid(),
+    // verifyTokenValid();
     retrieveAccount();
-    setPageLoading(false)
   }, []);
 
   const clearAccount = () => {
     setAccount(null);
   };
 
-  const verifyTokenValid = async () => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      try {
-        const session = await __CheckSession()
-        setCurrentUser(sesson)
-        setAuthenticated(true)
-        props.history.push('/home')
-      } catch (error) {
-        console.log(error)
-        setCurrentUser(null)
-        setAuthenticated(false)
-        localStorage.clear()
-      }
-    }
-  }
+  // const verifyTokenValid = async () => {
+  //   const token = localStorage.getItem('token')
+  //   if (token) {
+  //     try {
+  //       const session = await __CheckSession()
+  //       setAccount(session)
+  //       setAuthenticated(true)
+  //       // props.history.push('/home')
+  //     } catch (error) {
+  //       console.log(error)
+  //       setAuthenticated(false)
+  //       localStorage.clear()
+  //     }
+  //   }
+  // }
 
-  const toggleAuthenticated = (value, user, done) => {
-    setAuthenticated(value)
-    setCurrentUser(user)
-    done()
-  }
-
+  // const toggleAuthenticated = (value, user, done) => {
+  //   console.log("toggleAuthenticated HIT: value, user", toggleAuthenticated, value, user)
+  //   setAuthenticated(value)
+  //   setAccount()
+  //   done()
+  // }
+  
+  console.log("account?", account)
+  
   return (
     <main>
       <Switch>
@@ -79,63 +79,59 @@ const Router = () => {
             <SignIn
               {...props}
               setAccount={setAccount}
-              toggleAuthenticated={authenticated}
+              // toggleAuthenticated={toggleAuthenticated}
             />
           )}
         />
         <ProtectedRoute
-          authenticated={authenticated}
+          authenticated={account !== null}
           path="/home"
           component={(props) => (
-            <Layout currentUser={currentUser} authenticated={authenticated}>
+            <Layout>
               <Home
                 {...props}
                 account={account}
                 onClickSignOut={clearAccount}
                 setNeedsRefresh={setNeedsRefresh}
-                currentUser={currentUser}
               />
             </Layout>
           )}
         />
         <ProtectedRoute
-          authenticated={authenticated}
+          authenticated={account !== null}
           path="/lessons"
           component={(props) => (
-            <Layout currentUser={currentUser} authenticated={authenticated}>
+            <Layout>
               <Lessons
                 {...props}
                 account={account}
                 onClickSignOut={clearAccount}
-                currentUser={currentUser}
               />
             </Layout>
           )}
         />
         <ProtectedRoute
-          authenticated={authenticated}
+          authenticated={account !== null}
           path="/resources"
           component={(props) => (
-            <Layout currentUser={currentUser} authenticated={authenticated}>
+            <Layout>
               <Resources
                 {...props}
                 account={account}
                 onClickSignOut={clearAccount}
-                currentUser={currentUser}
               />
             </Layout>
           )}
         />
         <ProtectedRoute
-          authenticated={authenticated}
+          authenticated={account !== null}
           path="/achievements"
           component={(props) => (
-            <Layout currentUser={currentUser} authenticated={authenticated}>
+            <Layout>
               <Achievements
                 {...props}
                 account={account}
                 onClickSignOut={clearAccount}
-                currentUser={currentUser}
               />
             </Layout>
           )}

@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     bootcamp: DataTypes.STRING,
     goal: DataTypes.STRING,
     email: DataTypes.STRING,
-    password: DataTypes.STRING
+    password_digest: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Account',

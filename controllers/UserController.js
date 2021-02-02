@@ -62,22 +62,24 @@ const createAccount = async (req, res) => {
 
 const signIn = async (req, res, next) => {
   try {
-    const user = await Account.findOne({
+    const account = await Account.findOne({
       where: {
         email: req.body.email
       }
     })
-      if ( 
-        user && 
-        (await checkPassword(req.body.password, user.password_digest))
+    if ( 
+      account && 
+      (await checkPassword(req.body.password, account.password_digest))
       ) { 
         const payload = {
-          _id: user._id,
-          name: user.name
+          id: account.id
+          // email: account.email
         }
         res.locals.payload = payload
+        console.log('signIn, checkPassword payload:', payload)
         return next()
       }
+      console.log('SIGNIN HIT, user.password_digest', account.password_digest)
       res.status(401).send({msg: 'Unauthorized'})
   } catch (error) {
     console.log(error)

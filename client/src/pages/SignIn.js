@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import TextInput from '../components/TextInput'
 import { __LoginUser } from '../services/UserService' 
 import '../styles/Buttons.css'
@@ -6,10 +6,12 @@ import '../styles/Form.css'
 
 
 const SignIn = (props) => {
+
   const { setAccount } = props;
   const [loginValue, setLoginValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [formError, setFormError] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false)
 
   const emailField = (e) => {
     setLoginValue(e.target.value);
@@ -19,18 +21,36 @@ const SignIn = (props) => {
     setPasswordValue(e.target.value);
   };
 
+  // useEffect(()=>{
+  //   let isMounted = true;
+  //   handleSubmit(e).then(loginResponse => {
+  //     if (isMounted) {
+  //     setAccount(loginResponse);
+  //     setAuthenticated(true)  
+  //   }
+  // })
+  // return () => { isMounted = false }
+  // },[])
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const userData = { email: loginValue, password: passwordValue };
       const loginResponse = await __LoginUser(userData);
+      console.log('loginResponse', loginResponse.user.id)
+      setAccount(loginResponse.user.id);
+      // setAuthenticated(true);
+      
+      props.history.push("/home");
       // ref: Mern-Fullstack->> this.props.toggleAuthenticated(true, loginResponse.user, () => 
       // this.props.history.push('/home'))
-      if (loginResponse !== "") {
-        setAccount(loginResponse);
-        props.history.push("/home");
-      }
+      // if (loginResponse !== "") {
+      //   setAccount(loginResponse);
+      //   setAuthenticated(true)
+      //   props.history.push("/home");
+      // }
     } catch (error) {
+      console.log(error)
       setFormError(true);
     }
   };

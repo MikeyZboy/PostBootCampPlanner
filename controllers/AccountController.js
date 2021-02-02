@@ -13,7 +13,7 @@ const getAll = async (req, res) => {
 }
 
 const getOne = async (req, res) => {
-  const entityId = req.params.id;
+  const entityId = parseInt(req.params.id);
   try {
     const entity = await Account.findByPk(entityId, {
       include: [
@@ -25,7 +25,7 @@ const getOne = async (req, res) => {
     });
     res.send(entity);
   } catch (error) {
-    throw error;
+    console.log(error)
   }
 };
 
@@ -39,7 +39,7 @@ const createOne = async (req, res) => {
     await newAccount.save();
     res.send(newAccount);
   } catch (error) {
-    throw error;
+    console.log(error)
   }
 };
 
