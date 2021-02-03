@@ -1,15 +1,5 @@
 const { Account } = require('../models')
 
-//not implemented: for a future admin user OR community page
-// const getAll = async (req, res) => {
-//     try { 
-//         const entities = await Account.findAll()
-//         res.send(entities)
-//     } catch (error) {
-//         throw error
-//     }
-// }
-
 const getOne = async (req, res) => {
   const entityId = parseInt(req.params.id);
   try {
@@ -73,7 +63,6 @@ const deleteOne = async (req, res) => {
 };
 
 module.exports = {
-    // getAll,
     getOne,
     createOne,
     updateOne,
