@@ -4,8 +4,7 @@ import { __CreateResource } from '../services/ResourceService'
 
 
 const ResourceForm = (props) => {
-    // console.log('resourceForm, props:', props)
-    
+ 
     const [ title, setTitle ] = useState('')
     const [ topic, setTopic ] = useState('')
     const [ link, setLink ] = useState('')
@@ -36,7 +35,6 @@ const ResourceForm = (props) => {
             topic: topic,
             account_id: accountId,
         };
-        console.log('ResourceForm, formState:', formState)
         const newResource = await __CreateResource(formState);
         props.addResource(newResource);
         e.target.reset()

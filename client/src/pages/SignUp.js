@@ -11,12 +11,15 @@ const SignUp = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [bootcamp, setBootcamp] = useState("");
-  const [goal, setGoal] = useState("");
   const [formError, setFormError] = useState(false);
 
   const formFieldChange = (e) => {
     const fieldName = e.target.name;
-    const fieldValue = e.target.value;
+    const fieldValue = e.target.value; 
+      if (fieldValue == '' || fieldValue == null) {
+        setFormError(true)
+        return
+    }
     switch (fieldName) {
       case "firstName":
         setFirstName(fieldValue);
@@ -33,9 +36,6 @@ const SignUp = (props) => {
       case "bootcamp":
         setBootcamp(fieldValue);
         break;
-      case "goal":
-        setGoal(fieldValue);
-        break;
     }
   };
 
@@ -47,8 +47,7 @@ const SignUp = (props) => {
       lastName: lastName,
       email: email,
       password: password,
-      bootcamp: bootcamp,
-      goal: goal,
+      bootcamp: bootcamp
     };
     try {
       const accountResponse = await __RegisterUser(formState);
@@ -67,9 +66,9 @@ const SignUp = (props) => {
           <label htmlFor="firstName">
             <TextInput
               className="form-input"
-              placeholder="First Name"
-              name="firstName"
               type="text"
+              placeholder="First Name*"
+              name="firstName"
               onChange={formFieldChange}
             />
           </label>
@@ -78,9 +77,9 @@ const SignUp = (props) => {
           <label htmlFor="lastName">
             <TextInput
               className="form-input"
-              placeholder="Last Name"
-              name="lastName"
               type="text"
+              placeholder="Last Name*"
+              name="lastName"
               onChange={formFieldChange}
             />
           </label>
@@ -89,9 +88,9 @@ const SignUp = (props) => {
           <label htmlFor="email" className="form-label">
             <TextInput
               className="form-input"
-              placeholder="Email"
+              type="text" 
+              placeholder="Email*"
               name="email"
-              type="text"
               onChange={formFieldChange}
             />
           </label>
@@ -100,9 +99,9 @@ const SignUp = (props) => {
           <label htmlFor="password" className="form-label">
             <TextInput
               className="form-input"
-              placeholder="Password"
-              name="password"
               type="text"
+              placeholder="Password*"
+              name="password"
               onChange={formFieldChange}
             />
           </label>
@@ -111,20 +110,9 @@ const SignUp = (props) => {
           <label htmlFor="bootcamp" className="form-label">
             <TextInput
               className="form-input"
-              placeholder="Bootcamp/School"
+              type="text"
+              placeholder="Bootcamp/School*"
               name="bootcamp"
-              type="text"
-              onChange={formFieldChange}
-            />
-          </label>
-        </div>
-        <div className="form-input">
-          <label htmlFor="goal" className="form-label">
-            <TextInput
-              className="form-input"
-              placeholder="Your End Goal"
-              name="goal"
-              type="text"
               onChange={formFieldChange}
             />
           </label>
@@ -132,6 +120,12 @@ const SignUp = (props) => {
         <div className="submit-button">
           <button className="submit-button">Submit</button>
         </div>
+        { formError ? (
+          <alert>All Fields Required</alert>  
+        ) : (
+          <p>Thanks for signing up!</p>
+        )
+        }
         <div>
           <NavLink to="/signin" activeclassName="nav-active">
             <p>Already have an account?</p>

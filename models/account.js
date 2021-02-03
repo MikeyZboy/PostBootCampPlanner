@@ -26,17 +26,46 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
   };
-  Account.init({
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    bootcamp: DataTypes.STRING,
-    goal: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password_digest: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Account',
-    tableName: 'accounts'
-  });
+  Account.init(
+    {
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      bootcamp: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+          isEmail: true,
+          notEmpty: true
+        },
+      },
+      goal: DataTypes.STRING,
+      password_digest: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "Account",
+      tableName: "accounts",
+    }
+  );
   return Account;
 };

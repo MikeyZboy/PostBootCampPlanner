@@ -60,8 +60,7 @@ const Router = () => {
   //   done()
   // }
   
-  console.log("account?", account)
-  
+
   return (
     <main>
       <Switch>

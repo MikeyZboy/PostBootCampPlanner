@@ -5,11 +5,9 @@ const setLocalAccountId = (account_id) => {
 };
 
 export const __RegisterUser = async (formData) => {
-    console.log("UserService, __RegisterUser:", formData);
   try {
     const res = await ApiClient.post(`/signup`, formData);
     setLocalAccountId(res.data.id)
-    console.log('__RegisterUser res:', res)
     return res.data;
   } catch (error) {
     throw error;
@@ -17,11 +15,9 @@ export const __RegisterUser = async (formData) => {
 };
 
 export const __LoginUser = async (userData) => {
-    console.log("UserService, __LoginUser:", userData);
   try {
     const res = await ApiClient.post(`/signin`, userData);
     setLocalAccountId(res.data.id);
-    console.log("__LoginUser, res.data", res.data)
     return res.data;
   } catch (error) {
     throw error;
