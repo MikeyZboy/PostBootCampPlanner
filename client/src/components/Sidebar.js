@@ -3,12 +3,13 @@ import styled from "styled-components";
 import DateTime from '../components/DateTime'
 import { NavLink } from 'react-router-dom'
 import SignOut from '../components/SignOut'
+import PBCP from '../styles/assets/PBCPlogo.png'
 
 const SidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: #252529;
+  background-color: #194d44;
   color: #fff;
 `;
 
@@ -38,6 +39,7 @@ const Icon = styled.svg`
 const SidebarMenuItemLabel = styled.p`
   margin-top: 0;
   font-family: "Open Sans", sans-serif;
+  font: ;
   color: #fff;
   font-size: 14px;
   line-height: 1.5;
@@ -46,6 +48,10 @@ const SidebarMenuItemLabel = styled.p`
   text-align: left;
 `;
 
+const Logo = styled.img`
+  margin: 0 auto;
+  padding: 1em;
+`;
 
 const Sidebar = () => {
   
@@ -56,6 +62,7 @@ const Sidebar = () => {
   return (
       <div>
         <SidebarContainer>
+          <Logo src={PBCP}/>
           <DateTime />
           <SidebarMenu>
             <NavLink to="/home">
@@ -81,9 +88,9 @@ const Sidebar = () => {
                 <Icon></Icon>
                 <SidebarMenuItemLabel>Achievements</SidebarMenuItemLabel>
               </SidebarMenuItem>
-            </NavLink>
+            </NavLink>      
             <NavLink to="/welcome">
-          <SignOut onClick={clearAccount}/>         
+            <SignOut onClick={clearAccount}/>         
             </NavLink>
           </SidebarMenu>
         </SidebarContainer>

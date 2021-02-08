@@ -1,9 +1,10 @@
-import React from 'react'
-import Goal from '../components/Goal'
-import "../styles/Layout.css"
+import React from "react";
+import Goal from "../components/Goal";
+import Calendar from "../components/Calendar";
+import "../styles/Layout.css";
 
 export default (props) => {
-    const { account } = props;
+  const { account } = props;
 
   if (account !== null && account !== undefined) {
     return (
@@ -12,12 +13,14 @@ export default (props) => {
           <h1>Welcome back, {account.firstName}</h1>
         </header>
         <div className="main">
-          <Goal account={props.account}/>
+          <Goal account={props.account} />
         </div>
-        <div className="main">Future Calendar integration here</div>
+        <div className="main">
+          <Calendar />
+        </div>
       </div>
-    )
-} else {
+    );
+  } else {
     <div>Thanks for stopping by...</div>;
-}
-}
+  }
+};
