@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import LessonForm from "../components/LessonForm";
-import TextInput from '../components/TextInput'
+import LessonsKanban from '../components/LessonsKanban'
 import {
   __DeleteLesson,
   __GetLessons,
@@ -28,66 +28,51 @@ const LessonCardContainer = styled.div`
 
 const Lessons = (props) => {
   const { account } = props;
-  const [lessons, setLessons] = useState([]);
-  const [ category, setCategory ] = useState([])
+  // const [lessons, setLessons] = useState([]);
+  // const [ category, setCategory ] = useState([])
 
-  const getLessons = async () => {
-    let userLessons = await __GetLessons(account.id);
-    setLessons(userLessons);
-  };
+  // const getLessons = async () => {
+  //   let userLessons = await __GetLessons(account.id);
+  //   setLessons(userLessons);
+  // };
 
-  const addLesson = (lesson) => {
-    setLessons([...lessons, lesson]);
-  };
+  // const addLesson = (lesson) => {
+  //   setLessons([...lessons, lesson]);
+  // };
 
-  useEffect(() => {
-    getLessons();
-  }, []);
+  // useEffect(() => {
+  //   getLessons();
+  // }, []);
 
-  const markComplete = async (lesson) => {
-    let id = account.id;
-    let formData = {
-      title: lesson.title,
-      category: lesson.category,
-      link: lesson.link,
-      complete: true,
-    };
-    let updatedLessons = await __UpdateLesson(id, formData);
-    setLessons(updatedLessons);
-    getLessons();
-  };
+  // const markComplete = async (lesson) => {
+  //   let id = account.id;
+  //   let formData = {
+  //     title: lesson.title,
+  //     category: lesson.category,
+  //     link: lesson.link,
+  //     complete: true,
+  //   };
+  //   let updatedLessons = await __UpdateLesson(id, formData);
+  //   setLessons(updatedLessons);
+  //   getLessons();
+  // };
 
-  const removeLesson = async (lesson) => {
-    let id = lesson.id;
-    const newLessons = await __DeleteLesson(id);
-    setLessons(newLessons);
-    getLessons();
-  };
-
-   const handleChange = (e) => {
-     e.preventDefault();
-     setCategory(e.target.value);
-   };
-
-   const handleSubmit = async (e) => {
-     e.preventDefault()
-     try {
-       // to have category persist on card
-       // will need to follow the Goal update route with the Lessons model
-       const newCategory = e.target.value;
-       setCategory(newCategory);
-     }catch (error){
-       console.log(error)
-     }
-   }
+  // const removeLesson = async (lesson) => {
+  //   let id = lesson.id;
+  //   const newLessons = await __DeleteLesson(id);
+  //   setLessons(newLessons);
+  //   getLessons();
+  // };
 
   return (
     <div>
       <header className="head">
         <h1>Lessons</h1>
       </header>
-      <LessonCardContainer>
-      <div className="main">
+      {/* <div>
+        <LessonForm account={account} addLesson={addLesson} />
+      </div> */}
+      {/* <div className="main">
         <input onSubmit={(e) => handleSubmit(e)}  
           className="goal-input"
           type="text"
@@ -121,14 +106,16 @@ const Lessons = (props) => {
                   <h3>Loading Lessons...</h3>
                 </div>
                 )}
-      </div>
-      <div>
-      <LessonForm account={account} addLesson={addLesson} />
-      </div>     
-      </LessonCardContainer>
-      {/* <div className="main">
-        <h3>What do you plan to learn?</h3>
       </div> */}
+      <div>
+        <LessonsKanban 
+          account={account}
+          // getLessons={getLessons} 
+          // addLesson={addLesson}
+          // removeLesson={removeLesson}
+          // markComplete={markComplete}
+          />
+      </div>
     </div>
   );
 };

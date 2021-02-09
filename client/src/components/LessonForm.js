@@ -4,6 +4,7 @@ import { __CreateLesson } from "../services/LessonService";
 import { __GetLessons } from "../services/LessonService";
 
 const LessonForm = (props) => {
+
   const { lessons, setNeedsRefresh } = props;
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
@@ -54,7 +55,7 @@ const LessonForm = (props) => {
     <div className="form-container form-div">
       <form className="inapp-form" onSubmit={handleSubmit}>
         <TextInput
-          placeholder="Lesson Name"
+          placeholder="Lesson"
           type="text"
           name="title"
           value={props.value}
@@ -68,7 +69,7 @@ const LessonForm = (props) => {
           onChange={handleChange}
         />
         <TextInput
-          placeholder="URL"
+          placeholder="Link"
           type="text"
           name="link"
           value={props.value}
