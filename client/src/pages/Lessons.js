@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import LessonForm from "../components/LessonForm";
+import TextInput from '../components/TextInput'
 import {
   __DeleteLesson,
   __GetLessons,
@@ -7,10 +8,28 @@ import {
 } from "../services/LessonService";
 import '../styles/Layout.css'
 import '../styles/Card.css'
+import styled from 'styled-components'
+
+const LessonCardContainer = styled.div`
+  display: inline-block;
+  position: relative;
+  mid-width: 120px;
+  width: 180px;
+  height: 240px;
+  scrollable: true;
+  margin: 0 auto;
+  cursor: pointer;
+  color: darkgrey;
+  &:hover {
+    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+`;
 
 const Lessons = (props) => {
   const { account } = props;
   const [lessons, setLessons] = useState([]);
+  const [ category, setCategory ] = useState([])
 
   const getLessons = async () => {
     let userLessons = await __GetLessons(account.id);
@@ -37,7 +56,6 @@ const Lessons = (props) => {
     setLessons(updatedLessons);
     getLessons();
   };
-  // may need to use a sort in the above function - they're returning randomly...
 
   const removeLesson = async (lesson) => {
     let id = lesson.id;
@@ -46,46 +64,71 @@ const Lessons = (props) => {
     getLessons();
   };
 
+   const handleChange = (e) => {
+     e.preventDefault();
+     setCategory(e.target.value);
+   };
+
+   const handleSubmit = async (e) => {
+     e.preventDefault()
+     try {
+       // to have category persist on card
+       // will need to follow the Goal update route with the Lessons model
+       const newCategory = e.target.value;
+       setCategory(newCategory);
+     }catch (error){
+       console.log(error)
+     }
+   }
+
   return (
     <div>
       <header className="head">
-        <h1>Keep Grinding {account.firstName}!</h1>
+        <h1>Lessons</h1>
       </header>
+      <LessonCardContainer>
       <div className="main">
-        <h3>What have you learned?</h3>
+        <input onSubmit={(e) => handleSubmit(e)}  
+          className="goal-input"
+          type="text"
+          name="category"
+          value={category}
+          placeholder="__________________"
+          onChange={handleChange} 
+        />  
         {lessons.length ? (
-          lessons.map((lesson, category, index) => (
-            <div key={category} className="card">
-              <h4>{lesson.category}</h4>
-              {lesson.complete === true ? (
-                <div key={index}>
-                  {/* <h4>{lesson.category}</h4> */}
-                  <a href={lesson.link}>{lesson.title}</a>
-                  <p>COMPLETED</p>
-                  <button onClick={() => removeLesson(lesson)}>DELETE</button>
-                </div>
+          lessons.map((lesson, index) => (
+            <div key={lesson} className="card">
+            {lesson.complete === true ? (
+              <div key={index}>
+              <a href={lesson.link}>{lesson.title}</a>
+              <p>COMPLETED</p>
+              <button onClick={() => removeLesson(lesson)}>REMOVE</button>
+              </div>
               ) : (
                 <div key={index}>
-                  {/* <h4>{lesson.category}</h4> */}
                   <li> <a href={lesson.link}>{lesson.title}</a></li>
                   <button onClick={() => markComplete(index)}>
-                    MARK COMPLETE
+                  MARK COMPLETE
                   </button>
-                  <button onClick={() => removeLesson(lesson)}>DELETE</button>
+                  <button onClick={() => removeLesson(lesson)}>REMOVE</button>
                 </div>
               )}
-            </div>  
-          ))
-        ) : (
-          <div>
-            <h3>Searching for your Lessons...</h3>
-          </div>
-        )}
+                </div>  
+                ))
+                ) : (
+                <div>
+                  <h3>Loading Lessons...</h3>
+                </div>
+                )}
       </div>
-      <div className="main">
+      <div>
+      <LessonForm account={account} addLesson={addLesson} />
+      </div>     
+      </LessonCardContainer>
+      {/* <div className="main">
         <h3>What do you plan to learn?</h3>
-        <LessonForm account={account} addLesson={addLesson} />
-      </div>
+      </div> */}
     </div>
   );
 };

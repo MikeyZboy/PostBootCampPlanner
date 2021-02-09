@@ -1,68 +1,91 @@
-import React, {useState, useEffect} from 'react'
-import { __GetResources, __DeleteResource } from '../services/ResourceService'
-import ResourceForm from '../components/ResourceForm'
+import React, { useState, useEffect } from "react";
+import { __GetResources, __DeleteResource } from "../services/ResourceService";
+import ResourceForm from "../components/ResourceForm";
+import styled from "styled-components";
+
+const ResourceCardContainer = styled.div`
+  display: inline-block;
+  position: relative;
+  mid-width: 120px;
+  width: 180px;
+  height: 240px;
+  scrollable: true;
+  margin: 0 auto;
+  cursor: pointer;
+  color: darkgrey;
+  &:hover {
+    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+`;
 
 const Resources = (props) => {
-const { account } = props
-const [resources, setResources] = useState([])
+  const { account } = props;
+  const [resources, setResources] = useState([]);
 
-const getResources = async () => {
-  let userResources = await __GetResources(account.id)
-  setResources(userResources)
-}
+  const getResources = async () => {
+    let userResources = await __GetResources(account.id);
+    setResources(userResources);
+  };
 
-const addResource = (resource) => {
-  // let moreResources = [...resources, resource]
-  // setResources(moreResources)
-  setResources([...resources, resource])
-  getResources()
-}
+  const addResource = (resource) => {
+    setResources([...resources, resource]);
+    getResources();
+  };
 
-useEffect(()=> {
-  getResources()
-},[])
+  useEffect(() => {
+    getResources();
+  }, []);
 
-const removeResource = async (resource) => {
-  let id = resource.id;
-  const newResources = await __DeleteResource(id);
-  setResources(newResources);
-  getResources();
+  const removeResource = async (resource) => {
+    let id = resource.id;
+    const newResources = await __DeleteResource(id);
+    setResources(newResources);
+    getResources();
+  };
+
+  return (
+    <div>
+      <header className="head">
+        <h1>Resources</h1>
+      </header>
+      <ResourceCardContainer>
+        <div className="upload-container">
+          {resources.length === 0 ? (
+            <div>
+              <h2>Add Your Favorite Sites</h2>
+              <ResourceForm account={account} addResource={addResource} />
+            </div>
+          ) : (
+            <div>
+              {resources.length ? (
+                resources.map((resource, index) => (
+                  <div key={index} className="card mini">
+                    <ul>
+                      <p>{resource.topic}</p>
+                      <a href={`https://${resource.link}`}>
+                        <img
+                          class="favicon"
+                          src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
+                        />
+                        {resource.title}
+                      </a>
+                      <button onClick={() => removeResource(resource)}>
+                        REMOVE
+                      </button>
+                    </ul>
+                    <ResourceForm account={account} addResource={addResource} />
+                  </div>
+                ))
+              ) : (
+                <div>There's room for more...</div>
+              )}
+            </div>
+          )}
+        </div>
+      </ResourceCardContainer>
+    </div>
+  );
 };
 
-return (
-  <div>
-    <header className="head">
-      <h1>Resources</h1>
-    </header>
-    <div className="upload-container">
-      {resources.length ? (
-        resources.map((resource, index) => (
-          <div key={index} className="card mini">
-            <ul>
-              <p>{resource.topic}</p>
-              <a href={`https://${resource.link}`}>
-                <img
-                  class="favicon"
-                  src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
-                />
-                {resource.title}
-              </a>
-              <button onClick={() => removeResource(resource)}>X</button>
-            </ul>
-          </div>
-        ))
-      ) : (
-        <div className="main">
-          <span>Add Some Favorite Sites</span>
-        </div>
-      )}
-    </div>
-    <div>
-      <ResourceForm account={account} addResource={addResource} />
-    </div>
-  </div>
-);
-
-}
-
-export default Resources
+export default Resources;

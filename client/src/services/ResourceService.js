@@ -22,8 +22,10 @@ export const __CreateResource = async (formData) => {
 };
 
 export const __DeleteResource = async (id) => {
+  console.log('__DeleteResource hit: "id"', id)
   try {
     const res = await ApiClient.delete(`/resources/${id}`);
+    console.log('__DeleteResource, res.data', res.data)
     return res.data;
   } catch (error) {
     console.log(error);
