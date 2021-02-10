@@ -23,27 +23,25 @@ const Column = styled.div`
   }
 `;
 
-const LessonCard = styled.div`
-  position: relative;
-  display: inline-block;
-  width: 1fr;
-  border-radius: 
+const FormHolder = styled.div`
+  position: top;
+  padding: 1em;
+  border: 2px solid gray;
+  border-radius: 15px;
+  margin: 1em;
 `;
 
 const LessonsKanban = (props) => {
-    console.log('LessonsKanban props', props)
     const { account, getLessons, addLesson, removeLesson, markComplete } = props
 
     return (
         <ColumnsContainer>
             <Column>
             Not Started
-            <div>
+            <FormHolder>
                 <LessonForm account={account} addLesson={addLesson}/>
-            </div>
-            <div>
-                <LessonList account={account} getLessons={getLessons} removeLesson={removeLesson} markComplete={markComplete}/>
-            </div>
+            </FormHolder>    
+            <LessonList account={account} getLessons={getLessons} removeLesson={removeLesson} markComplete={markComplete}/>
             </Column>
             <Column>
             In Progress

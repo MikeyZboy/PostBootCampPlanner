@@ -8,6 +8,7 @@ const TextInput = (props) =>
       value={props.value}
       onChange={(e) => props.onChange(e)}
       placeholder={props.placeholder}
+      contentEditable
     />
   ) : (
     <input
@@ -17,6 +18,7 @@ const TextInput = (props) =>
       onChange={(e) => props.onChange(e)}
       placeholder={props.placeholder}
       autoComplete="false"
+      contentEditable
     />
   );
 

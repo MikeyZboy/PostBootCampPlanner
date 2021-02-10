@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import TextInput from "../components/TextInput";
 import { __CreateLesson } from "../services/LessonService";
 import { __GetLessons } from "../services/LessonService";
+import styled from 'styled-components'
+
+const Container = styled.div`
+  position: absolute;
+  margin: 0 auto;
+  margin-top: 0;
+  // display: none;
+`;
 
 const LessonForm = (props) => {
 
@@ -12,6 +20,7 @@ const LessonForm = (props) => {
   const [complete, setComplete] = useState(false);
   const [formError, setFormError] = useState(false);
   const [accountId, setAccountId] = useState(props.account.id);
+  const [hidden, setHidden] = useState(true)
 
   const handleChange = (e) => {
     const fieldName = e.target.name;
@@ -52,7 +61,7 @@ const LessonForm = (props) => {
   };
 
   return (
-    <div className="form-container form-div">
+    <Container>
       <form className="inapp-form" onSubmit={handleSubmit}>
         <TextInput
           placeholder="Lesson"
@@ -77,7 +86,7 @@ const LessonForm = (props) => {
         />
         <button>Add</button>
       </form>
-    </div>
+    </Container>
   );
 };
 

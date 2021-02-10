@@ -5,11 +5,18 @@ import {
   __GetLessons,
   __UpdateLesson,
 } from "../services/LessonService";
+import styled from 'styled-components'
 
+const LessonCard = styled.div`
+  position: relative;
+  padding: 1em;
+  border: 2px solid gray;
+  border-radius: 15px 30px;
+  margin: 1em;
+  margin-top: 25em;
+`;
 
 const LessonList = (props) => {
-    console.log('LessonList, props:', props)
-    // const { markComplete, removeLesson } = props.account
     const [lessons, setLessons] = useState([])
 
     const getLessons = async () => {
@@ -21,9 +28,8 @@ const LessonList = (props) => {
         getLessons()
     }, [])
 
-    // if (lessons !== null && lessons !== undefined) {  
     return (
-        <div>
+        <LessonCard>
             {lessons.map((lesson, index) => (
                 <Lesson 
                 key={index}                
@@ -33,15 +39,9 @@ const LessonList = (props) => {
                 // removeLesson={removeLesson}   
                 />
             ))}
-        </div>
+        </LessonCard>
     )
-    // } else {
-    //     return (
-    //         <div>
-    //             You have not started your Lessons Board yet
-    //         </div>
-    //     )
-    // }
+
 }
 
 export default LessonList
