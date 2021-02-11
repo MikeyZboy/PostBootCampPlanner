@@ -5,10 +5,9 @@ import { __GetLessons } from "../services/LessonService";
 import styled from 'styled-components'
 
 const Container = styled.div`
-  position: absolute;
-  margin: 0 auto;
-  margin-top: 0;
-  // display: none;
+  position: relative;
+  height: 75%;
+  width: 50%;
 `;
 
 const LessonForm = (props) => {

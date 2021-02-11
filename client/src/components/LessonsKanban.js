@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useState,useEffect} from 'react'
 import styled from 'styled-components'
 import LessonForm from './LessonForm'
 import LessonList from './LessonList'
+import { Modal } from 'react-responsive-modal'
 
 const ColumnsContainer = styled.section`
   position: relative;
@@ -24,23 +25,46 @@ const Column = styled.div`
 `;
 
 const FormHolder = styled.div`
-  position: top;
+  position: relative;
   padding: 1em;
+  margin: 1em;
   border: 2px solid gray;
   border-radius: 15px;
+`;
+
+const Button = styled.button`
+  font-size: 1em;
   margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid gray;
+  border-radius: 3px;
+  background: #1FB0B5;
+  color: white;
 `;
 
 const LessonsKanban = (props) => {
     const { account, getLessons, addLesson, removeLesson, markComplete } = props
 
+    const [open, setOpen] = useState(false)
+
+    useEffect(()=> {
+      getLessons();
+      setOpen()
+    },[])
+
+    const showModal = () => setOpen(true)
+    const hideModal = () => setOpen(false)
+
     return (
         <ColumnsContainer>
             <Column>
             Not Started
-            <FormHolder>
-                <LessonForm account={account} addLesson={addLesson}/>
-            </FormHolder>    
+            <Button onClick={showModal}> Add Lesson </Button>
+              <Modal open={open} onClose={hideModal}>            
+                <FormHolder onClose={hideModal}>
+                  <LessonForm account={account} addLesson={addLesson} onClose={hideModal}/>
+                </FormHolder>
+              </Modal>
             <LessonList account={account} getLessons={getLessons} removeLesson={removeLesson} markComplete={markComplete}/>
             </Column>
             <Column>

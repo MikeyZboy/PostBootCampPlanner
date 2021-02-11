@@ -28,21 +28,21 @@ const LessonCardContainer = styled.div`
 
 const Lessons = (props) => {
   const { account } = props;
-  // const [lessons, setLessons] = useState([]);
+  const [lessons, setLessons] = useState([]);
   // const [ category, setCategory ] = useState([])
 
-  // const getLessons = async () => {
-  //   let userLessons = await __GetLessons(account.id);
-  //   setLessons(userLessons);
-  // };
+  const getLessons = async () => {
+    let userLessons = await __GetLessons(account.id);
+    setLessons(userLessons);
+  };
 
   // const addLesson = (lesson) => {
   //   setLessons([...lessons, lesson]);
   // };
 
-  // useEffect(() => {
-  //   getLessons();
-  // }, []);
+  useEffect(() => {
+    getLessons();
+  }, []);
 
   // const markComplete = async (lesson) => {
   //   let id = account.id;
@@ -110,7 +110,7 @@ const Lessons = (props) => {
       <div>
         <LessonsKanban 
           account={account}
-          // getLessons={getLessons} 
+          getLessons={getLessons} 
           // addLesson={addLesson}
           // removeLesson={removeLesson}
           // markComplete={markComplete}
