@@ -50,7 +50,7 @@ const Lesson = (props) => {
     };
     
     return (
-      <div>
+      <li>
         <a href={props.lesson.link}>
         <Favicon
           src={`https://icons.duckduckgo.com/ip2/${props.lesson.link}.ico`}
@@ -59,7 +59,7 @@ const Lesson = (props) => {
             </a>
         <button onClick={() => markComplete(props.lesson.index)}>MARK COMPLETE</button>
         <button onClick={() => removeLesson(props.lesson)}>REMOVE</button>
-      </div>
+      </li>
     );
 }
 

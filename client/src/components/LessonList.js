@@ -29,8 +29,9 @@ const LessonList = (props) => {
     }, [])
 
     return (
-        <LessonCard>
+        <div>
             {lessons.map((lesson, index) => (
+              <LessonCard>
                 <Lesson 
                 key={index}                
                 lesson={lesson}
@@ -38,8 +39,9 @@ const LessonList = (props) => {
                 // markComplete={markComplete}
                 // removeLesson={removeLesson}   
                 />
+              </LessonCard>
             ))}
-        </LessonCard>
+        </div>
     )
 
 }

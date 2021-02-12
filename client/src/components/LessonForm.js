@@ -5,21 +5,18 @@ import { __GetLessons } from "../services/LessonService";
 import styled from 'styled-components'
 
 const Container = styled.div`
-  position: relative;
-  height: 75%;
-  width: 50%;
+
 `;
 
 const LessonForm = (props) => {
-
   const { lessons, setNeedsRefresh } = props;
+
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [link, setLink] = useState("");
   const [complete, setComplete] = useState(false);
   const [formError, setFormError] = useState(false);
   const [accountId, setAccountId] = useState(props.account.id);
-  const [hidden, setHidden] = useState(true)
 
   const handleChange = (e) => {
     const fieldName = e.target.name;

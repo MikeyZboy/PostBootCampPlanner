@@ -30,6 +30,7 @@ const FormHolder = styled.div`
   margin: 1em;
   border: 2px solid gray;
   border-radius: 15px;
+  
 `;
 
 const Button = styled.button`
@@ -60,11 +61,9 @@ const LessonsKanban = (props) => {
             <Column>
             Not Started
             <Button onClick={showModal}> Add Lesson </Button>
-              <Modal open={open} onClose={hideModal}>            
                 <FormHolder onClose={hideModal}>
                   <LessonForm account={account} addLesson={addLesson} onClose={hideModal}/>
                 </FormHolder>
-              </Modal>
             <LessonList account={account} getLessons={getLessons} removeLesson={removeLesson} markComplete={markComplete}/>
             </Column>
             <Column>
