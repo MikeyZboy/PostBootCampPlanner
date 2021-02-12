@@ -1,47 +1,73 @@
 import React, { useState, useEffect } from "react";
 import LessonForm from "../components/LessonForm";
-import LessonsKanban from '../components/LessonsKanban'
+import LessonList from "../components/LessonList";
 import {
   __DeleteLesson,
   __GetLessons,
   __UpdateLesson,
 } from "../services/LessonService";
-import '../styles/Layout.css'
-import '../styles/Card.css'
-import styled from 'styled-components'
+import "../styles/Layout.css";
+import "../styles/Card.css";
+import styled from "styled-components";
 
-const LessonCardContainer = styled.div`
-  display: inline-block;
+const ColumnsContainer = styled.section`
   position: relative;
-  mid-width: 120px;
-  width: 180px;
-  height: 240px;
-  scrollable: true;
   margin: 0 auto;
-  cursor: pointer;
-  color: darkgrey;
+  margin-top: 5em;
+  height: 75vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  color: grey;
+  border: 5px solid black;
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.4);
+`;
+
+const Column = styled.div`
+  position: relative;
+  display: inline-block;
+  width: 1fr;
+  border: 2px solid grey;
   &:hover {
-    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.4);
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.4);
   }
+`;
+
+const FormHolder = styled.div`
+  position: relative;
+  padding: 1em;
+  margin: 1em;
+  border: 2px solid gray;
+  border-radius: 15px;
+`;
+
+const Button = styled.button`
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid gray;
+  border-radius: 3px;
+  background: #1fb0b5;
+  color: white;
 `;
 
 const Lessons = (props) => {
   const { account } = props;
+
   const [lessons, setLessons] = useState([]);
-  // const [ category, setCategory ] = useState([])
+  const [updated, setUpdated] = useState([]);
 
   const getLessons = async () => {
     let userLessons = await __GetLessons(account.id);
     setLessons(userLessons);
   };
 
-  // const addLesson = (lesson) => {
-  //   setLessons([...lessons, lesson]);
-  // };
+  const addLesson = (lesson) => {
+    setLessons([...lessons, lesson]);
+    getLessons();
+  };
 
   useEffect(() => {
-    getLessons();
+    getLessons()
   }, []);
 
   // const markComplete = async (lesson) => {
@@ -57,65 +83,36 @@ const Lessons = (props) => {
   //   getLessons();
   // };
 
-  // const removeLesson = async (lesson) => {
-  //   let id = lesson.id;
-  //   const newLessons = await __DeleteLesson(id);
-  //   setLessons(newLessons);
-  //   getLessons();
-  // };
+  const removeLesson = async (lesson) => {
+    let id = lesson.id;
+    const newLessons = await __DeleteLesson(id);
+    setLessons(newLessons);
+    getLessons();
+  };
 
   return (
     <div>
       <header className="head">
         <h1>Lessons</h1>
       </header>
-      {/* <div>
-        <LessonForm account={account} addLesson={addLesson} />
-      </div> */}
-      {/* <div className="main">
-        <input onSubmit={(e) => handleSubmit(e)}  
-          className="goal-input"
-          type="text"
-          name="category"
-          value={category}
-          placeholder="__________________"
-          onChange={handleChange} 
-        />  
-        {lessons.length ? (
-          lessons.map((lesson, index) => (
-            <div key={lesson} className="card">
-            {lesson.complete === true ? (
-              <div key={index}>
-              <a href={lesson.link}>{lesson.title}</a>
-              <p>COMPLETED</p>
-              <button onClick={() => removeLesson(lesson)}>REMOVE</button>
-              </div>
-              ) : (
-                <div key={index}>
-                  <li> <a href={lesson.link}>{lesson.title}</a></li>
-                  <button onClick={() => markComplete(index)}>
-                  MARK COMPLETE
-                  </button>
-                  <button onClick={() => removeLesson(lesson)}>REMOVE</button>
-                </div>
-              )}
-                </div>  
-                ))
-                ) : (
-                <div>
-                  <h3>Loading Lessons...</h3>
-                </div>
-                )}
-      </div> */}
-      <div>
-        <LessonsKanban 
-          account={account}
-          getLessons={getLessons} 
-          // addLesson={addLesson}
-          // removeLesson={removeLesson}
-          // markComplete={markComplete}
-          />
-      </div>
+      <ColumnsContainer>
+        <Column>
+          <h4>Not Started</h4>
+          <Button> Add Lesson </Button>
+          <FormHolder>
+            <LessonForm account={account} addLesson={addLesson} />
+          </FormHolder>
+          <LessonList account={account} getLessons={getLessons} />
+        </Column>
+        <Column>
+          <h4>In Progress</h4>
+          <LessonList account={account} getLessons={getLessons} />
+        </Column>
+        <Column>
+          <h4>Complete</h4>
+          <LessonList account={account} getLessons={getLessons} />
+        </Column>
+      </ColumnsContainer>
     </div>
   );
 };

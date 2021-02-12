@@ -5,18 +5,20 @@ import { __GetLessons } from "../services/LessonService";
 import styled from 'styled-components'
 
 const Container = styled.div`
-
+  position: relative;
+  height: 75%;
+  width: 50%;
 `;
 
 const LessonForm = (props) => {
-  const { lessons, setNeedsRefresh } = props;
+
+  const { account, lessons, setNeedsRefresh } = props;
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [link, setLink] = useState("");
   const [complete, setComplete] = useState(false);
   const [formError, setFormError] = useState(false);
-  const [accountId, setAccountId] = useState(props.account.id);
 
   const handleChange = (e) => {
     const fieldName = e.target.name;
@@ -45,7 +47,7 @@ const LessonForm = (props) => {
         category: category,
         link: link,
         complete: false,
-        account_id: accountId,
+        account_id: account.id,
       };
       const newLesson = await __CreateLesson(formState);
       props.addLesson(newLesson);

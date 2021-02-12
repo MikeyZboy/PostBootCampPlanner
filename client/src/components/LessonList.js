@@ -7,43 +7,63 @@ import {
 } from "../services/LessonService";
 import styled from 'styled-components'
 
-const LessonCard = styled.div`
+const LessonCard = styled.ul`
   position: relative;
-  padding: 1em;
   border: 2px solid gray;
   border-radius: 15px 30px;
-  margin: 1em;
-  margin-top: 25em;
+  padding: 0.25em;
+  margin: 0.5em;
 `;
 
 const LessonList = (props) => {
-    const [lessons, setLessons] = useState([])
+  const [lessons, setLessons] = useState([]);
 
-    const getLessons = async () => {
-      let userLessons = await __GetLessons(props.account.id);
-      setLessons(userLessons);
+  const getLessons = async () => {
+    let userLessons = await __GetLessons(props.account.id);
+    setLessons(userLessons);
+  };
+
+  useEffect(() => {
+    getLessons();
+  }, []);
+
+  const markComplete = async (lesson) => {
+    let id = props.account.id;
+    let formData = {
+      title: lesson.title,
+      category: lesson.category,
+      link: lesson.link,
+      // complete -> switch to status
+      complete: true,
+      account_id: id
     };
+    let updatedLessons = await __UpdateLesson(id, formData);
+    setLessons(updatedLessons);
+    getLessons();
+  };
 
-    useEffect(()=> {
-        getLessons()
-    }, [])
+  const removeLesson = async (lesson) => {
+    let id = lesson.id;
+    const newLessons = await __DeleteLesson(id);
+    setLessons(newLessons);
+    getLessons();
+  };
 
-    return (
-        <div>
-            {lessons.map((lesson, index) => (
-              <LessonCard>
-                <Lesson 
-                key={index}                
-                lesson={lesson}
-                props={props}
-                // markComplete={markComplete}
-                // removeLesson={removeLesson}   
-                />
-              </LessonCard>
-            ))}
-        </div>
-    )
-
+  return (
+    <div>
+      {lessons.map((lesson, index) => (
+        <LessonCard>
+          <Lesson
+            key={index}
+            lesson={lesson}
+            props={props}
+            // markComplete={markComplete}
+            // removeLesson={removeLesson}
+          />
+        </LessonCard>
+      ))}
+    </div>
+  );
 }
 
 export default LessonList

@@ -2,14 +2,6 @@ import React, {useState} from 'react'
 import { __DeleteLesson, __UpdateLesson, __GetLessons } from "../services/LessonService"
 import styled from 'styled-components'
 
-const Card = styled.div`
-    position: relative;
-    padding: 1em;
-    border: 2px solid gray;
-    border-radius: 15px 30px;
-    margin: 1em;
-`;
-
 const Favicon = styled.img`
     size: 16px;
     min-height: 12px;
@@ -20,6 +12,7 @@ const Favicon = styled.img`
 `;
 
 const Lesson = (props) => {
+    console.log('Lesson props', props)
     const { account } = props
     const [lessons, setLessons] = useState([])
 
@@ -50,7 +43,7 @@ const Lesson = (props) => {
     };
     
     return (
-      <li>
+      <div>
         <a href={props.lesson.link}>
         <Favicon
           src={`https://icons.duckduckgo.com/ip2/${props.lesson.link}.ico`}
@@ -59,7 +52,7 @@ const Lesson = (props) => {
             </a>
         <button onClick={() => markComplete(props.lesson.index)}>MARK COMPLETE</button>
         <button onClick={() => removeLesson(props.lesson)}>REMOVE</button>
-      </li>
+      </div>
     );
 }
 
