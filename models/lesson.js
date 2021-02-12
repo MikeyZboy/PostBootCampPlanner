@@ -17,7 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     category: DataTypes.STRING,
     link: DataTypes.STRING,
-    complete: DataTypes.BOOLEAN,
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     accountId: {
       type: DataTypes.INTEGER,
       field: 'account_id',

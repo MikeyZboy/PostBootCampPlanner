@@ -17,7 +17,7 @@ const LessonForm = (props) => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [link, setLink] = useState("");
-  const [complete, setComplete] = useState(false);
+  const [status, setStatus] = useState("");
   const [formError, setFormError] = useState(false);
 
   const handleChange = (e) => {
@@ -33,9 +33,6 @@ const LessonForm = (props) => {
       case "link":
         setLink(fieldValue);
         break;
-      case "complete":
-        setComplete(fieldValue);
-        break;
     }
   };
 
@@ -46,12 +43,11 @@ const LessonForm = (props) => {
         title: title,
         category: category,
         link: link,
-        complete: false,
+        status: "Not Started",
         account_id: account.id,
       };
       const newLesson = await __CreateLesson(formState);
       props.addLesson(newLesson);
-      setComplete(false);
       e.target.reset()
     } catch (error) {
       setFormError(true);

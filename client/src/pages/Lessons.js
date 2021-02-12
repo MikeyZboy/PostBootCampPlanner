@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import LessonForm from "../components/LessonForm";
-import LessonList from "../components/LessonList";
+import NewLessonList from "../components/NewLessonList";
+import InProgressList from '../components/InProgressList'
+import CompletedList from '../components/CompletedList'
 import {
   __DeleteLesson,
   __GetLessons,
@@ -53,8 +55,12 @@ const Button = styled.button`
 const Lessons = (props) => {
   const { account } = props;
 
+  const [ show, setShow ] = useState(false)
   const [lessons, setLessons] = useState([]);
   const [updated, setUpdated] = useState([]);
+  const [notStarted, setNotStarted] = useState([]);
+  const [inProgress, setInProgress] = useState([]);
+  const [completed, setCompleted] = useState([]);
 
   const getLessons = async () => {
     let userLessons = await __GetLessons(account.id);
@@ -67,21 +73,23 @@ const Lessons = (props) => {
   };
 
   useEffect(() => {
-    getLessons()
+    getLessons();
   }, []);
 
-  // const markComplete = async (lesson) => {
-  //   let id = account.id;
-  //   let formData = {
-  //     title: lesson.title,
-  //     category: lesson.category,
-  //     link: lesson.link,
-  //     complete: true,
-  //   };
-  //   let updatedLessons = await __UpdateLesson(id, formData);
-  //   setLessons(updatedLessons);
-  //   getLessons();
-  // };
+  const changeStatus = async (e, lesson) => {
+    let statusValue = e.target.value;
+    let id = props.account.id;
+    let formData = {
+      title: lesson.title,
+      category: lesson.category,
+      link: lesson.link,
+      status: statusValue,
+      account_id: id,
+    };
+    let updatedLessons = await __UpdateLesson(id, formData);
+    setLessons(updatedLessons);
+    getLessons();
+  };
 
   const removeLesson = async (lesson) => {
     let id = lesson.id;
@@ -98,19 +106,44 @@ const Lessons = (props) => {
       <ColumnsContainer>
         <Column>
           <h4>Not Started</h4>
-          <Button> Add Lesson </Button>
-          <FormHolder>
-            <LessonForm account={account} addLesson={addLesson} />
-          </FormHolder>
-          <LessonList account={account} getLessons={getLessons} />
+          { account.lessons = [] ? (
+            <div>
+              <FormHolder>
+                <LessonForm account={account} addLesson={addLesson} />
+              </FormHolder>
+            </div>
+          ) : (
+            <div>
+            <Button onClick={setShow}> Add Lesson </Button>
+            <FormHolder>
+              <LessonForm account={account} addLesson={addLesson} />
+            </FormHolder>
+            </div>
+          )}
+            <NewLessonList
+              account={account}
+              getLessons={getLessons}
+              changeStatus={changeStatus}
+              removeLesson={removeLesson}
+            />
         </Column>
         <Column>
           <h4>In Progress</h4>
-          <LessonList account={account} getLessons={getLessons} />
+          <InProgressList
+            account={account}
+            getLessons={getLessons}
+            changeStatus={changeStatus}
+            removeLesson={removeLesson}
+          />
         </Column>
         <Column>
           <h4>Complete</h4>
-          <LessonList account={account} getLessons={getLessons} />
+          <CompletedList
+            account={account}
+            getLessons={getLessons}
+            changeStatus={changeStatus}
+            removeLesson={removeLesson}
+          />
         </Column>
       </ColumnsContainer>
     </div>

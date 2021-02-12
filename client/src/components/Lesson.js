@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { __DeleteLesson, __UpdateLesson, __GetLessons } from "../services/LessonService"
 import styled from 'styled-components'
 
@@ -11,47 +11,16 @@ const Favicon = styled.img`
     padding: 1px 5px 1px 2px;
 `;
 
-const Lesson = (props) => {
-    console.log('Lesson props', props)
-    const { account } = props
-    const [lessons, setLessons] = useState([])
+const Lesson = (props) => {  
 
-    const getLessons = async (id) => {
-        let userLessons = await __GetLessons(id);
-        setLessons(userLessons);
-    };
-
-    const markComplete = async (lesson) => {
-        let id = account.id;
-        let formData = {
-            title: lesson.title,
-            category: lesson.category,
-            link: lesson.link,
-            complete: true,
-        };
-        let updatedLessons = await __UpdateLesson(id, formData);
-        setLessons(updatedLessons);
-        getLessons();
-    };
-    
-    const removeLesson = async (lesson) => {
-        console.log('lesson to be removed:', lesson)
-        let id = lesson.id;
-        const newLessons = await __DeleteLesson(id);
-        setLessons(newLessons);
-        getLessons();
-    };
-    
     return (
       <div>
         <a href={props.lesson.link}>
-        <Favicon
-          src={`https://icons.duckduckgo.com/ip2/${props.lesson.link}.ico`}
-        />
-            {props.lesson.title}
-            </a>
-        <button onClick={() => markComplete(props.lesson.index)}>MARK COMPLETE</button>
-        <button onClick={() => removeLesson(props.lesson)}>REMOVE</button>
+          <Favicon
+            src={`https://icons.duckduckgo.com/ip2/${props.lesson.link}.ico`}
+          />
+          {props.lesson.title}
+        </a>
       </div>
     );
 }

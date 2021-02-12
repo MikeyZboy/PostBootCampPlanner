@@ -15,7 +15,7 @@ const LessonCard = styled.ul`
   margin: 0.5em;
 `;
 
-const LessonList = (props) => {
+const InProgressList = (props) => {
   const [lessons, setLessons] = useState([]);
 
   const getLessons = async () => {
@@ -27,14 +27,13 @@ const LessonList = (props) => {
     getLessons();
   }, []);
 
-  const markComplete = async (lesson) => {
+  const changeStatus = async (e, lesson) => {
     let id = props.account.id;
     let formData = {
       title: lesson.title,
       category: lesson.category,
       link: lesson.link,
-      // complete -> switch to status
-      complete: true,
+      status: e.target.value,
       account_id: id
     };
     let updatedLessons = await __UpdateLesson(id, formData);
@@ -51,19 +50,43 @@ const LessonList = (props) => {
 
   return (
     <div>
-      {lessons.map((lesson, index) => (
+      {
+      lessons.length ? 
+      (lessons.map((lesson, index) => (
+        lesson.status === "In Progress" ? (
         <LessonCard>
           <Lesson
             key={index}
             lesson={lesson}
             props={props}
-            // markComplete={markComplete}
-            // removeLesson={removeLesson}
           />
+        <button
+          value={"In Progress"}
+          onClick={() => changeStatus(props.lesson.index)}
+        >
+          Making Progress
+        </button>
+        <button
+          value={"Complete"}
+          onClick={() => changeStatus(props.lesson.index)}
+        >
+          Done!
+        </button>
+        <button value={"Removed"} onClick={() => removeLesson(lesson)}>REMOVE</button>
         </LessonCard>
-      ))}
+      ) : (
+        <div>
+          Save for a FontAwesome Img
+        </div>
+      )
+      ))) : (
+        <div>
+            Save for a FontAwesome Img
+        </div>
+      )
+    }
     </div>
   );
 }
 
-export default LessonList
+export default InProgressList
