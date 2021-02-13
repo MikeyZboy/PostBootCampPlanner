@@ -37,11 +37,12 @@ const NewLessonList = (props) => {
       account_id: id,
     };
     let updatedLessons = await __UpdateLesson(id, formData);
+    console.log('updatedLessons', updatedLessons)
     setLessons(updatedLessons);
     getLessons();
   };
 
-  const removeLesson = async (lesson) => {
+  const removeLesson = async (e, lesson) => {
     let id = lesson.id;
     const newLessons = await __DeleteLesson(id);
     setLessons(newLessons);
@@ -57,17 +58,17 @@ const NewLessonList = (props) => {
               <Lesson key={index} lesson={lesson} props={props} />
               <button
                 value={"In Progress"}
-                onClick={() => changeStatus(props.lesson.index)}
+                onClick={(e) => changeStatus(e, lesson)}
               >
                 Making Progress
               </button>
               <button
                 value={"Complete"}
-                onClick={() => changeStatus(props.lesson.index)}
+                onClick={(e) => changeStatus(e, lesson)}
               >
                 Done!
               </button>
-              <button value={"Removed"} onClick={() => removeLesson(lesson)}>
+              <button onClick={(e) => removeLesson(e, lesson)}>
                 REMOVE
               </button>
             </LessonCard>

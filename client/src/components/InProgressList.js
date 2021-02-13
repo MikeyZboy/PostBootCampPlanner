@@ -41,7 +41,7 @@ const InProgressList = (props) => {
     getLessons();
   };
 
-  const removeLesson = async (lesson) => {
+  const removeLesson = async (e, lesson) => {
     let id = lesson.id;
     const newLessons = await __DeleteLesson(id);
     setLessons(newLessons);
@@ -50,8 +50,7 @@ const InProgressList = (props) => {
 
   return (
     <div>
-      {
-      lessons.length ? 
+      {lessons.length ? 
       (lessons.map((lesson, index) => (
         lesson.status === "In Progress" ? (
         <LessonCard>
@@ -61,18 +60,18 @@ const InProgressList = (props) => {
             props={props}
           />
         <button
-          value={"In Progress"}
-          onClick={() => changeStatus(props.lesson.index)}
+          value={"Not Started"}
+          onClick={(e) => changeStatus(e, lesson)}
         >
-          Making Progress
+          Not Started
         </button>
         <button
           value={"Complete"}
-          onClick={() => changeStatus(props.lesson.index)}
+          onClick={(e) => changeStatus(e, lesson)}
         >
           Done!
         </button>
-        <button value={"Removed"} onClick={() => removeLesson(lesson)}>REMOVE</button>
+        <button onClick={(e) => removeLesson(e,lesson)}>REMOVE</button>
         </LessonCard>
       ) : (
         <div>
