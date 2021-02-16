@@ -9,6 +9,7 @@ export const __GetLessons = async (accountId) => {
     const res = await ApiClient.get(`/lessons/view/${accountId}`);
     return res.data;
   } catch (error) {
+    console.log(error)
     throw error;
   }
 };
@@ -19,6 +20,7 @@ export const __CreateLesson = async (formData) => {
     console.log("res.data return:", res.data);
     return res.data;
   } catch (error) {
+    console.log(error)
     throw error;
   }
 };
@@ -33,7 +35,6 @@ export const __UpdateLesson = async (id, formData) => {
 };
 
 export const __DeleteLesson = async (id) => {
-  console.log('__DeleteLesson id:', id)
   try {
     const res = await ApiClient.delete(`/lessons/${id}`);
     return res.data;

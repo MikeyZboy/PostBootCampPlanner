@@ -61,7 +61,7 @@ const CompletedList = (props) => {
               >
                 Still Working
               </button>
-              <button onClick={(e) => removeLesson(e, lesson)}>
+              <button value={"Removed"} onClick={(e) => removeLesson(e, lesson)}>
                 REMOVE
               </button>
             </LessonCard>

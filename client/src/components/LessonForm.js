@@ -50,6 +50,7 @@ const LessonForm = (props) => {
       props.addLesson(newLesson);
       e.target.reset()
     } catch (error) {
+      console.log(error)
       setFormError(true);
     }
   };

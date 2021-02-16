@@ -55,21 +55,23 @@ const Button = styled.button`
 const Lessons = (props) => {
   const { account } = props;
 
-  const [ show, setShow ] = useState(false)
   const [lessons, setLessons] = useState([]);
-  const [updated, setUpdated] = useState([]);
-  const [notStarted, setNotStarted] = useState([]);
-  const [inProgress, setInProgress] = useState([]);
-  const [completed, setCompleted] = useState([]);
+  const [ show, setShow ] = useState(false)
+
+  //setShow => should change the behavior of the formholder
+  // e.g. "display: none || block"
+
 
   const getLessons = async () => {
     let userLessons = await __GetLessons(account.id);
     setLessons(userLessons);
+    console.log('Lessons.js, getLessons hit')
   };
 
   const addLesson = (lesson) => {
     setLessons([...lessons, lesson]);
     getLessons();
+    console.log('Lessons.js, addLesson HIT')
   };
 
   useEffect(() => {
@@ -89,6 +91,7 @@ const Lessons = (props) => {
     let updatedLessons = await __UpdateLesson(id, formData);
     setLessons(updatedLessons);
     getLessons();
+    console.log('lessons.js changeStatus HIT')
   };
 
   const removeLesson = async (lesson) => {
@@ -96,6 +99,7 @@ const Lessons = (props) => {
     const newLessons = await __DeleteLesson(id);
     setLessons(newLessons);
     getLessons();
+    console.log('lessons.js, removeLesson hit')
   };
 
   return (
@@ -106,7 +110,7 @@ const Lessons = (props) => {
       <ColumnsContainer>
         <Column>
           <h4>Not Started</h4>
-          { account.lessons = [] ? (
+          { account.lessons !== [] ? (
             <div>
               <FormHolder>
                 <LessonForm account={account} addLesson={addLesson} />
@@ -120,12 +124,16 @@ const Lessons = (props) => {
             </FormHolder>
             </div>
           )}
+          {account.lessons ? (
             <NewLessonList
               account={account}
               getLessons={getLessons}
               changeStatus={changeStatus}
               removeLesson={removeLesson}
             />
+          ):(
+            <></>
+          )}
         </Column>
         <Column>
           <h4>In Progress</h4>
