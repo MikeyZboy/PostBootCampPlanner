@@ -32,16 +32,13 @@ const FormHolder = styled.div`
   padding: 2em;
   margin: 10px 250px;
   margin-top: 2em;
-  border: 2px solid gray;
-  border-radius: 15px;
-  height: ;
+  height: auto;
   width: 1fr;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.4);
-  }
+
 `;
 
 const UploadButton = styled.button`
+  width: 1fr;
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
@@ -49,6 +46,9 @@ const UploadButton = styled.button`
   border-radius: 3px;
   background: #1fb0b5;
   color: white;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 `;
 
 const Achievements = (props) => {
@@ -122,7 +122,7 @@ const Achievements = (props) => {
         <h1>{account.firstName}'s Achievements!</h1>
       </header>
       <FormHolder>
-        <form onSubmit={handleSubmit}>
+        {/* <form onSubmit={handleSubmit}> */}
           <UploadButton onClick={uploadClick}>
             Upload an Achievement
             <input
@@ -142,14 +142,15 @@ const Achievements = (props) => {
             style={{ display: `${clicked}` }}
           />
           <button
+            style={{ display: `${clicked}` }}
             onClick={() => {
               toggleClick();
             }}
-            style={{ display: `${clicked}` }}
+            onSubmit={handleSubmit}
           >
             Post
           </button>
-        </form>
+        {/* </form> */}
       </FormHolder>
       <AchievementsHolder>
         <div className="upload-container">
