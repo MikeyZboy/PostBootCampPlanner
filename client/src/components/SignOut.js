@@ -3,15 +3,20 @@ import { Redirect } from "react-router";
 import styled from "styled-components";
 
 const Button = styled.button`
-  display: inline-block;
+  display: flex;
   color: white;
   font-size: 1em;
-  margin-top: 15em;
+  margin: 250px auto;
   padding: 0.25em 1em;
   border: 2px solid white;
   border-radius: 3px;
   display: block;
   background-color: transparent;
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: inset 3px 0 0 0 #ffffff;
+    cursor: pointer;
+  }
 `;
 
 export default () => {

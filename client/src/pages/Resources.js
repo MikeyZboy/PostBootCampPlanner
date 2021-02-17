@@ -22,6 +22,7 @@ const ResourceCardContainer = styled.div`
 const Resources = (props) => {
   const { account } = props;
   const [resources, setResources] = useState([]);
+  const [categoryValue, setCategoryValue] = useState("");
 
   const getResources = async () => {
     let userResources = await __GetResources(account.id);
@@ -44,6 +45,8 @@ const Resources = (props) => {
     getResources();
   };
 
+  const handleChange = () => {}
+
   return (
     <div>
       <header className="head">
@@ -58,7 +61,46 @@ const Resources = (props) => {
             </div>
           ) : (
             <div>
-              {resources.length ? (
+              <form>
+                <input
+                  className="goal-input"
+                  type="text"
+                  name="category"
+                  value={categoryValue}
+                  placeholder="Category"
+                  onChange={handleChange}
+                />
+              </form>
+              {resources.map((resource, index) => {
+                resource.category === categoryValue ? (
+                  <ul key={index}>
+                    <a href={`https://${resource.link}`}>
+                      <img
+                        class="favicon"
+                        src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
+                      />
+                      {resource.title}
+                    </a>
+                    <button onClick={() => removeResource(resource)}>
+                      REMOVE
+                    </button>
+                  </ul>
+                ) : (
+                  <div>
+                    <p>Uncategorized</p>
+                    <ul> </ul>
+                    <ResourceForm />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </ResourceCardContainer>
+    </div>
+  );
+};
+              {/* {resources.length ? (
                 resources.map((resource, index) => (
                   <div key={index} className="card mini">
                     <ul>
@@ -74,18 +116,20 @@ const Resources = (props) => {
                         REMOVE
                       </button>
                     </ul>
-                    <ResourceForm account={account} addResource={addResource} />
-                  </div>
-                ))
-              ) : (
-                <div>There's room for more...</div>
-              )}
-            </div>
-          )}
-        </div>
-      </ResourceCardContainer>
-    </div>
-  );
-};
+                    <ResourceForm account={account} addResource={addResource} /> */}
+        //           </div>
+        //         ))
+        //       ) : (
+        //         <div>There's room for more...</div>
+        //       )}
+        //     </div>
+        //   )}
+        // </div>
+//                   }
+//                   </div>
+//       </ResourceCardContainer>
+//     </div>
+//   );
+// };
 
 export default Resources;

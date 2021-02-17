@@ -40,10 +40,9 @@ const SidebarMenuItemLabel = styled.p`
   margin-top: 0;
   font-family: "Open Sans", sans-serif;
   font: ;
-  color: #fff;
   font-size: 14px;
-  line-height: 1.5;
   font-weight: 500;
+  line-height: 1.5;
   color: #ffffff;
   text-align: left;
 `;
@@ -89,10 +88,12 @@ const Sidebar = () => {
                 <SidebarMenuItemLabel>Achievements</SidebarMenuItemLabel>
               </SidebarMenuItem>
             </NavLink>      
-            <NavLink to="/welcome">
-            <SignOut onClick={clearAccount}/>         
-            </NavLink>
           </SidebarMenu>
+          <div>
+            <NavLink to="/welcome">
+              <SignOut onClick={clearAccount}/>         
+            </NavLink>
+          </div>
         </SidebarContainer>
       </div>
   );
