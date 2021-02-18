@@ -19,7 +19,7 @@
   grid-area: main;
   background-color: transparent;
   margin: 0 auto;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 h1, h3{

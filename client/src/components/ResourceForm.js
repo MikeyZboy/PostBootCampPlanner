@@ -1,7 +1,14 @@
 import React, { useState } from 'react'
 import TextInput from '../components/TextInput'
 import { __CreateResource } from '../services/ResourceService'
+import styled from 'styled-components'
 
+const InlineForm = styled.form`
+  margin: 0 auto;
+  padding: 10px;
+  display: block;
+  background-color: transparent;
+  `;
 
 const ResourceForm = (props) => {
  
@@ -45,9 +52,8 @@ const ResourceForm = (props) => {
     };
 
     return (
-      <div className="bottom-form">
-        <div className="form-container form-div">
-          <form className="inapp-form" onSubmit={handleSubmit}>
+        <div>
+          <InlineForm onSubmit={handleSubmit}>
             <TextInput
               placeholder="Name"
               type="text"
@@ -67,9 +73,8 @@ const ResourceForm = (props) => {
               onChange={handleChange}
             />
             <button>Add</button>
-          </form>
+          </InlineForm>
         </div>
-      </div>
     );
 }
 

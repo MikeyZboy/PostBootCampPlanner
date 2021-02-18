@@ -3,23 +3,31 @@ import { __GetResources, __DeleteResource } from "../services/ResourceService";
 import ResourceForm from "../components/ResourceForm";
 import styled from "styled-components";
 
-const ResourceContainer = styled.div`
-  display: inline-block;
+const ResourcesContainer = styled.section`
   position: relative;
-  mid-width: 120px;
-  width: 180px;
-  height: 240px;
-  scrollable: true;
-  margin: 0 auto;
-  cursor: pointer;
-  color: darkgrey;
-  &:hover {
-    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.4);
-    background-color: rgba(0, 0, 0, 0.6);
-  }
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  color: grey;
+  margin: 0;
+  overflow: scroll;
 `;
 
-const ResourceCard = styled.div``;
+const ResourceCard = styled.div`
+  height: 1fr;
+  width: 1fr;
+  padding: .5em, 1em;
+  margin: 1em;
+  border: 2px solid gray;
+  border-radius: 10px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+`;
 
 const Resources = (props) => {
   const { account } = props;
@@ -54,84 +62,37 @@ const Resources = (props) => {
       <header className="head">
         <h1>Resources</h1>
       </header>
-      <ResourceCardContainer>
-        <div className="upload-container">
-          {resources.length === 0 ? (
-            <div>
-              <h2>Add Your Favorite Sites</h2>
-              <ResourceForm account={account} addResource={addResource} />
-            </div>
-          ) : (
-            <div>
-              <form>
-                <input
-                  className="goal-input"
-                  type="text"
-                  name="category"
-                  value={categoryValue}
-                  placeholder="Category"
-                  onChange={handleChange}
-                />
-              </form>
-              {resources.map((resource, index) => {
-                resource.category === categoryValue ? (
-                  <ul key={index}>
-                    <a href={`https://${resource.link}`}>
-                      <img
-                        class="favicon"
-                        src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
-                      />
-                      {resource.title}
-                    </a>
-                    <button onClick={() => removeResource(resource)}>
-                      REMOVE
-                    </button>
-                  </ul>
-                ) : (
-                  <div>
-                    <p>Uncategorized</p>
-                    <ul> </ul>
-                    <ResourceForm />
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      </ResourceCardContainer>
+        {resources.length <= 1 ? 
+        (
+          <div>
+            <h2>Add Your Favorite Resources</h2>
+            <p>Here, you can create and categorize what you rely on most!</p>
+            <ResourceForm account={account} addResource={addResource}/>
+          </div>
+        ):(
+          resources.map((resource, category, index) => 
+        (
+          <ResourcesContainer>
+            <ResourceCard key={index}>
+              <h2>{resource.category}</h2> 
+              <ul value={index}>
+                <a href={`https://${resource.link}`}>
+                  <img
+                    class="favicon"
+                    src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
+                    alt="favicon link"
+                  />
+                  {resource.title}
+                </a>
+                <button onClick={()=> {removeResource(resource)}}>Delete</button>   
+              </ul>
+            </ResourceCard>
+          </ResourcesContainer>
+        ) 
+        ))
+        }
     </div>
   );
 };
-              {/* {resources.length ? (
-                resources.map((resource, index) => (
-                  <div key={index} className="card mini">
-                    <ul>
-                      <p>{resource.topic}</p>
-                      <a href={`https://${resource.link}`}>
-                        <img
-                          class="favicon"
-                          src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
-                        />
-                        {resource.title}
-                      </a>
-                      <button onClick={() => removeResource(resource)}>
-                        REMOVE
-                      </button>
-                    </ul>
-                    <ResourceForm account={account} addResource={addResource} /> */}
-        //           </div>
-        //         ))
-        //       ) : (
-        //         <div>There's room for more...</div>
-        //       )}
-        //     </div>
-        //   )}
-        // </div>
-//                   }
-//                   </div>
-//       </ResourceCardContainer>
-//     </div>
-//   );
-// };
 
 export default Resources;
