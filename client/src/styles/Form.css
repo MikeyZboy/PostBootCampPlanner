@@ -58,11 +58,11 @@
 input {
   height: 30px;
   min-width: 50%;
-  max-width: 75%;
-  padding: 0;
+  /* max-width: 75%; */
+  padding: 5px;
   border-radius: 0;
   background-color: transparent;
-  color: white;
+  color: seagreen;
   font-size: large;
   border: none;
   outline: none;
@@ -87,6 +87,9 @@ margin: 0 auto;
 
 .inapp-form input[type="text"] {
   color: rgb(87, 82, 82);
+  font-size: large;
+  text-align: center;
+  width: auto;
 } 
 
 .inapp-form input[type="file"] {

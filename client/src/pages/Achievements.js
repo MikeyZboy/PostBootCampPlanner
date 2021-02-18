@@ -9,16 +9,17 @@ import styled from 'styled-components'
 
 const AchievementsHolder = styled.section`
   position: relative;
-  margin: 0 auto;
-  margin-top: 1.5em;
+  margin: 1.5em;
+  padding: 1em;
   height: 75vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-row-gap: 50px;
   color: grey;
-  border: 5px solid black;
+  border: 2px dotted gray;
   border-radius: 15px;
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.4);
+  overflow: scroll;
   &:hover {
     background-color: rgba(0, 0, 0, 0.4);
   }
@@ -34,20 +35,43 @@ const FormHolder = styled.div`
   margin-top: 2em;
   height: auto;
   width: 1fr;
-
 `;
 
 const UploadButton = styled.button`
   width: 1fr;
-  font-size: 1em;
+  font-size: 1.5em;
+  font-weight: 700;
   margin: 1em;
   padding: 0.25em 1em;
   border: 2px solid gray;
   border-radius: 3px;
-  background: #1fb0b5;
+  background: #194d44;
   color: white;
   &:hover {
     background-color: rgba(0, 0, 0, 0.4);
+  }
+`;
+
+const AchievementCard = styled.div`
+  height: 400px;
+  width: 300px;
+  padding: .5em, 1em;
+  margin: 1em;
+  border: 2px solid gray;
+  border-radius: 10px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+`;
+
+const Image = styled.img`
+  height: auto;
+  margin: 10px;
+  border-radius: 10px;
+  max-width: 275px;
+  &:hover{
+    transform: translateZ(150%);
   }
 `;
 
@@ -112,8 +136,9 @@ const Achievements = (props) => {
   }
   
   const toggleClick = () => {
-    setInterval(100000)
+    setTimeout(() => {
     clicked === "none" ? setClicked("list-item") : setClicked("none")
+    }, 3000)
   }
 
   return (
@@ -122,7 +147,6 @@ const Achievements = (props) => {
         <h1>{account.firstName}'s Achievements!</h1>
       </header>
       <FormHolder>
-        {/* <form onSubmit={handleSubmit}> */}
           <UploadButton onClick={uploadClick}>
             Upload an Achievement
             <input
@@ -134,40 +158,39 @@ const Achievements = (props) => {
               style={{ display: "none" }}
             />
           </UploadButton>
+        <form onSubmit={handleSubmit} className="inapp-form">
           <input
             type="text"
             name="name"
-            placeholder="Name of Achievement"
+            placeholder="Achievement Name"
             onChange={handleChange}
             style={{ display: `${clicked}` }}
+            contentEditable
           />
           <button
             style={{ display: `${clicked}` }}
             onClick={() => {
               toggleClick();
             }}
-            onSubmit={handleSubmit}
           >
             Post
           </button>
-        {/* </form> */}
+        </form>
       </FormHolder>
       <AchievementsHolder>
-        <div className="upload-container">
           {achievements.length ? (
             achievements.map((achievement, index) => (
-              <div key={index} className="card">
+              <AchievementCard key={index}>
                 <h4>{achievement.name}</h4>
-                <img src={achievement.achievementImage} />
+                <Image src={achievement.achievementImage} alt="uploaded post"/>
                 <button onClick={() => handleDelete(achievement)}>
                   Delete
                 </button>
-              </div>
+              </AchievementCard>
             ))
           ) : (
-            <h3>No Achievements Yet</h3>
+            <h3>No Posts Yet</h3>
           )}
-        </div>
       </AchievementsHolder>
     </div>
   );

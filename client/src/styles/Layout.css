@@ -25,6 +25,16 @@
 h1, h3{
   color: gray;
   font-style: italic;
+  text-align: center;
+  align-content: center;
+  margin: 10px;
+}
+
+h4 {
+  font-size: 1.3rem;
+  color: gray;
+  margin: 10px;
+  font-weight: 700;
 }
 
 .background {

@@ -3,7 +3,7 @@ import { __GetResources, __DeleteResource } from "../services/ResourceService";
 import ResourceForm from "../components/ResourceForm";
 import styled from "styled-components";
 
-const ResourceCardContainer = styled.div`
+const ResourceContainer = styled.div`
   display: inline-block;
   position: relative;
   mid-width: 120px;
@@ -18,6 +18,8 @@ const ResourceCardContainer = styled.div`
     background-color: rgba(0, 0, 0, 0.6);
   }
 `;
+
+const ResourceCard = styled.div``;
 
 const Resources = (props) => {
   const { account } = props;
