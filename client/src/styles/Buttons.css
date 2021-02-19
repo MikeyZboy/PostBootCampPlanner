@@ -1,6 +1,7 @@
 .submit-button{
     padding: 5px;
     margin: 5px;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .signout-button{

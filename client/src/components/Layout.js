@@ -5,7 +5,7 @@ const Layout = ({children}) => {
 
     return (
       <div className="grid-container">
-        <div className="sidebar">
+        <div>
           <Sidebar />
         </div>
         {children}

@@ -127,7 +127,7 @@ const SignUp = (props) => {
         )
         }
         <div>
-          <NavLink to="/signin" activeclassName="nav-active">
+          <NavLink to="/signin" className="nav-active">
             <p>Already have an account?</p>
           </NavLink>
         </div>

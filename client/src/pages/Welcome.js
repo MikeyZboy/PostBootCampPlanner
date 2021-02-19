@@ -11,7 +11,7 @@ const Welcome = () => {
       <div className="welcome-div">
         <div className="welcome-card">
           <h1>Post BootCamp Planner</h1>
-          <p>“A browser based planner for nonstop learning!”</p>
+          <p>A browser based planner for nonstop learning!</p>
           <NavLink to="/signup" onClick={handleClick}>
             <button className="submit-button">Get Started</button>
           </NavLink>

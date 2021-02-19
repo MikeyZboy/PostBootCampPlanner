@@ -16,7 +16,7 @@ export default (props) => {
           <Goal account={props.account} />
         </div>
         <div className="main">
-          <Calendar />
+          {/* <Calendar /> */}
         </div>
       </div>
     );

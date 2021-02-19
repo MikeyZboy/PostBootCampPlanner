@@ -17,6 +17,7 @@ html {
   background-color: transparent;
   background-attachment: fixed;
   background-size: cover;
+  font-family: 'Roboto Mono', monospace; 
 }
 
 .App-logo {
