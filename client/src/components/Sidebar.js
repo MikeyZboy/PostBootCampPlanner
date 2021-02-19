@@ -9,7 +9,7 @@ import { faCalendarDay, faLaptopCode, faBookmark, faAward, faSignOutAlt } from '
 
 const SidebarContainer = styled.div`
   height: 100%;
-  width: 15%;
+  width: 20%;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -27,26 +27,12 @@ const SidebarMenu = styled.ul`
   list-style: none;
   text-decoration: none;
   width: 100%;
-  padding: 0px 30px;
+  padding: 0px 15px;
   margin-top: 4em;
 `;
-
-// const SidebarMenuItem = styled.li`
-//   list-style: none;
-//   position: relative;
-//   text-decoration: none;
-//   margin-left: 0;
-//   height: 40px;
-//   width: 100%;
-//   &:hover {
-//     background: rgba(255, 255, 255, 0.05);
-//     // box-shadow: 3px;
-//     cursor: pointer;
-//   }
-// `;
   
   const SidebarMenuItem = styled.a`
-    margin: 1em;
+    margin-top: 1em;
     padding: 8px 0px 8px 0px;
     text-decoration: none;
     font-size: 25px;
@@ -54,11 +40,12 @@ const SidebarMenu = styled.ul`
     display: block;
     transition: 0.3s;
     &:hover {
-      transform: scale(1.5);
+      transform: scale(1.1);
     }
   `;
 
-  const SidebarMenuItemLabel = styled.p` 
+  const SidebarMenuItemLabel = styled.p`
+    display: inline-block;
     text-decoration: none;
     margin-top: 20px;
     padding-bottom: 10px;
@@ -69,7 +56,8 @@ const SidebarMenu = styled.ul`
     color: #ffffff;
     max-width: 15%;
     &:hover {
-      display: block;
+      cursor: pointer;
+      transition: 3s;
     }
   `;
 
@@ -79,9 +67,8 @@ const Icon = styled.svg`
   margin-right: 30px;
   color: white;
   &:hover{
-    background: rgba(255,255,255,0.05);
     cursor: pointer;
-    transform: scale(1.5);
+    transform: scale(1.1);
   }
 `;
 
@@ -90,16 +77,43 @@ const SignOutButton = styled.div`
 `;
 
 const Logo = styled.img`
+  top: 0;
+  left: 0;
+  position: absolute;
   margin: 0 auto;
-  padding: 1em;
+  padding: .5em;
+`;
+
+const SideBarOpenButton = styled.button`
+  position: relative;
+  font-size: 40px;
+  margin: 3em;
+  cursor: pointer;
+  background-color: #fff;
+`;
+
+const SideBarCloseButton = styled.button`
+  position: relative;  
+  right: 25px;
+  font-size: 40px;
+  margin: 3em;
+  cursor: pointer;
+  background-color: #fff;
 `;
 
 const Sidebar = () => {
   
-  const [show, setShow] = useState('')
+  const [sideBarOpen, setSideBarOpen] = useState('show')
+  const [sideBarClose, setSideBarClose] = useState('hidden')
+  
+  const handleOpen = () => {
+    setSideBarOpen('hidden')
+    setSideBarClose('show')
+  }
 
-  const startShow = () => {
-    setShow("block")
+  const handleClose = () => {
+    setSideBarClose('hidden')
+    setSideBarOpen('show')
   }
 
   useEffect(()=>{},[])
@@ -109,69 +123,65 @@ const Sidebar = () => {
   };
 
   return (
-    <div onMouseOut={setShow}>
-      <SidebarContainer onMouseOut={setShow}>
-        <Logo src={PBCP} />
-        <DateTime />
-        <SidebarMenu>
+    <SidebarContainer>
+      <Logo src={PBCP} />
+      <SideBarOpenButton
+        onClick={handleOpen}
+        style={{ display: `${sideBarOpen}` }}
+      />
+      <SideBarCloseButton
+        onClick={handleClose}
+        style={{ display: `${sideBarClose}` }}
+      />
+      <DateTime />
+      <SidebarMenu>
         <NavLink className="active" to="/home">
-          <SidebarMenuItem onMouseOut={setShow}>
-            <Icon onMouseOver={startShow}>
+          <SidebarMenuItem>
+            <Icon>
               <FontAwesomeIcon icon={faCalendarDay} />
             </Icon>
-            <SidebarMenuItemLabel style={{ display: `${show}` }}>
-              Calendar
-            </SidebarMenuItemLabel>
+            <SidebarMenuItemLabel>Calendar</SidebarMenuItemLabel>
           </SidebarMenuItem>
         </NavLink>
         <NavLink className="active" to="/lessons">
-          <SidebarMenuItem onMouseOut={setShow}>
-            <Icon onMouseOver={startShow}>
+          <SidebarMenuItem>
+            <Icon>
               <FontAwesomeIcon icon={faLaptopCode} />
             </Icon>
-            <SidebarMenuItemLabel style={{ display: `${show}` }}>
-              Lessons
-            </SidebarMenuItemLabel>
+            <SidebarMenuItemLabel>Lessons</SidebarMenuItemLabel>
           </SidebarMenuItem>
         </NavLink>
         <NavLink className="active" to="/resources">
-          <SidebarMenuItem onMouseOut={setShow}>
-            <Icon onMouseOver={startShow}>
+          <SidebarMenuItem>
+            <Icon>
               <FontAwesomeIcon icon={faBookmark} />
             </Icon>
-            <SidebarMenuItemLabel style={{ display: `${show}` }}>
-              Resources
-            </SidebarMenuItemLabel>
+            <SidebarMenuItemLabel>Resources</SidebarMenuItemLabel>
           </SidebarMenuItem>
         </NavLink>
         <NavLink className="active" to="/achievements">
-          <SidebarMenuItem onMouseOut={setShow}>
-            <Icon onMouseOver={startShow}>
+          <SidebarMenuItem>
+            <Icon>
               <FontAwesomeIcon icon={faAward} />
             </Icon>
-            <SidebarMenuItemLabel style={{ display: `${show}` }}>
-              Achievements
-            </SidebarMenuItemLabel>
+            <SidebarMenuItemLabel>Achievements</SidebarMenuItemLabel>
           </SidebarMenuItem>
         </NavLink>
-        </SidebarMenu>
-        <SignOutButton>
-          <NavLink className="active" to="/welcome">
-            <SidebarMenuItem onMouseOut={setShow}>
-              <Icon onMouseOver={startShow}>
-                <FontAwesomeIcon
-                  icon={faSignOutAlt}
-                  component={<SignOut onClick={clearAccount} />}
-                />
-              </Icon>
-              <SidebarMenuItemLabel style={{ display: `${show}` }}>
-                Sign Out
-              </SidebarMenuItemLabel>
-            </SidebarMenuItem>
-          </NavLink>
-        </SignOutButton>
-      </SidebarContainer>
-    </div>
+      </SidebarMenu>
+      <SignOutButton>
+        <NavLink className="active" to="/welcome">
+          <SidebarMenuItem>
+            <Icon>
+              <FontAwesomeIcon
+                icon={faSignOutAlt}
+                component={<SignOut onClick={clearAccount} />}
+              />
+            </Icon>
+            <SidebarMenuItemLabel>Sign Out</SidebarMenuItemLabel>
+          </SidebarMenuItem>
+        </NavLink>
+      </SignOutButton>
+    </SidebarContainer>
   );
 };
 
