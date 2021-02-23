@@ -114,17 +114,20 @@ const NavButtonsContainer = styled.div`
 
 const Sidebar = () => {
   
-  const [sideBarOpen, setSideBarOpen] = useState('inline')
-  const [sideBarClose, setSideBarClose] = useState('none')
+  const [sideBarOpenButton, setSideBarOpenButton] = useState('inline')
+  const [sideBarCloseButton, setSideBarCloseButton] = useState('none')
+
   
-  const handleOpen = () => {
-    setSideBarOpen('none')
-    setSideBarClose('inline')
+
+
+  const handleOpen = (e) => {
+    setSideBarOpenButton('none')
+    setSideBarCloseButton('inline')
   }
 
   const handleClose = () => {
-    setSideBarClose('none')
-    setSideBarOpen('inline')
+    setSideBarCloseButton('none')
+    setSideBarOpenButton('inline')
   }
 
   useEffect(()=>{},[])
@@ -133,12 +136,6 @@ const Sidebar = () => {
      localStorage.clear("account_id");
   };
 
-  // function to openSidebar
-
-  
-  // function to closeSidebar
-
-
   return (
     <SidebarContainer>
       <LDTContainer>
@@ -146,15 +143,23 @@ const Sidebar = () => {
         <DateTime />
       </LDTContainer>
       <NavButtonsContainer>
-        <Icon style={{ display: `${sideBarOpen}` }}>
+        <Icon
+          onClick={(e) => handleOpen(e)}
+          style={{ display: `${sideBarOpenButton}` }}
+        >
           <FontAwesomeIcon
             icon={faBars}
-            component={<SideBarOpenButton onClick={handleOpen} />}
+            component={<SideBarOpenButton />}
           ></FontAwesomeIcon>
         </Icon>
-        <Icon style={{ display: `${sideBarClose}` }}>
-          <FontAwesomeIcon icon={faAngleDoubleLeft} />
-          <SideBarCloseButton onClick={handleClose} />
+        <Icon
+          onClick={(e) => handleClose(e)}
+          style={{ display: `${sideBarCloseButton}` }}
+        >
+          <FontAwesomeIcon
+            icon={faAngleDoubleLeft}
+            component={<SideBarCloseButton />}
+          />
         </Icon>
       </NavButtonsContainer>
       <SidebarMenu>
