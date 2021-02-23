@@ -113,7 +113,7 @@ const NavButtonsContainer = styled.div`
 `;
 
 const MinimizedContainer = styled.div`
-  width: 50px;
+  width: 75px;
   height: 100%;
   background-color: #194d44;;
   position: fixed;
@@ -123,8 +123,6 @@ const Sidebar = () => {
   
   const [sideBarOpenButton, setSideBarOpenButton] = useState('inline')
   const [sideBarCloseButton, setSideBarCloseButton] = useState('inline')
-
-  // set click t/f for showing or not showing navbar
   const [clicked, setClicked] = useState(false)
 
   const handleOpen = (e) => {
@@ -201,7 +199,7 @@ const Sidebar = () => {
           <SignOutButton>
             <NavLink className="active" to="/welcome">
               <SidebarMenuItem>
-                <Icon>
+                <Icon style={{ transform: `scaleX(-1)` }}>
                   <FontAwesomeIcon
                     icon={faSignOutAlt}
                     component={<SignOut onClick={clearAccount} />}
@@ -214,15 +212,17 @@ const Sidebar = () => {
         </SidebarContainer>
       ) : (
         <MinimizedContainer>
-          <Icon
-            onClick={(e) => handleOpen(e)}
-            style={{ display: `${sideBarOpenButton}` }}
-          >
-            <FontAwesomeIcon
-              icon={faBars}
-              component={<SideBarOpenButton />}
-            ></FontAwesomeIcon>
-          </Icon>
+          <NavButtonsContainer>
+            <Icon
+              onClick={(e) => handleOpen(e)}
+              style={{ display: `${sideBarOpenButton}` }}
+            >
+              <FontAwesomeIcon
+                icon={faBars}
+                component={<SideBarOpenButton />}
+              ></FontAwesomeIcon>
+            </Icon>
+          </NavButtonsContainer>
           <SidebarMenu>
             <NavLink className="active" to="/home">
               <SidebarMenuItem>
@@ -252,11 +252,9 @@ const Sidebar = () => {
                 </Icon>
               </SidebarMenuItem>
             </NavLink>
-          </SidebarMenu>
-          <SignOutButton>
             <NavLink className="active" to="/welcome">
               <SidebarMenuItem>
-                <Icon>
+                <Icon style={{ transform: `scaleX(-1)` }}>
                   <FontAwesomeIcon
                     icon={faSignOutAlt}
                     component={<SignOut onClick={clearAccount} />}
@@ -264,7 +262,7 @@ const Sidebar = () => {
                 </Icon>
               </SidebarMenuItem>
             </NavLink>
-          </SignOutButton>
+          </SidebarMenu>
         </MinimizedContainer>
       )}
     </div>
