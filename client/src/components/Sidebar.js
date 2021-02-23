@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import SignOut from '../components/SignOut'
 import PBCP from '../styles/assets/PBCPlogo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarDay, faLaptopCode, faBookmark, faAward, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarDay, faLaptopCode, faBookmark, faAward, faSignOutAlt, faBars, faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons'
 
 const SidebarContainer = styled.div`
   height: 100%;
@@ -16,7 +16,6 @@ const SidebarContainer = styled.div`
   left: 0;
   background-color: #194d44;
   overflow-x: hidden;
-  padding-top: 60px;
   transition: 0.5s;
 `;
 
@@ -26,9 +25,9 @@ const SidebarMenu = styled.ul`
   flex-direction: column;
   list-style: none;
   text-decoration: none;
-  width: 100%;
+  width: 75%;
   padding: 0px 15px;
-  margin-top: 4em;
+  margin-top: 2em;
 `;
   
   const SidebarMenuItem = styled.a`
@@ -79,7 +78,7 @@ const SignOutButton = styled.div`
 const Logo = styled.img`
   top: 0;
   left: 0;
-  position: absolute;
+  position: relative;
   margin: 0 auto;
   padding: .5em;
 `;
@@ -101,19 +100,31 @@ const SideBarCloseButton = styled.button`
   background-color: #fff;
 `;
 
+const LDTContainer = styled.div`
+  top: 0;
+  padding: 10px;
+  margin: 10px;
+`;
+
+const NavButtonsContainer = styled.div`
+  padding: 10px;
+  margin: 10px;
+  margin-top: 40px;
+`;
+
 const Sidebar = () => {
   
-  const [sideBarOpen, setSideBarOpen] = useState('show')
-  const [sideBarClose, setSideBarClose] = useState('hidden')
+  const [sideBarOpen, setSideBarOpen] = useState('inline')
+  const [sideBarClose, setSideBarClose] = useState('none')
   
   const handleOpen = () => {
-    setSideBarOpen('hidden')
-    setSideBarClose('show')
+    setSideBarOpen('none')
+    setSideBarClose('inline')
   }
 
   const handleClose = () => {
-    setSideBarClose('hidden')
-    setSideBarOpen('show')
+    setSideBarClose('none')
+    setSideBarOpen('inline')
   }
 
   useEffect(()=>{},[])
@@ -122,18 +133,30 @@ const Sidebar = () => {
      localStorage.clear("account_id");
   };
 
+  // function to openSidebar
+
+  
+  // function to closeSidebar
+
+
   return (
     <SidebarContainer>
-      <Logo src={PBCP} />
-      <SideBarOpenButton
-        onClick={handleOpen}
-        style={{ display: `${sideBarOpen}` }}
-      />
-      <SideBarCloseButton
-        onClick={handleClose}
-        style={{ display: `${sideBarClose}` }}
-      />
-      <DateTime />
+      <LDTContainer>
+        <Logo src={PBCP} />
+        <DateTime />
+      </LDTContainer>
+      <NavButtonsContainer>
+        <Icon style={{ display: `${sideBarOpen}` }}>
+          <FontAwesomeIcon
+            icon={faBars}
+            component={<SideBarOpenButton onClick={handleOpen} />}
+          ></FontAwesomeIcon>
+        </Icon>
+        <Icon style={{ display: `${sideBarClose}` }}>
+          <FontAwesomeIcon icon={faAngleDoubleLeft} />
+          <SideBarCloseButton onClick={handleClose} />
+        </Icon>
+      </NavButtonsContainer>
       <SidebarMenu>
         <NavLink className="active" to="/home">
           <SidebarMenuItem>
