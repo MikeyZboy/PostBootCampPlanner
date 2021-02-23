@@ -112,22 +112,31 @@ const NavButtonsContainer = styled.div`
   margin-top: 40px;
 `;
 
+const MinimizedContainer = styled.div`
+  width: 50px;
+  height: 100%;
+  background-color: #194d44;;
+  position: fixed;
+`;
+
 const Sidebar = () => {
   
   const [sideBarOpenButton, setSideBarOpenButton] = useState('inline')
-  const [sideBarCloseButton, setSideBarCloseButton] = useState('none')
+  const [sideBarCloseButton, setSideBarCloseButton] = useState('inline')
 
-  
-
+  // set click t/f for showing or not showing navbar
+  const [clicked, setClicked] = useState(false)
 
   const handleOpen = (e) => {
     setSideBarOpenButton('none')
     setSideBarCloseButton('inline')
+    setClicked(true)
   }
 
   const handleClose = () => {
     setSideBarCloseButton('none')
     setSideBarOpenButton('inline')
+    setClicked(false)
   }
 
   useEffect(()=>{},[])
@@ -137,79 +146,128 @@ const Sidebar = () => {
   };
 
   return (
-    <SidebarContainer>
-      <LDTContainer>
-        <Logo src={PBCP} />
-        <DateTime />
-      </LDTContainer>
-      <NavButtonsContainer>
-        <Icon
-          onClick={(e) => handleOpen(e)}
-          style={{ display: `${sideBarOpenButton}` }}
-        >
-          <FontAwesomeIcon
-            icon={faBars}
-            component={<SideBarOpenButton />}
-          ></FontAwesomeIcon>
-        </Icon>
-        <Icon
-          onClick={(e) => handleClose(e)}
-          style={{ display: `${sideBarCloseButton}` }}
-        >
-          <FontAwesomeIcon
-            icon={faAngleDoubleLeft}
-            component={<SideBarCloseButton />}
-          />
-        </Icon>
-      </NavButtonsContainer>
-      <SidebarMenu>
-        <NavLink className="active" to="/home">
-          <SidebarMenuItem>
-            <Icon>
-              <FontAwesomeIcon icon={faCalendarDay} />
-            </Icon>
-            <SidebarMenuItemLabel>Calendar</SidebarMenuItemLabel>
-          </SidebarMenuItem>
-        </NavLink>
-        <NavLink className="active" to="/lessons">
-          <SidebarMenuItem>
-            <Icon>
-              <FontAwesomeIcon icon={faLaptopCode} />
-            </Icon>
-            <SidebarMenuItemLabel>Lessons</SidebarMenuItemLabel>
-          </SidebarMenuItem>
-        </NavLink>
-        <NavLink className="active" to="/resources">
-          <SidebarMenuItem>
-            <Icon>
-              <FontAwesomeIcon icon={faBookmark} />
-            </Icon>
-            <SidebarMenuItemLabel>Resources</SidebarMenuItemLabel>
-          </SidebarMenuItem>
-        </NavLink>
-        <NavLink className="active" to="/achievements">
-          <SidebarMenuItem>
-            <Icon>
-              <FontAwesomeIcon icon={faAward} />
-            </Icon>
-            <SidebarMenuItemLabel>Achievements</SidebarMenuItemLabel>
-          </SidebarMenuItem>
-        </NavLink>
-      </SidebarMenu>
-      <SignOutButton>
-        <NavLink className="active" to="/welcome">
-          <SidebarMenuItem>
-            <Icon>
+    <div>
+      {clicked ? (
+        <SidebarContainer>
+          <LDTContainer>
+            <Logo src={PBCP} />
+            <DateTime />
+          </LDTContainer>
+          <NavButtonsContainer>
+            <Icon
+              onClick={(e) => handleClose(e)}
+              style={{ display: `${sideBarCloseButton}` }}
+            >
               <FontAwesomeIcon
-                icon={faSignOutAlt}
-                component={<SignOut onClick={clearAccount} />}
+                icon={faAngleDoubleLeft}
+                component={<SideBarCloseButton />}
               />
             </Icon>
-            <SidebarMenuItemLabel>Sign Out</SidebarMenuItemLabel>
-          </SidebarMenuItem>
-        </NavLink>
-      </SignOutButton>
-    </SidebarContainer>
+          </NavButtonsContainer>
+          <SidebarMenu>
+            <NavLink className="active" to="/home">
+              <SidebarMenuItem>
+                <Icon>
+                  <FontAwesomeIcon icon={faCalendarDay} />
+                </Icon>
+                <SidebarMenuItemLabel>Calendar</SidebarMenuItemLabel>
+              </SidebarMenuItem>
+            </NavLink>
+            <NavLink className="active" to="/lessons">
+              <SidebarMenuItem>
+                <Icon>
+                  <FontAwesomeIcon icon={faLaptopCode} />
+                </Icon>
+                <SidebarMenuItemLabel>Lessons</SidebarMenuItemLabel>
+              </SidebarMenuItem>
+            </NavLink>
+            <NavLink className="active" to="/resources">
+              <SidebarMenuItem>
+                <Icon>
+                  <FontAwesomeIcon icon={faBookmark} />
+                </Icon>
+                <SidebarMenuItemLabel>Resources</SidebarMenuItemLabel>
+              </SidebarMenuItem>
+            </NavLink>
+            <NavLink className="active" to="/achievements">
+              <SidebarMenuItem>
+                <Icon>
+                  <FontAwesomeIcon icon={faAward} />
+                </Icon>
+                <SidebarMenuItemLabel>Achievements</SidebarMenuItemLabel>
+              </SidebarMenuItem>
+            </NavLink>
+          </SidebarMenu>
+          <SignOutButton>
+            <NavLink className="active" to="/welcome">
+              <SidebarMenuItem>
+                <Icon>
+                  <FontAwesomeIcon
+                    icon={faSignOutAlt}
+                    component={<SignOut onClick={clearAccount} />}
+                  />
+                </Icon>
+                <SidebarMenuItemLabel>Sign Out</SidebarMenuItemLabel>
+              </SidebarMenuItem>
+            </NavLink>
+          </SignOutButton>
+        </SidebarContainer>
+      ) : (
+        <MinimizedContainer>
+          <Icon
+            onClick={(e) => handleOpen(e)}
+            style={{ display: `${sideBarOpenButton}` }}
+          >
+            <FontAwesomeIcon
+              icon={faBars}
+              component={<SideBarOpenButton />}
+            ></FontAwesomeIcon>
+          </Icon>
+          <SidebarMenu>
+            <NavLink className="active" to="/home">
+              <SidebarMenuItem>
+                <Icon>
+                  <FontAwesomeIcon icon={faCalendarDay} />
+                </Icon>
+              </SidebarMenuItem>
+            </NavLink>
+            <NavLink className="active" to="/lessons">
+              <SidebarMenuItem>
+                <Icon>
+                  <FontAwesomeIcon icon={faLaptopCode} />
+                </Icon>
+              </SidebarMenuItem>
+            </NavLink>
+            <NavLink className="active" to="/resources">
+              <SidebarMenuItem>
+                <Icon>
+                  <FontAwesomeIcon icon={faBookmark} />
+                </Icon>
+              </SidebarMenuItem>
+            </NavLink>
+            <NavLink className="active" to="/achievements">
+              <SidebarMenuItem>
+                <Icon>
+                  <FontAwesomeIcon icon={faAward} />
+                </Icon>
+              </SidebarMenuItem>
+            </NavLink>
+          </SidebarMenu>
+          <SignOutButton>
+            <NavLink className="active" to="/welcome">
+              <SidebarMenuItem>
+                <Icon>
+                  <FontAwesomeIcon
+                    icon={faSignOutAlt}
+                    component={<SignOut onClick={clearAccount} />}
+                  />
+                </Icon>
+              </SidebarMenuItem>
+            </NavLink>
+          </SignOutButton>
+        </MinimizedContainer>
+      )}
+    </div>
   );
 };
 
