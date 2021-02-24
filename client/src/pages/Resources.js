@@ -30,6 +30,24 @@ const ResourceCard = styled.div`
   }
 `;
 
+const ResourceFormHolder = styled.div`
+  height: auto;
+  width: 40%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-size: large;
+  border: 3px solid grey;
+  border-radius: 15px;
+  position: relative;
+  align-items: center;
+  box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: #194d44;
+`;
+
 const Resources = (props) => {
   const { account } = props;
   const [resources, setResources] = useState([]);
@@ -66,10 +84,10 @@ const Resources = (props) => {
       </header>
         {!resources.length ? 
         (
-          <div>
-            <p>Here, you can create and categorize what you rely on most!</p>
+          <ResourceFormHolder>
+            <p>Add your first bookmark card!</p>
             <ResourceForm account={account} addResource={addResource}/>
-          </div>
+          </ResourceFormHolder>
         ) : (
           resources.map((resource, category, index) => 
         (

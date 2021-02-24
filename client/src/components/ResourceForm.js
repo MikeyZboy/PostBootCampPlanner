@@ -2,13 +2,24 @@ import React, { useState } from 'react'
 import TextInput from '../components/TextInput'
 import { __CreateResource } from '../services/ResourceService'
 import styled from 'styled-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const InlineForm = styled.form`
   margin: 0 auto;
   padding: 10px;
-  display: block;
+  display: inline-block;
   background-color: transparent;
   `;
+
+const Button = styled.button`
+  display: inline-block;
+  border: transparent;
+  background-color: transparent;
+  color: white;
+  height: 50px;
+  width: 50px;
+`;
 
 const ResourceForm = (props) => {
  
@@ -72,7 +83,9 @@ const ResourceForm = (props) => {
               name="link"
               onChange={handleChange}
             />
-            <button>Add</button>
+            <Button>
+              <FontAwesomeIcon icon={faPlus}/>
+            </Button>
           </InlineForm>
         </div>
     );
