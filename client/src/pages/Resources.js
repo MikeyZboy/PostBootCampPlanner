@@ -34,6 +34,8 @@ const ResourceFormHolder = styled.div`
   height: auto;
   width: 40%;
   margin: 0 auto;
+  margin-top: 2em;
+  padding-top: 1em;
   display: flex;
   flex-direction: column;
   justify-content: center;
