@@ -16,7 +16,6 @@ const SidebarContainer = styled.div`
   left: 0;
   background-color: #194d44;
   overflow-x: hidden;
-  transition: 0.5s;
 `;
 
 const SidebarMenu = styled.ul`
@@ -89,15 +88,23 @@ const SideBarOpenButton = styled.button`
   margin: 3em;
   cursor: pointer;
   background-color: #fff;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
 `;
 
 const SideBarCloseButton = styled.button`
-  position: relative;  
+  position: relative;
   right: 25px;
   font-size: 40px;
   margin: 3em;
   cursor: pointer;
   background-color: #fff;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
 `;
 
 const LDTContainer = styled.div`
@@ -115,7 +122,7 @@ const NavButtonsContainer = styled.div`
 const MinimizedContainer = styled.div`
   width: 75px;
   height: 100%;
-  background-color: #194d44;;
+  background-color: #194d44;
   position: fixed;
 `;
 

@@ -16,6 +16,7 @@ export default (props) => {
           <Goal account={props.account} />
         </div>
         <div className="main">
+          {/* Let's Do A Pomodoro Timer w/Tasks! */}
           {/* <Calendar /> */}
         </div>
       </div>

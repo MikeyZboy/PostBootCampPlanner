@@ -6,6 +6,7 @@ import styled from "styled-components";
 const ResourcesContainer = styled.section`
   position: relative;
   height: 100vh;
+  width: 75vw;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -65,7 +66,6 @@ const Resources = (props) => {
         {resources.length <= 1 ? 
         (
           <div>
-            <h2>Add Your Favorite Resources</h2>
             <p>Here, you can create and categorize what you rely on most!</p>
             <ResourceForm account={account} addResource={addResource}/>
           </div>

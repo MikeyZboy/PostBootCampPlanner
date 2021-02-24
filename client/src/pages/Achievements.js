@@ -6,12 +6,29 @@ import {
 } from "../services/AchievementService";
 import "../styles/Achievements.css";
 import styled from 'styled-components'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
+
+const Icon = styled.svg`
+  position: relative;
+  display: inline;
+  width: 40px;
+  height: 40px;
+  padding-left: 5px;
+  padding-top: 5px;
+  color: green;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+`;
 
 const AchievementsHolder = styled.section`
   position: relative;
   margin: 1.5em;
   padding: 1em;
   height: 75vh;
+  width: 75vw;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-row-gap: 50px;
@@ -144,7 +161,7 @@ const Achievements = (props) => {
   return (
     <div>
       <header className="head">
-        <h1>{account.firstName}'s Achievements!</h1>
+        <h1>{account.firstName}'s Achievements</h1>
       </header>
       <FormHolder>
           <UploadButton onClick={uploadClick}>
@@ -177,6 +194,13 @@ const Achievements = (props) => {
           </button>
         </form>
       </FormHolder>
+      <div>
+          <h2>{account.bootcamp}
+          <Icon>
+            <FontAwesomeIcon icon={faCheckSquare}/>
+          </Icon>
+          </h2>
+      </div>
       <AchievementsHolder>
           {achievements.length ? (
             achievements.map((achievement, index) => (

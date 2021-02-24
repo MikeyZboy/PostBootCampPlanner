@@ -16,7 +16,7 @@ const SignUp = (props) => {
   const formFieldChange = (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value; 
-      if (fieldValue == '' || fieldValue == null) {
+      if (fieldValue === '' || fieldValue === null) {
         setFormError(true)
         return
     }

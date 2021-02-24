@@ -17,6 +17,7 @@ const ColumnsContainer = styled.section`
   margin: 0 auto;
   margin-top: 5em;
   height: 75vh;
+  width: 75vw;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   color: grey;
@@ -107,7 +108,7 @@ const Lessons = (props) => {
       <header className="head">
         <h1>Lessons</h1>
       </header>
-      <ColumnsContainer>
+      <ColumnsContainer className="main">
         <Column>
           <h4>Not Started</h4>
           { account.lessons !== [] ? (

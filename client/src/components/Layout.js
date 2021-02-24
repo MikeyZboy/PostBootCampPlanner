@@ -8,7 +8,9 @@ const Layout = ({children}) => {
         <div>
           <Sidebar />
         </div>
+        <div className="main">
         {children}
+        </div>
       </div>
     );
 }

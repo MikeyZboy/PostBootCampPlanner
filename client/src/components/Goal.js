@@ -32,8 +32,8 @@ const Goal = (props) => {
   };
 
     return (
-      <div className="">
-        <p>What's your goal after {account.bootcamp}?</p>
+      <div>
+        <p>What are you focusing on?</p>
         <form onSubmit={(e) => handleSubmit(e)}>
           <input
             className="goal-input"
@@ -42,8 +42,10 @@ const Goal = (props) => {
             value={goalValue}
             placeholder="__________________"
             onChange={handleChange}
+            contentEditable
           />
         </form>
+        {/* Pomodoro Timer! with useState/Effect to change the document title to counter*/}
       </div>
     );
 };
