@@ -58,18 +58,19 @@ const Resources = (props) => {
 
   const handleChange = () => {}
 
+  console.log('Resources:', resources)
   return (
     <div>
       <header className="head">
         <h1>Resources</h1>
       </header>
-        {resources.length <= 1 ? 
+        {!resources.length ? 
         (
           <div>
             <p>Here, you can create and categorize what you rely on most!</p>
             <ResourceForm account={account} addResource={addResource}/>
           </div>
-        ):(
+        ) : (
           resources.map((resource, category, index) => 
         (
           <ResourcesContainer>
