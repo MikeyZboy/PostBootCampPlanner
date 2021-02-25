@@ -3,11 +3,34 @@ import TextInput from "../components/TextInput";
 import { __CreateLesson } from "../services/LessonService";
 import { __GetLessons } from "../services/LessonService";
 import styled from 'styled-components'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
   position: relative;
-  height: 75%;
-  width: 50%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+`;
+
+const InlineForm = styled.form`
+  margin: 0 auto;
+  display: inline-block;
+  background-color: transparent;
+`;
+
+const Button = styled.svg`
+  display: block;
+  border: transparent;
+  background-color: transparent;
+  color: white;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 5px;
+  height: 40px;
+  width: 40px;
 `;
 
 const LessonForm = (props) => {
@@ -57,7 +80,7 @@ const LessonForm = (props) => {
 
   return (
     <Container>
-      <form className="inapp-form" onSubmit={handleSubmit}>
+      <InlineForm onSubmit={handleSubmit}>
         <TextInput
           placeholder="Lesson"
           type="text"
@@ -79,8 +102,10 @@ const LessonForm = (props) => {
           value={props.value}
           onChange={handleChange}
         />
-        <button>Add</button>
-      </form>
+        <Button onClick={(e)=> {handleSubmit(e)}}>
+          <FontAwesomeIcon icon={faPlus} />
+        </Button>
+      </InlineForm>
     </Container>
   );
 };

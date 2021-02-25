@@ -12,13 +12,16 @@ const InlineForm = styled.form`
   background-color: transparent;
   `;
 
-const Button = styled.button`
-  display: inline-block;
+const Button = styled.svg`
+  display: block;
   border: transparent;
   background-color: transparent;
   color: white;
-  height: 50px;
-  width: 50px;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 5px;
+  height: 40px;
+  width: 40px;
 `;
 
 const ResourceForm = (props) => {
@@ -63,31 +66,31 @@ const ResourceForm = (props) => {
     };
 
     return (
-        <div>
-          <InlineForm onSubmit={handleSubmit}>
-            <TextInput
-              placeholder="Name"
-              type="text"
-              name="title"
-              onChange={handleChange}
-            />
-            <TextInput
-              placeholder="Topic"
-              type="text"
-              name="topic"
-              onChange={handleChange}
-            />
-            <TextInput
-              placeholder="URL"
-              type="text"
-              name="link"
-              onChange={handleChange}
-            />
-            <Button>
-              <FontAwesomeIcon icon={faPlus}/>
-            </Button>
-          </InlineForm>
-        </div>
+      <div>
+        <InlineForm onSubmit={handleSubmit}>
+          <TextInput
+            placeholder="Name"
+            type="text"
+            name="title"
+            onChange={handleChange}
+          />
+          {/* <TextInput
+            placeholder="Topic"
+            type="text"
+            name="topic"
+            onChange={handleChange}
+          /> */}
+          <TextInput
+            placeholder="URL"
+            type="text"
+            name="link"
+            onChange={handleChange}
+          />
+          <Button>
+            <FontAwesomeIcon icon={faPlus} />
+          </Button>
+        </InlineForm>
+      </div>
     );
 }
 

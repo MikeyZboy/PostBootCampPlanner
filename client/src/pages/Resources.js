@@ -50,6 +50,15 @@ const ResourceFormHolder = styled.div`
   background-color: #194d44;
 `;
 
+const Button = styled.button`
+  display: inline-block;
+  border: transparent;
+  background-color: transparent;
+  color: white;
+  height: 50px;
+  width: 50px;
+`;
+
 const Resources = (props) => {
   const { account } = props;
   const [resources, setResources] = useState([]);

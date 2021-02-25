@@ -59,18 +59,21 @@ input {
   height: 30px;
   min-width: 50%;
   padding: 5px;
-  border-radius: 0;
-  background-color: transparent;
-  color: seagreen;
-  font-size: large;
   border: none;
-  outline: none;
+  border-radius: 0;
   border-bottom: 2px solid #ffffff;
+  background-color: transparent;
+  color: #194d44;
+  font-size: larger;
+  font-weight: 800;
+  outline: none;
   text-align: center;
 }
 
 .goal-input {
-  color: seagreen;
+  color: #194d44;
+  font-weight: 800;
+  font-size: larger;
 }
 
 .bottom-form{
@@ -82,19 +85,28 @@ input {
 display: inline-grid;
 position: relative;
 margin: 0 auto;
+color: white;
 }
 
 .inapp-form input[type="text"] {
-  color: rgb(87, 82, 82);
-  font-size: large;
+  /* color: rgb(87, 82, 82); */
+  color: white;
+  font-size: larger;
+  font-weight: 800;
   text-align: center;
   width: auto;
 } 
 
 .inapp-form input[type="file"] {
   color: rgb(87, 82, 82);
+  font-size: larger;
+  font-weight: 800;
 }
 
 textarea {
   color: white;
+}
+
+.white {
+  color: white
 }

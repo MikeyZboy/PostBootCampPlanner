@@ -37,20 +37,17 @@ const Column = styled.div`
 
 const FormHolder = styled.div`
   position: relative;
-  padding: 1em;
-  margin: 1em;
+  margin: 25px;
   border: 2px solid gray;
   border-radius: 15px;
+  background-color: #194d44;
 `;
 
 const Button = styled.button`
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
-  border: 2px solid gray;
-  border-radius: 3px;
-  background: #1fb0b5;
-  color: white;
+  color: transparent;
 `;
 
 const Lessons = (props) => {
@@ -112,11 +109,11 @@ const Lessons = (props) => {
         <Column>
           <h4>Not Started</h4>
           { account.lessons !== [] ? (
-            <div>
+          
               <FormHolder>
                 <LessonForm account={account} addLesson={addLesson} />
               </FormHolder>
-            </div>
+            
           ) : (
             <div>
             <Button onClick={setShow}> Add Lesson </Button>
