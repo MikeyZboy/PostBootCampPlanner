@@ -24,9 +24,11 @@ const ResourceCard = styled.div`
   margin: 1em;
   border: 2px solid gray;
   border-radius: 10px;
+  background-color: #194d44;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.4);
-    cursor: pointer;
+    transform: rotateX(-180) ease 2s;
+    border: 2px solid #194d44;
+    background-color: rgba(0, 0, 0, 0.4);  
   }
 `;
 
@@ -85,7 +87,13 @@ const Resources = (props) => {
     getResources();
   };
 
-  const handleChange = () => {}
+  const handleSubmit = () => {
+    console.log()
+  }
+
+  const handleChange = () => {
+    console.log()
+  }
 
   console.log('Resources:', resources)
   return (
@@ -93,18 +101,32 @@ const Resources = (props) => {
       <header className="head">
         <h1>Resources</h1>
       </header>
-        {!resources.length ? 
-        (
-          <ResourceFormHolder>
-            <p>Add your first bookmark card!</p>
-            <ResourceForm account={account} addResource={addResource}/>
-          </ResourceFormHolder>
-        ) : (
-          resources.map((resource, category, index) => 
-        (
+      {!resources.length ? (
+        <ResourceFormHolder>
+          <p>Add your first bookmark card!</p>
+          <ResourceForm account={account} addResource={addResource} />
+        </ResourceFormHolder>
+      ) : (
+        resources.map((resource, index) => (
           <ResourcesContainer>
             <ResourceCard key={index}>
-              <h2>{resource.category}</h2> 
+              {/* <div>
+                {resource.category ? (
+                  <h2>{resource.category}</h2>
+                ) : (
+                <form onSubmit={(e) => handleSubmit(e)}>
+                  <input
+                    className="goal-input"
+                    type="text"
+                    name="category"
+                    value={categoryValue}
+                    placeholder="Card Category"
+                    onChange={handleChange}
+                    contentEditable
+                  />
+                </form>
+                )}
+              </div> */}
               <ul value={index}>
                 <a href={`https://${resource.link}`}>
                   <img
@@ -114,13 +136,19 @@ const Resources = (props) => {
                   />
                   {resource.title}
                 </a>
-                <button onClick={()=> {removeResource(resource)}}>Delete</button>   
+                <button
+                  onClick={() => {
+                    removeResource(resource);
+                  }}
+                >
+                  Delete
+                </button>
               </ul>
+              <ResourceForm account={account} addResource={addResource} />
             </ResourceCard>
           </ResourcesContainer>
-        ) 
         ))
-        }
+      )}
     </div>
   );
 };

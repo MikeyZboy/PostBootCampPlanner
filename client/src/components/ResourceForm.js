@@ -74,19 +74,19 @@ const ResourceForm = (props) => {
             name="title"
             onChange={handleChange}
           />
-          {/* <TextInput
+          <TextInput
             placeholder="Topic"
             type="text"
             name="topic"
             onChange={handleChange}
-          /> */}
+          />
           <TextInput
             placeholder="URL"
             type="text"
             name="link"
             onChange={handleChange}
           />
-          <Button>
+          <Button onClick={handleSubmit}>
             <FontAwesomeIcon icon={faPlus} />
           </Button>
         </InlineForm>

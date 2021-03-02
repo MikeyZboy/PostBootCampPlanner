@@ -55,20 +55,6 @@
   border: none;
 }
 
-input {
-  height: 30px;
-  min-width: 50%;
-  padding: 5px;
-  border: none;
-  border-radius: 0;
-  border-bottom: 2px solid #ffffff;
-  background-color: transparent;
-  color: #194d44;
-  font-size: larger;
-  font-weight: 800;
-  outline: none;
-  text-align: center;
-}
 
 .goal-input {
   color: #194d44;
@@ -82,19 +68,26 @@ input {
 }
 
 .inapp-form {
-display: inline-grid;
-position: relative;
-margin: 0 auto;
-color: white;
+  display: inline-grid;
+  position: relative;
+  margin: 0 auto;
+  color: white;
+}
+
+.dark-form {
+  display: inline-grid;
+  position: relative;
+  margin: 0 auto;
+  color: rgb(90, 82, 82);
 }
 
 .inapp-form input[type="text"] {
-  /* color: rgb(87, 82, 82); */
   color: white;
   font-size: larger;
   font-weight: 800;
   text-align: center;
   width: auto;
+  /* color: rgb(87, 82, 82); */
 } 
 
 .inapp-form input[type="file"] {
@@ -105,6 +98,21 @@ color: white;
 
 textarea {
   color: white;
+}
+
+input {
+  height: 30px;
+  min-width: 50%;
+  padding: 5px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid #ffffff;
+  background-color: transparent;
+  color: lightgray;
+  font-size: larger;
+  font-weight: 800;
+  outline: none;
+  text-align: center;
 }
 
 .white {

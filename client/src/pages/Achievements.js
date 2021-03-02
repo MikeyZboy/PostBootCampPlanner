@@ -175,8 +175,9 @@ const Achievements = (props) => {
               style={{ display: "none" }}
             />
           </UploadButton>
-        <form onSubmit={handleSubmit} className="inapp-form">
+        <form onSubmit={handleSubmit} className="dark-form">
           <input
+            className="dark-form"
             type="text"
             name="name"
             placeholder="Achievement Name"
