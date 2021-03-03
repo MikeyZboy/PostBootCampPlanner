@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { __GetResources, __DeleteResource } from "../services/ResourceService";
+import {
+  __GetResources,
+  __DeleteResource,
+  __CreateResource,
+} from "../services/ResourceService";
+import TextInput from '../components/TextInput';
 import ResourceForm from "../components/ResourceForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
 const ResourcesContainer = styled.section`
@@ -20,7 +27,7 @@ const ResourcesContainer = styled.section`
 const ResourceCard = styled.div`
   height: 1fr;
   width: 1fr;
-  padding: .5em, 1em;
+  padding: 0.5em, 1em;
   margin: 1em;
   border: 2px solid gray;
   border-radius: 10px;
@@ -28,7 +35,7 @@ const ResourceCard = styled.div`
   &:hover {
     transform: rotateX(-180) ease 2s;
     border: 2px solid #194d44;
-    background-color: rgba(0, 0, 0, 0.4);  
+    background-color: rgba(0, 0, 0, 0.4);
   }
 `;
 
@@ -61,41 +68,115 @@ const Button = styled.button`
   width: 50px;
 `;
 
+const InlineForm = styled.form`
+  margin: 0 auto;
+  padding: 10px;
+  display: inline-block;
+  background-color: transparent;
+`;
+
 const Resources = (props) => {
   const { account } = props;
   const [resources, setResources] = useState([]);
-  const [categoryValue, setCategoryValue] = useState("");
+  const [title, setTitle] = useState("");
+  const [topic, setTopic] = useState("");
+  const [link, setLink] = useState("");
+  const [accountId, setAccountId] = useState(props.account.id);
 
-  const getResources = async () => {
-    let userResources = await __GetResources(account.id);
-    setResources(userResources);
+    const getResources = async () => {
+      let userResources = await __GetResources(account.id);
+      setResources(userResources);
+    };
+
+    const addResource = (resource) => {
+      setResources([...resources, resource]);
+      getResources();
+    };
+
+    useEffect(() => {
+      getResources();
+    }, []);
+
+
+    const removeResource = async (resource) => {
+      let id = resource.id;
+      const newResources = await __DeleteResource(id);
+      setResources(newResources);
+      getResources();
+    };
+
+
+  const handleChange = (e) => {
+    const fieldName = e.target.name;
+    const fieldValue = e.target.value;
+    switch (fieldName) {
+      case "title":
+        setTitle(fieldValue);
+        break;
+      case "topic":
+        setTopic(fieldValue);
+        break;
+      case "link":
+        setLink(fieldValue);
+        break;
+    }
   };
 
-  const addResource = (resource) => {
-    setResources([...resources, resource]);
-    getResources();
+  const handleSubmit = async (e) => {
+    console.log("handleSubmit fired;", e.target.value);
+    e.preventDefault();
+    try {
+      let formState = {
+        link: link,
+        title: title,
+        topic: topic,
+        account_id: accountId,
+      };
+      const newResource = await __CreateResource(formState);
+      addResource(newResource);
+      clearForm()
+      // e.target.reset();
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   };
 
-  useEffect(() => {
-    getResources();
-  }, []);
+    const submitOnCard = async (e) => {
+      e.preventDefault();
+      try {
+        let formState = {
+          link: link,
+          title: title,
+          topic: e.target.value,
+          account_id: accountId,
+        };
+        const newResource = await __CreateResource(formState);
+        addResource(newResource);
+        // clearForm();
+        e.target.reset();
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    };
 
-  const removeResource = async (resource) => {
-    let id = resource.id;
-    const newResources = await __DeleteResource(id);
-    setResources(newResources);
-    getResources();
-  };
-
-  const handleSubmit = () => {
-    console.log()
+  const clearForm = (e) => {
+    try {
+      e.target.reset()
+  } catch (error) {
+    console.log(error)
+  }
   }
 
-  const handleChange = () => {
-    console.log()
-  }
+  // NOT WORKING : logic for determining if all topics match and add value of that
+  // const topicValue = (topic) => {
+  //   for (let i = 0; i < resources.length; i++) {
+  //     resources[i] === topic ? 
+  //       setTopic(resources[0].topic) : console.log('You done fucked up')
+  //   }
+  // }
 
-  console.log('Resources:', resources)
   return (
     <div>
       <header className="head">
@@ -104,50 +185,83 @@ const Resources = (props) => {
       {!resources.length ? (
         <ResourceFormHolder>
           <p>Add your first bookmark card!</p>
-          <ResourceForm account={account} addResource={addResource} />
+          <ResourceForm
+            account={account}
+            addResource={addResource}
+            onSubmit={(e) => handleSubmit(e)}
+          />
         </ResourceFormHolder>
       ) : (
-        resources.map((resource, index) => (
-          <ResourcesContainer>
-            <ResourceCard key={index}>
-              {/* <div>
-                {resource.category ? (
-                  <h2>{resource.category}</h2>
-                ) : (
-                <form onSubmit={(e) => handleSubmit(e)}>
-                  <input
-                    className="goal-input"
-                    type="text"
-                    name="category"
-                    value={categoryValue}
-                    placeholder="Card Category"
+        <ResourcesContainer>
+          {resources.length ? (
+            <ResourcesContainer>
+              {/* Can I do resources.topic.length ? resources.topic.map(topic) then each ResourceCard key={topic} */}
+              <ResourceCard>
+                <ul>
+                  {resources.map((resource, index) => (
+                    <ul value={index} href={`https://${resource.link}`}>
+                      <h3>{resource.topic}</h3>
+                      <img
+                        class="favicon"
+                        src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
+                        alt="favicon link"
+                      />
+                      {resource.title}
+                      <button
+                        onClick={() => {
+                          removeResource(resource);
+                        }}
+                      >
+                        Remove
+                      </button>
+                    </ul>
+                  ))}
+                  <InlineForm onSubmit={(e)=>submitOnCard(e)}>
+                    <TextInput
+                      placeholder="Name"
+                      type="text"
+                      name="title"
+                      onChange={handleChange}
+                    />
+                    <TextInput
+                      placeholder="URL"
+                      type="text"
+                      name="link"
+                      onChange={handleChange}
+                    />
+                    <input 
+                    type='text'
+                    name="topic"
+                    value={topic}
                     onChange={handleChange}
-                    contentEditable
-                  />
-                </form>
-                )}
-              </div> */}
-              <ul value={index}>
-                <a href={`https://${resource.link}`}>
-                  <img
-                    class="favicon"
-                    src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
-                    alt="favicon link"
-                  />
-                  {resource.title}
-                </a>
-                <button
-                  onClick={() => {
-                    removeResource(resource);
-                  }}
-                >
-                  Delete
-                </button>
-              </ul>
-              <ResourceForm account={account} addResource={addResource} />
+                    style={{ display: "none" }}
+                    />
+                    <Button onClick={(e)=>submitOnCard(e)}>
+                      <FontAwesomeIcon icon={faPlus} />
+                    </Button>
+                  </InlineForm>
+                </ul>
+              </ResourceCard>
+              <ResourceFormHolder>
+                <ResourceForm
+                  account={account}
+                  addResource={addResource}
+                  onSubmit={(e) => handleSubmit(e)}
+                />
+              </ResourceFormHolder>
+            </ResourcesContainer>
+          ) : (
+            <ResourceCard>
+              <p>New Card</p>
+              <button>Add</button>
+              <ResourceForm
+                account={account}
+                addResource={addResource}
+                onSubmit={(e) => handleSubmit(e)}
+              />
             </ResourceCard>
-          </ResourcesContainer>
-        ))
+          )}
+        </ResourcesContainer>
       )}
     </div>
   );
