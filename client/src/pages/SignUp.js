@@ -4,6 +4,35 @@ import TextInput from "../components/TextInput";
 import { __RegisterUser } from '../services/UserService' 
 import "../styles/Form.css"
 import "../styles/Buttons.css"
+import styled from 'styled-components'
+
+const FormContainer = styled.div`
+  height: auto;
+  width: 30%;
+  margin: 0 auto;
+  margin-top: 2em;
+  padding-top: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-size: large;
+  border: 3px solid grey;
+  border-radius: 15px;
+  position: relative;
+  align-items: center;
+  box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: #194d44;
+`;
+
+const FormContent = styled.form`
+  padding: 20px;
+  margin-top: 20px;
+  margin: 50px auto;
+  position: center;
+`;
+
 
 const SignUp = (props) => {
   const [firstName, setFirstName] = useState("");
@@ -59,9 +88,9 @@ const SignUp = (props) => {
   };
 
   return (
-    <div className="form-container">
-      <form className="form-content form-div" onSubmit={(e) => handleSubmit(e)}>
-        <h1>Create Your Profile</h1>
+    <FormContainer>
+      <FormContent onSubmit={(e) => handleSubmit(e)}>
+        <h1 className="white">Create Your Profile</h1>
         <div className="form-input">
           <label htmlFor="firstName">
             <TextInput
@@ -88,7 +117,7 @@ const SignUp = (props) => {
           <label htmlFor="email" className="form-label">
             <TextInput
               className="form-input"
-              type="text" 
+              type="text"
               placeholder="Email*"
               name="email"
               onChange={formFieldChange}
@@ -120,19 +149,18 @@ const SignUp = (props) => {
         <div className="submit-button">
           <button className="submit-button">Submit</button>
         </div>
-        { formError ? (
-          <alert>All Fields Required</alert>  
+        {formError ? (
+          <alert>All Fields Required</alert>
         ) : (
           <p>Thanks for signing up!</p>
-        )
-        }
+        )}
         <div>
           <NavLink to="/signin" className="nav-active">
             <p>Already have an account?</p>
           </NavLink>
         </div>
-      </form>
-    </div>
+      </FormContent>
+    </FormContainer>
   );
 };
 export default SignUp;

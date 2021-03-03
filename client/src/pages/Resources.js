@@ -187,7 +187,7 @@ const Resources = (props) => {
       </header>
       {!resources.length ? (
         <ResourceFormHolder>
-          <p>Add your first bookmark card!</p>
+          <p>Add your first bookmark!</p>
           <ResourceForm
             account={account}
             addResource={addResource}
@@ -195,84 +195,39 @@ const Resources = (props) => {
           />
         </ResourceFormHolder>
       ) : (
-        <ResourcesContainer>
-          {resources.length ? (
-            <ResourcesContainer>
-              {/* Can I do resources.topic.length ? resources.topic.map(topic) then each ResourceCard key={topic} */}
-              {resources.map((topic) => (
-                // topic === topic ? (
-                <ResourceCard key={topic}>
-                  <ul>
-                    {resources.map((resource, index) => (
-                      <ul value={index} href={`https://${resource.link}`}>
-                        <h3>{resource.topic}</h3>
-                        <img
-                          class="favicon"
-                          src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
-                          alt="favicon link"
-                        />
-                        {resource.title}
-                        <button
-                          onClick={() => {
-                            removeResource(resource);
-                          }}
-                        >
-                          Remove
-                        </button>
-                      </ul>
-                    ))}
-                    <InlineForm onSubmit={(e) => submitOnCard(e)}>
-                      <TextInput
-                        placeholder="Name"
-                        type="text"
-                        name="title"
-                        onChange={handleChange}
-                      />
-                      <TextInput
-                        placeholder="URL"
-                        type="text"
-                        name="link"
-                        onChange={handleChange}
-                      />
-                      <input
-                        type="text"
-                        name="topic"
-                        value={topic}
-                        onChange={handleChange}
-                        style={{ display: "none" }}
-                      />
-                      <Button onClick={(e) => submitOnCard(e)}>
-                        <FontAwesomeIcon icon={faPlus} />
-                      </Button>
-                    </InlineForm>
-                  </ul>
-                </ResourceCard>
-              ))}
-              <ResourceFormHolder>
-                <p>New Card</p>
-                <button>Add</button>
-                {/* <ResourceForm
-                  account={account}
-                  addResource={addResource}
-                  onSubmit={(e) => handleSubmit(e)}
-                /> */}
-              </ResourceFormHolder>
-            </ResourcesContainer>
-          ) : (
-            <ResourceCard>
-              <p>New Card</p>
-              <button>Add</button>
-              <ResourceForm
-                account={account}
-                addResource={addResource}
-                onSubmit={(e) => handleSubmit(e)}
-              />
-            </ResourceCard>
-          )}
+      <ResourcesContainer>
+        <ResourceFormHolder>
+          <p>Add Bookmarks Below</p>
+          <ResourceForm
+            account={account}
+            addResource={addResource}
+            onSubmit={(e) => handleSubmit(e)}
+          />
+        </ResourceFormHolder>
+          <ul>
+          {resources.map((resource, index) => (
+            <ul value={index} href={`https://${resource.link}`}>
+              <img
+                  class="favicon"
+                  src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
+                  alt="favicon link"
+                />
+                {resource.title}
+              <button
+                onClick={() => {
+                  removeResource(resource);
+                }}
+                >
+                Remove
+              </button>
+            </ul>
+          ))}
+          </ul>
         </ResourcesContainer>
-      )}
-    </div>
+    )
+    }
+  </div>
   );
-};
+}
 
 export default Resources;
