@@ -114,7 +114,10 @@ const Resources = (props) => {
         setTitle(fieldValue);
         break;
       case "topic":
-        setTopic(fieldValue);
+        fieldValue === '' ? 
+          setTopic(props.resource.topic)
+          :
+          setTopic(fieldValue);
         break;
       case "link":
         setLink(fieldValue);
@@ -153,8 +156,8 @@ const Resources = (props) => {
         };
         const newResource = await __CreateResource(formState);
         addResource(newResource);
-        // clearForm();
-        e.target.reset();
+        clearForm();
+        // e.target.reset();
       } catch (error) {
         console.log(error);
         throw error;
@@ -196,58 +199,63 @@ const Resources = (props) => {
           {resources.length ? (
             <ResourcesContainer>
               {/* Can I do resources.topic.length ? resources.topic.map(topic) then each ResourceCard key={topic} */}
-              <ResourceCard>
-                <ul>
-                  {resources.map((resource, index) => (
-                    <ul value={index} href={`https://${resource.link}`}>
-                      <h3>{resource.topic}</h3>
-                      <img
-                        class="favicon"
-                        src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
-                        alt="favicon link"
+              {resources.map((topic) => (
+                // topic === topic ? (
+                <ResourceCard key={topic}>
+                  <ul>
+                    {resources.map((resource, index) => (
+                      <ul value={index} href={`https://${resource.link}`}>
+                        <h3>{resource.topic}</h3>
+                        <img
+                          class="favicon"
+                          src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
+                          alt="favicon link"
+                        />
+                        {resource.title}
+                        <button
+                          onClick={() => {
+                            removeResource(resource);
+                          }}
+                        >
+                          Remove
+                        </button>
+                      </ul>
+                    ))}
+                    <InlineForm onSubmit={(e) => submitOnCard(e)}>
+                      <TextInput
+                        placeholder="Name"
+                        type="text"
+                        name="title"
+                        onChange={handleChange}
                       />
-                      {resource.title}
-                      <button
-                        onClick={() => {
-                          removeResource(resource);
-                        }}
-                      >
-                        Remove
-                      </button>
-                    </ul>
-                  ))}
-                  <InlineForm onSubmit={(e)=>submitOnCard(e)}>
-                    <TextInput
-                      placeholder="Name"
-                      type="text"
-                      name="title"
-                      onChange={handleChange}
-                    />
-                    <TextInput
-                      placeholder="URL"
-                      type="text"
-                      name="link"
-                      onChange={handleChange}
-                    />
-                    <input 
-                    type='text'
-                    name="topic"
-                    value={topic}
-                    onChange={handleChange}
-                    style={{ display: "none" }}
-                    />
-                    <Button onClick={(e)=>submitOnCard(e)}>
-                      <FontAwesomeIcon icon={faPlus} />
-                    </Button>
-                  </InlineForm>
-                </ul>
-              </ResourceCard>
+                      <TextInput
+                        placeholder="URL"
+                        type="text"
+                        name="link"
+                        onChange={handleChange}
+                      />
+                      <input
+                        type="text"
+                        name="topic"
+                        value={topic}
+                        onChange={handleChange}
+                        style={{ display: "none" }}
+                      />
+                      <Button onClick={(e) => submitOnCard(e)}>
+                        <FontAwesomeIcon icon={faPlus} />
+                      </Button>
+                    </InlineForm>
+                  </ul>
+                </ResourceCard>
+              ))}
               <ResourceFormHolder>
-                <ResourceForm
+                <p>New Card</p>
+                <button>Add</button>
+                {/* <ResourceForm
                   account={account}
                   addResource={addResource}
                   onSubmit={(e) => handleSubmit(e)}
-                />
+                /> */}
               </ResourceFormHolder>
             </ResourcesContainer>
           ) : (
