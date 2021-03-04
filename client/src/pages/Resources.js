@@ -4,10 +4,9 @@ import {
   __DeleteResource,
   __CreateResource,
 } from "../services/ResourceService";
-import TextInput from '../components/TextInput';
 import ResourceForm from "../components/ResourceForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
 const ResourcesContainer = styled.section`
@@ -22,41 +21,87 @@ const ResourcesContainer = styled.section`
   color: grey;
   margin: 0;
   overflow: scroll;
-`;
-
-const ResourceCard = styled.div`
-  height: 1fr;
-  width: 1fr;
-  padding: 0.5em, 1em;
-  margin: 1em;
-  border: 2px solid gray;
-  border-radius: 10px;
-  background-color: #194d44;
-  &:hover {
-    transform: rotateX(-180) ease 2s;
-    border: 2px solid #194d44;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
+  background-color: transparent;
 `;
 
 const ResourceFormHolder = styled.div`
-  height: auto;
-  width: 40%;
-  margin: 0 auto;
-  margin-top: 2em;
-  padding-top: 1em;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  padding-top: 1em;
+  margin: 0 auto;
+  margin-top: 2em;
+  height: auto;
+  width: 40%;
   text-align: center;
   color: white;
   font-size: large;
   border: 3px solid grey;
   border-radius: 15px;
-  position: relative;
   align-items: center;
   box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.2);
   background-color: #194d44;
+`;
+
+const TopFormHolder = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  grid-column: 1 / 5;
+  grid-row: 1;
+  margin: 0 auto;
+  height: 25%;
+  width: 75%;
+  text-align: center;
+  color: white;
+  font-size: large;
+  border: 3px solid grey;
+  border-radius: 15px;
+  align-items: center;
+  box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: #194d44;
+  overflow-y: hidden;
+  &:hover {
+    height: 75%;
+    overflow-y: visible;
+  }
+`;
+
+const LinkArea = styled.ul`
+  list-style: none;
+  grid-column: 1 / 5;
+  grid-row: 2;
+  display: flex;
+  flex-flow: column wrap;
+  width: 100%;
+  height: auto;
+`;
+
+const Link = styled.li`
+  display: inline;
+  list-style: none;
+  padding: 10px;
+  max-width: 45%;
+  border: 3px solid grey;
+  border-radius: 15px;
+  background-color: #194d44;
+`;
+
+const Favicon = styled.img`
+  display: inline;
+  position: relative;
+  margin-top: 5px;
+  margin-right: 10px;
+  height: 24px;
+  width: 24px;
+`;
+
+const Resource = styled.a`
+  padding: 20px;
+  margin: 0 auto;
+  text-decoration: none;
+  color: white;
 `;
 
 const Button = styled.button`
@@ -64,15 +109,6 @@ const Button = styled.button`
   border: transparent;
   background-color: transparent;
   color: white;
-  height: 50px;
-  width: 50px;
-`;
-
-const InlineForm = styled.form`
-  margin: 0 auto;
-  padding: 10px;
-  display: inline-block;
-  background-color: transparent;
 `;
 
 const Resources = (props) => {
@@ -105,81 +141,6 @@ const Resources = (props) => {
       getResources();
     };
 
-
-  const handleChange = (e) => {
-    const fieldName = e.target.name;
-    const fieldValue = e.target.value;
-    switch (fieldName) {
-      case "title":
-        setTitle(fieldValue);
-        break;
-      case "topic":
-        fieldValue === '' ? 
-          setTopic(props.resource.topic)
-          :
-          setTopic(fieldValue);
-        break;
-      case "link":
-        setLink(fieldValue);
-        break;
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    console.log("handleSubmit fired;", e.target.value);
-    e.preventDefault();
-    try {
-      let formState = {
-        link: link,
-        title: title,
-        topic: topic,
-        account_id: accountId,
-      };
-      const newResource = await __CreateResource(formState);
-      addResource(newResource);
-      clearForm()
-      // e.target.reset();
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
-
-    const submitOnCard = async (e) => {
-      e.preventDefault();
-      try {
-        let formState = {
-          link: link,
-          title: title,
-          topic: e.target.value,
-          account_id: accountId,
-        };
-        const newResource = await __CreateResource(formState);
-        addResource(newResource);
-        clearForm();
-        // e.target.reset();
-      } catch (error) {
-        console.log(error);
-        throw error;
-      }
-    };
-
-  const clearForm = (e) => {
-    try {
-      e.target.reset()
-  } catch (error) {
-    console.log(error)
-  }
-  }
-
-  // NOT WORKING : logic for determining if all topics match and add value of that
-  // const topicValue = (topic) => {
-  //   for (let i = 0; i < resources.length; i++) {
-  //     resources[i] === topic ? 
-  //       setTopic(resources[0].topic) : console.log('You done fucked up')
-  //   }
-  // }
-
   return (
     <div>
       <header className="head">
@@ -188,45 +149,35 @@ const Resources = (props) => {
       {!resources.length ? (
         <ResourceFormHolder>
           <p>Add your first bookmark!</p>
-          <ResourceForm
-            account={account}
-            addResource={addResource}
-            onSubmit={(e) => handleSubmit(e)}
-          />
+          <ResourceForm account={account} addResource={addResource} />
         </ResourceFormHolder>
       ) : (
-      <ResourcesContainer>
-        <ResourceFormHolder>
-          <p>Add Bookmarks Below</p>
-          <ResourceForm
-            account={account}
-            addResource={addResource}
-            onSubmit={(e) => handleSubmit(e)}
-          />
-        </ResourceFormHolder>
-          <ul>
-          {resources.map((resource, index) => (
-            <ul value={index} href={`https://${resource.link}`}>
-              <img
-                  class="favicon"
+        <ResourcesContainer>
+          <TopFormHolder>
+            <p>Add Bookmarks Below</p>
+            <ResourceForm account={account} addResource={addResource} />
+          </TopFormHolder>
+          <LinkArea>
+            {resources.map((resource, index) => (
+              <Link key={resource}>
+                <Favicon
                   src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
                   alt="favicon link"
                 />
-                {resource.title}
-              <button
-                onClick={() => {
-                  removeResource(resource);
-                }}
+                <Resource href={`https://${resource.link}`}>{resource.title}</Resource>
+                <Button
+                  onClick={() => {
+                    removeResource(resource);
+                  }}
                 >
-                Remove
-              </button>
-            </ul>
-          ))}
-          </ul>
+                  <FontAwesomeIcon icon={faTimes}/>
+                </Button>
+              </Link>
+            ))}
+          </LinkArea>
         </ResourcesContainer>
-    )
-    }
-  </div>
+      )}
+    </div>
   );
 }
 

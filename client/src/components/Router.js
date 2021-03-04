@@ -23,7 +23,6 @@ const Router = () => {
     try {
       const thisAccount = await __GetProfile(parseInt(localAccountId));
       setAccount(thisAccount);
-      console.log(thisAccount);
       return thisAccount;
     } catch (error) {}
   };
