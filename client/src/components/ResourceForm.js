@@ -27,7 +27,7 @@ const Button = styled.svg`
 const ResourceForm = (props) => {
  
     const [ title, setTitle ] = useState('')
-    const [ topic, setTopic ] = useState('')
+    const [ notes, setNotes ] = useState('')
     const [ link, setLink ] = useState('')
     const [ accountId, setAccountId ] = useState(props.account.id)
 
@@ -38,8 +38,8 @@ const ResourceForm = (props) => {
           case "title":
             setTitle(fieldValue);
             break;
-          case "topic":
-            setTopic(fieldValue);
+          case "notes":
+            setNotes(fieldValue);
             break;
           case "link":
             setLink(fieldValue);
@@ -53,7 +53,7 @@ const ResourceForm = (props) => {
         let formState = {
             link: link,
             title: title,
-            topic: topic,
+            notes: notes,
             account_id: accountId,
         };
         const newResource = await __CreateResource(formState);
@@ -75,15 +75,15 @@ const ResourceForm = (props) => {
             onChange={handleChange}
           />
           <TextInput
-            placeholder="Topic"
-            type="text"
-            name="topic"
-            onChange={handleChange}
-          />
-          <TextInput
             placeholder="URL"
             type="text"
             name="link"
+            onChange={handleChange}
+          />
+          <TextInput
+            placeholder="Notes"
+            type="text"
+            name="notes"
             onChange={handleChange}
           />
           <Button onClick={handleSubmit}>

@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Resource.init({
     title: DataTypes.STRING,
     link: DataTypes.STRING,
-    topic: DataTypes.STRING,
+    notes: DataTypes.STRING,
     accountId: {
       type: DataTypes.INTEGER,
       field: 'account_id',

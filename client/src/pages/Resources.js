@@ -76,6 +76,7 @@ const LinkArea = styled.ul`
   flex-flow: column wrap;
   width: 100%;
   height: auto;
+  margin-top: 0;
 `;
 
 const Link = styled.li`
@@ -102,6 +103,7 @@ const Resource = styled.a`
   margin: 0 auto;
   text-decoration: none;
   color: white;
+  font-weight: bold;
 `;
 
 const Button = styled.button`
@@ -114,10 +116,11 @@ const Button = styled.button`
 const Resources = (props) => {
   const { account } = props;
   const [resources, setResources] = useState([]);
-  const [title, setTitle] = useState("");
-  const [topic, setTopic] = useState("");
-  const [link, setLink] = useState("");
-  const [accountId, setAccountId] = useState(props.account.id);
+  const [ isShown, setIsShown ] = useState(false)
+  // const [title, setTitle] = useState("");
+  // const [notes, setNotes] = useState("");
+  // const [link, setLink] = useState("");
+  // const [accountId, setAccountId] = useState(props.account.id);
 
     const getResources = async () => {
       let userResources = await __GetResources(account.id);
@@ -159,7 +162,7 @@ const Resources = (props) => {
           </TopFormHolder>
           <LinkArea>
             {resources.map((resource, index) => (
-              <Link key={resource}>
+              <Link key={resource} onMouseEnter={()=> setIsShown(true)} onMouseLeave={()=> setIsShown(false)}>
                 <Favicon
                   src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
                   alt="favicon link"
@@ -172,7 +175,13 @@ const Resources = (props) => {
                 >
                   <FontAwesomeIcon icon={faTimes}/>
                 </Button>
+              {isShown && (
+              <div>
+                {resource.notes}
+              </div>
+              )}
               </Link>
+              
             ))}
           </LinkArea>
         </ResourcesContainer>
