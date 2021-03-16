@@ -28,13 +28,14 @@ const CompletedList = (props) => {
   }, []);
 
   const changeStatus = async (e, lesson) => {
-    let id = props.account.id;
+    console.log("changeStatus CL", e, lesson);
+    let id = lesson.id;
     let formData = {
       title: lesson.title,
       category: lesson.category,
       link: lesson.link,
       status: e.target.value,
-      account_id: id,
+      account_id: props.account.id,
     };
     let updatedLessons = await __UpdateLesson(id, formData);
     setLessons(updatedLessons);
@@ -56,8 +57,8 @@ const CompletedList = (props) => {
             <LessonCard>
               <Lesson key={index} lesson={lesson} props={props} />
               <button
-                value={"In Progress"}
                 onClick={(e) => changeStatus(e, lesson)}
+                value={"In Progress"}
               >
                 Still Working
               </button>

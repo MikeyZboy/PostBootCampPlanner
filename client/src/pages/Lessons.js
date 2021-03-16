@@ -50,20 +50,29 @@ const Button = styled.button`
   color: transparent;
 `;
 
+const AddLessonButton = styled.button`
+  background-color: #194d44;
+  color: white;
+  border: 2px solid gray;
+`;
+
 const Lessons = (props) => {
   const { account } = props;
 
   const [lessons, setLessons] = useState([]);
   const [ show, setShow ] = useState(false)
 
-  //setShow => should change the behavior of the formholder
-  // e.g. "display: none || block"
-
+  const handleClick = (e) => {
+    if (show === false) {
+      setShow(true)
+    }
+    else
+      setShow(false)
+  }
 
   const getLessons = async () => {
     let userLessons = await __GetLessons(account.id);
     setLessons(userLessons);
-    console.log('Lessons.js, getLessons hit')
   };
 
   const addLesson = (lesson) => {
@@ -78,13 +87,13 @@ const Lessons = (props) => {
 
   const changeStatus = async (e, lesson) => {
     let statusValue = e.target.value;
-    let id = props.account.id;
+    let id = props.account.id; //<-- should this be lesson id
     let formData = {
       title: lesson.title,
       category: lesson.category,
       link: lesson.link,
       status: statusValue,
-      account_id: id,
+      account_id: id, // <-- should this be lesson id, pushed to lessonservice?
     };
     let updatedLessons = await __UpdateLesson(id, formData);
     setLessons(updatedLessons);
@@ -108,30 +117,34 @@ const Lessons = (props) => {
       <ColumnsContainer className="main">
         <Column>
           <h4>Not Started</h4>
-          { account.lessons !== [] ? (
-          
+          <div>
+            {show === true ? (
               <FormHolder>
-                <LessonForm account={account} addLesson={addLesson} />
+                <p>Add Lesson</p>
+                <LessonForm
+                  account={account}
+                  addLesson={addLesson}
+                  onSubmit={(e)=>handleClick(e)}
+                />
               </FormHolder>
-            
-          ) : (
-            <div>
-            <Button onClick={setShow}> Add Lesson </Button>
-            <FormHolder>
-              <LessonForm account={account} addLesson={addLesson} />
-            </FormHolder>
-            </div>
-          )}
-          {account.lessons ? (
+            ) : (
+              <AddLessonButton onClick={(e) => handleClick(e)}>
+                {" "}
+                Add Lesson{" "}
+              </AddLessonButton>
+            )}
+          </div>
+          {/* )} */}
+          {/* {account.lessons.length ? ( */}
             <NewLessonList
               account={account}
               getLessons={getLessons}
               changeStatus={changeStatus}
               removeLesson={removeLesson}
             />
-          ):(
-            <></>
-          )}
+          {/* ) : (
+            <p>No new lessons in progress</p>
+          )} */}
         </Column>
         <Column>
           <h4>In Progress</h4>

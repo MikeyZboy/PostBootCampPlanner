@@ -83,6 +83,7 @@ const Link = styled.li`
   display: inline;
   list-style: none;
   padding: 10px;
+  margin: 10px;
   max-width: 45%;
   border: 3px solid grey;
   border-radius: 15px;
@@ -117,10 +118,6 @@ const Resources = (props) => {
   const { account } = props;
   const [resources, setResources] = useState([]);
   const [ isShown, setIsShown ] = useState(false)
-  // const [title, setTitle] = useState("");
-  // const [notes, setNotes] = useState("");
-  // const [link, setLink] = useState("");
-  // const [accountId, setAccountId] = useState(props.account.id);
 
     const getResources = async () => {
       let userResources = await __GetResources(account.id);
@@ -162,26 +159,27 @@ const Resources = (props) => {
           </TopFormHolder>
           <LinkArea>
             {resources.map((resource, index) => (
-              <Link key={resource} onMouseEnter={()=> setIsShown(true)} onMouseLeave={()=> setIsShown(false)}>
+              <Link key={resource}>
                 <Favicon
                   src={`https://icons.duckduckgo.com/ip2/${resource.link}.ico`}
                   alt="favicon link"
                 />
-                <Resource href={`https://${resource.link}`}>{resource.title}</Resource>
+                <Resource
+                  href={`https://${resource.link}`}
+                  onMouseEnter={() => setIsShown(true)}
+                  onMouseLeave={() => setIsShown(false)}
+                >
+                  {resource.title}
+                </Resource>
                 <Button
                   onClick={() => {
                     removeResource(resource);
                   }}
                 >
-                  <FontAwesomeIcon icon={faTimes}/>
+                  <FontAwesomeIcon icon={faTimes} />
                 </Button>
-              {isShown && (
-              <div>
-                {resource.notes}
-              </div>
-              )}
+                {isShown && <div>{resource.notes}</div>}
               </Link>
-              
             ))}
           </LinkArea>
         </ResourcesContainer>

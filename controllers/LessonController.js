@@ -1,7 +1,6 @@
 const { Lesson } = require("../models");
 
 const getAll = async (req, res) => {
-  console.log("LessonController, req.body:", req.body);
   try {
     let entityId = parseInt(req.params.id);
     const lessons = await Lesson.findAll({
@@ -14,6 +13,7 @@ const getAll = async (req, res) => {
       lessons
     );
   } catch (error) {
+    console.log(error)
     throw error;
   }
 };
@@ -29,6 +29,7 @@ const createOne = async (req, res) => {
     let lessonData = await Lesson.create(lessonBody);
     res.send(lessonData);
   } catch (error) {
+    console.log(error)
     throw error;
   }
 };
@@ -44,14 +45,16 @@ const getOne = async (req, res) => {
 };
 
 const updateOne = async (req, res) => {
+  console.log('LessonController updateOne HIT, req.params.id, req.body,', req.params.id, req.body)
   try {
     let entity = parseInt(req.params.id);
     let updatedEntity = await Lesson.update(req.body, {
-      where: { account_id: entity },
+      where: { id: entity },
       returning: true,
     });
     res.send(updatedEntity);
   } catch (error) {
+    console.log(error)
     throw error;
   }
 };

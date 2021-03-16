@@ -12,10 +12,10 @@ const Favicon = styled.img`
 `;
 
 const Lesson = (props) => {  
-
+  // console.log('lesson props', props)
     return (
       <div>
-        <a href={props.lesson.link}>
+        <a value={props.lesson.id} href={props.lesson.link}>
           <Favicon
             src={`https://icons.duckduckgo.com/ip2/${props.lesson.link}.ico`}
           />

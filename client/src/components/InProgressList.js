@@ -28,13 +28,14 @@ const InProgressList = (props) => {
   }, []);
 
   const changeStatus = async (e, lesson) => {
-    let id = props.account.id;
+    console.log("changeStatus IPGL", e, lesson);
+    let id = lesson.id;
     let formData = {
       title: lesson.title,
       category: lesson.category,
       link: lesson.link,
       status: e.target.value,
-      account_id: id
+      account_id: props.account.id,
     };
     let updatedLessons = await __UpdateLesson(id, formData);
     setLessons(updatedLessons);
@@ -60,14 +61,14 @@ const InProgressList = (props) => {
             props={props}
           />
         <button
-          value={"Not Started"}
           onClick={(e) => changeStatus(e, lesson)}
+          value={"Not Started"}
         >
           Not Started
         </button>
         <button
-          value={"Complete"}
           onClick={(e) => changeStatus(e, lesson)}
+          value={"Complete"}
         >
           Done!
         </button>

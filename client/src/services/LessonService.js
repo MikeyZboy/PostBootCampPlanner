@@ -26,10 +26,13 @@ export const __CreateLesson = async (formData) => {
 };
 
 export const __UpdateLesson = async (id, formData) => {
+  console.log('__UpdateLesson id, formData', id, formData)
   try {
     const res = await ApiClient.put(`/lessons/${id}`, formData);
+    console.log('__UpdateLesson res.data', res.data)
     return res.data;
   } catch (error) {
+    console.log(error)
     throw error;
   }
 };

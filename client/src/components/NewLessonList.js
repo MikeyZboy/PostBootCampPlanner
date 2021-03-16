@@ -21,7 +21,7 @@ const NewLessonList = (props) => {
   const getLessons = async () => {
     let userLessons = await __GetLessons(props.account.id);
     setLessons(userLessons);
-    console.log(" getLessons fired");
+    // console.log(" getLessons fired");
   };
 
   useEffect(() => {
@@ -29,18 +29,18 @@ const NewLessonList = (props) => {
   }, []);
 
   const changeStatus = async (e, lesson) => {
-    let id = props.account.id;
+    console.log('changeStatus NLL',e.target.value, lesson)
+    let id = lesson.id;
     let formData = {
       title: lesson.title,
       category: lesson.category,
       link: lesson.link,
       status: e.target.value,
-      account_id: id,
+      account_id: props.account.id,
     };
     let updatedLessons = await __UpdateLesson(id, formData);
     setLessons(updatedLessons);
     getLessons();
-    console.log(' changeStatus => getLessons fired')
   };
 
   const removeLesson = async (e, lesson) => {
@@ -49,7 +49,7 @@ const NewLessonList = (props) => {
     setLessons(newLessons);
     getLessons();
   };
-
+  // console.log('NewLessonList', lessons)
   return (
     <div>
       {lessons.length ? (
@@ -58,14 +58,14 @@ const NewLessonList = (props) => {
             <LessonCard>
               <Lesson key={index} lesson={lesson} props={props} />
               <button
+                onClick={(e) => changeStatus(e,lesson)}
                 value={"In Progress"}
-                onClick={(e) => changeStatus(e, lesson)}
               >
                 Making Progress
               </button>
               <button
-                value={"Complete"}
                 onClick={(e) => changeStatus(e, lesson)}
+                value={"Complete"}
               >
                 Done!
               </button>

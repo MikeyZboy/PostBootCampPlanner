@@ -61,6 +61,7 @@ const LessonForm = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // e.target.reset()
     try {
       let formState = {
         title: title,
@@ -71,7 +72,6 @@ const LessonForm = (props) => {
       };
       const newLesson = await __CreateLesson(formState);
       props.addLesson(newLesson);
-      e.target.reset()
     } catch (error) {
       console.log(error)
       setFormError(true);
@@ -102,7 +102,7 @@ const LessonForm = (props) => {
           value={props.value}
           onChange={handleChange}
         />
-        <Button onClick={(e)=> {handleSubmit(e)}}>
+        <Button type="reset" onClick={(e)=> {handleSubmit(e)}}>
           <FontAwesomeIcon icon={faPlus} />
         </Button>
       </InlineForm>
