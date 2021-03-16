@@ -21,7 +21,8 @@ const ColumnsContainer = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   color: grey;
-  border: 5px solid black;
+  border: 5px solid #194d44;
+  border-radius: 15px;
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.4);
 `;
 

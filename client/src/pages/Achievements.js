@@ -5,9 +5,13 @@ import {
   __DeleteAchievement,
 } from "../services/AchievementService";
 import "../styles/Achievements.css";
-import styled from 'styled-components'
+import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheckSquare,
+  faTrash,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Icon = styled.svg`
   position: relative;
@@ -23,21 +27,18 @@ const Icon = styled.svg`
   }
 `;
 
-const AchievementsHolder = styled.section`
+const AchievementsHolder = styled.div`
   position: relative;
-  margin: 1.5em;
   padding: 1em;
-  height: 75vh;
+  margin-bottom: 1em;
+  height: auto;
   width: 75vw;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-row-gap: 50px;
-  color: grey;
-  border: 2px dotted gray;
+  display: flex;
+  flex-flow: row wrap;
+  border: 5px solid #194d44;
   border-radius: 15px;
-  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.4);
-  overflow: scroll;
   &:hover {
+    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.4);
     background-color: rgba(0, 0, 0, 0.4);
   }
 `;
@@ -47,9 +48,9 @@ const FormHolder = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   position: relative;
-  padding: 2em;
+  padding: 1em;
   margin: 10px 250px;
-  margin-top: 2em;
+  margin-top: 1em;
   height: auto;
   width: 1fr;
 `;
@@ -69,13 +70,24 @@ const UploadButton = styled.button`
   }
 `;
 
+const BootCampDiv = styled.div`
+  padding: 1em;
+  margin-top: 2em;
+  &:hover {
+    transform: scale(1.3);
+  }
+`;
+
 const AchievementCard = styled.div`
-  height: 400px;
+  height: auto;
+  max-height: 500px;
   width: 300px;
-  padding: .5em, 1em;
+  padding: 0.5em, 1em;
   margin: 1em;
+  background-color: lightgray;
   border: 2px solid gray;
   border-radius: 10px;
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.4);
   &:hover {
     background-color: rgba(0, 0, 0, 0.4);
     cursor: pointer;
@@ -87,15 +99,26 @@ const Image = styled.img`
   margin: 10px;
   border-radius: 10px;
   max-width: 275px;
-  &:hover{
+  &:hover {
     transform: translateZ(150%);
   }
+`;
+
+const DeleteButton = styled.svg`
+  display: block;
+  border: transparent;
+  background-color: transparent;
+  color: #194d44;
+  margin: 0 auto;
+  padding: 5px;
+  height: 40px;
+  width: 40px;
 `;
 
 const Achievements = (props) => {
   const { account } = props;
 
-  const [ clicked, setClicked ] = useState("none")
+  const [clicked, setClicked] = useState("none");
   const [achievements, setAchievements] = useState([]);
   const [newAchievement, setNewAchievement] = useState({
     name: "",
@@ -107,11 +130,10 @@ const Achievements = (props) => {
     setAchievements(data);
   };
 
-  
   useEffect(() => {
     fetchAchievements();
   }, []);
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -121,60 +143,68 @@ const Achievements = (props) => {
       formData.append("accountId", account.id);
       let achievement = await __CreateAchievement(formData);
       fetchAchievements();
-      setNewAchievement()
-      setClicked()
-      e.target.reset()
-    }
-    catch (error) {
-      console.log(error)
+      setNewAchievement();
+      setClicked();
+      e.target.reset();
+    } catch (error) {
+      console.log(error);
     }
   };
-  
+
   const handleChange = (e) => {
     setNewAchievement({
       ...newAchievement,
       [e.target.name]:
-      e.target.type === "file" ? e.target.files[0] : e.target.value,
+        e.target.type === "file" ? e.target.files[0] : e.target.value,
     });
   };
-  
+
   const handleDelete = async (achievement) => {
     let id = achievement.id;
     const updatedAchievements = await __DeleteAchievement(id);
     setAchievements(updatedAchievements);
     fetchAchievements();
   };
-  
+
   // --> clicking Upload Button to display file input
   const hiddenFileInput = React.useRef(null);
   const uploadClick = () => {
-    hiddenFileInput.current.click()  
-    toggleClick()
-  }
-  
+    hiddenFileInput.current.click();
+    toggleClick();
+  };
+
   const toggleClick = () => {
     setTimeout(() => {
-    clicked === "none" ? setClicked("list-item") : setClicked("none")
-    }, 3000)
-  }
+      clicked === "none" ? setClicked("list-item") : setClicked("none");
+    }, 3000);
+  };
 
   return (
     <div>
       <header className="head">
         <h1>{account.firstName}'s Achievements</h1>
       </header>
+      <BootCampDiv>
+        <h1 style={{ textDecoration: `underline #194d44` }}>Bootcamp:</h1>
+        <h2>
+          {account.bootcamp}
+          <Icon>
+            <FontAwesomeIcon icon={faCheckSquare} />
+          </Icon>
+        </h2>
+      </BootCampDiv>
       <FormHolder>
-          <UploadButton onClick={uploadClick}>
-            Upload an Achievement
-            <input
-              type="file"
-              ref={hiddenFileInput}
-              placeholder="Upload A File"
-              name="achievementImage"
-              onChange={handleChange}
-              style={{ display: "none" }}
-            />
-          </UploadButton>
+        <UploadButton onClick={uploadClick}>
+          Upload an Achievement
+          <input
+            type="file"
+            ref={hiddenFileInput}
+            placeholder="Upload A File"
+            name="achievementImage"
+            onChange={handleChange}
+            style={{ display: "none" }}
+          />
+        </UploadButton>
         <form onSubmit={handleSubmit} className="dark-form">
           <input
             className="dark-form"
@@ -195,28 +225,27 @@ const Achievements = (props) => {
           </button>
         </form>
       </FormHolder>
-      <div>
-          <h2>{account.bootcamp}
-          <Icon>
-            <FontAwesomeIcon icon={faCheckSquare}/>
-          </Icon>
-          </h2>
-      </div>
-      <AchievementsHolder>
-          {achievements.length ? (
-            achievements.map((achievement, index) => (
-              <AchievementCard key={index}>
-                <h4>{achievement.name}</h4>
-                <Image src={achievement.achievementImage} alt="uploaded post"/>
-                <button onClick={() => handleDelete(achievement)}>
-                  Delete
-                </button>
-              </AchievementCard>
-            ))
-          ) : (
-            <h3>No Posts Yet</h3>
-          )}
+        {!achievements.length ? (
+      <AchievementsHolder style={{border: `none`}}>
+          <h3 style={{margin: `0 auto`}}>No Posts Yet</h3>
       </AchievementsHolder>
+        ) : (
+       <AchievementsHolder>   
+          {achievements.map((achievement, index) => (
+            <AchievementCard key={index}>
+              <h4 style={{ color: `#194d44` }}>{achievement.name}</h4>
+              <Image src={achievement.achievementImage} alt="uploaded post" />
+              <DeleteButton
+                type="button"
+                onClick={() => handleDelete(achievement)}
+              >
+                <FontAwesomeIcon icon={faTrashAlt} />
+              </DeleteButton>
+            </AchievementCard>
+          ))}
+      </AchievementsHolder>
+        )
+        }
     </div>
   );
 };
