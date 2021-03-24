@@ -49,6 +49,17 @@ const SubmitButton = styled.button`
   }
 `;
 
+const EnlargeDiv = styled.div`
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
+const Link = styled.a`
+  color: white;
+  text-decoration: none;
+`;
+
 const SignUp = (props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -56,6 +67,7 @@ const SignUp = (props) => {
   const [password, setPassword] = useState("");
   const [bootcamp, setBootcamp] = useState("");
   const [formError, setFormError] = useState(false);
+  const [validSubmit, setValidSubmit] = useState(false)
 
   const formFieldChange = (e) => {
     const fieldName = e.target.name;
@@ -94,6 +106,7 @@ const SignUp = (props) => {
     };
     try {
       const accountResponse = await __RegisterUser(formState);
+      setValidSubmit(true)
       props.setAccount(accountResponse);
       props.history.push("/home");
     } catch (error) {
@@ -104,8 +117,10 @@ const SignUp = (props) => {
   return (
     <FormContainer>
       <FormContent onSubmit={(e) => handleSubmit(e)}>
-        <h1 className="white">Create Your Profile</h1>
-        <div className="form-input">
+        <EnlargeDiv>
+          <h1 className="white">Create Your Profile</h1>
+        </EnlargeDiv>
+        <EnlargeDiv className="form-input">
           <label htmlFor="firstName">
             <TextInput
               className="form-input"
@@ -115,8 +130,8 @@ const SignUp = (props) => {
               onChange={formFieldChange}
             />
           </label>
-        </div>
-        <div className="form-input">
+        </EnlargeDiv>
+        <EnlargeDiv className="form-input">
           <label htmlFor="lastName">
             <TextInput
               className="form-input"
@@ -126,8 +141,8 @@ const SignUp = (props) => {
               onChange={formFieldChange}
             />
           </label>
-        </div>
-        <div className="form-input">
+        </EnlargeDiv>
+        <EnlargeDiv className="form-input">
           <label htmlFor="email" className="form-label">
             <TextInput
               className="form-input"
@@ -137,8 +152,8 @@ const SignUp = (props) => {
               onChange={formFieldChange}
             />
           </label>
-        </div>
-        <div className="form-input">
+        </EnlargeDiv>
+        <EnlargeDiv className="form-input">
           <label htmlFor="password" className="form-label">
             <TextInput
               className="form-input"
@@ -148,8 +163,8 @@ const SignUp = (props) => {
               onChange={formFieldChange}
             />
           </label>
-        </div>
-        <div className="form-input">
+        </EnlargeDiv>
+        <EnlargeDiv className="form-input">
           <label htmlFor="bootcamp" className="form-label">
             <TextInput
               className="form-input"
@@ -159,20 +174,26 @@ const SignUp = (props) => {
               onChange={formFieldChange}
             />
           </label>
-        </div>
+        </EnlargeDiv>
         <div className="submit-button">
           <SubmitButton className="submit-button">Submit</SubmitButton>
         </div>
-        {formError ? (
-          <alert>All Fields Required</alert>
-        ) : (
-          <p>Thanks for signing up!</p>
-        )}
-        <div>
+        <EnlargeDiv>
+          {formError ? (
+            <alert>All Fields Required</alert>
+          ) : !formError && validSubmit ? (
+            <alert>Thanks for signing up!</alert>
+          ) : (
+            <NavLink to="/signin">
+              <Link>Have an account?</Link>
+            </NavLink>
+          )}
+        </EnlargeDiv>
+        {/* <div>
           <NavLink to="/signin" className="nav-active">
             <p>Already have an account?</p>
           </NavLink>
-        </div>
+        </div> */}
       </FormContent>
     </FormContainer>
   );
