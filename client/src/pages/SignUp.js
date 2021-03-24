@@ -67,14 +67,14 @@ const SignUp = (props) => {
   const [password, setPassword] = useState("");
   const [bootcamp, setBootcamp] = useState("");
   const [formError, setFormError] = useState(false);
-  const [validSubmit, setValidSubmit] = useState(false)
+  const [validSubmit, setValidSubmit] = useState(false);
 
   const formFieldChange = (e) => {
     const fieldName = e.target.name;
-    const fieldValue = e.target.value; 
-      if (fieldValue === '' || fieldValue === null) {
-        setFormError(true)
-        return
+    const fieldValue = e.target.value;
+    if (fieldValue === "" || fieldValue === null) {
+      setFormError(true);
+      return;
     }
     switch (fieldName) {
       case "firstName":
@@ -96,23 +96,40 @@ const SignUp = (props) => {
   };
 
   const handleSubmit = async (event) => {
+    console.log("handleSubmit hit");
     event.preventDefault();
     const formState = {
       firstName: firstName,
       lastName: lastName,
       email: email,
       password: password,
-      bootcamp: bootcamp
+      bootcamp: bootcamp,
     };
     try {
       const accountResponse = await __RegisterUser(formState);
-      setValidSubmit(true)
       props.setAccount(accountResponse);
       props.history.push("/home");
     } catch (error) {
       setFormError(true);
     }
   };
+
+  // STILL IN DEVELOPMENT IF SHORT-CIRCUIT / TERNARY DOESNT WORK ("https://blog.logrocket.com/conditional-rendering-in-react-c6b0e5af381e/")
+  // const renderAlert = () => {
+  //   let alert;
+  //   if (formError === true) {
+  //     alert =
+  //     <alert>
+  //       *All Fields Required
+  //     </alert>
+  //   } else if (validSubmit) {
+  //     alert =
+  //     <alert>
+  //       Thanks for signing up!
+  //     </alert>
+  //   }
+  //   return alert
+  // }
 
   return (
     <FormContainer>
@@ -178,22 +195,23 @@ const SignUp = (props) => {
         <div className="submit-button">
           <SubmitButton className="submit-button">Submit</SubmitButton>
         </div>
-        <EnlargeDiv>
-          {formError ? (
-            <alert>All Fields Required</alert>
-          ) : !formError && validSubmit ? (
+        {validSubmit && (
+          <EnlargeDiv>
             <alert>Thanks for signing up!</alert>
-          ) : (
+          </EnlargeDiv>
+        )}
+        {formError ? (
+          <EnlargeDiv>
+            <alert>All Fields Required</alert>
             <NavLink to="/signin">
               <Link>Have an account?</Link>
             </NavLink>
-          )}
-        </EnlargeDiv>
-        {/* <div>
-          <NavLink to="/signin" className="nav-active">
-            <p>Already have an account?</p>
+          </EnlargeDiv>
+        ) : (
+          <NavLink to="/signin">
+            <Link>Have an account?</Link>
           </NavLink>
-        </div> */}
+        )}
       </FormContent>
     </FormContainer>
   );
