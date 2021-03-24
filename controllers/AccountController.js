@@ -13,7 +13,7 @@ const getOne = async (req, res) => {
     });
     res.send(entity);
   } catch (error) {
-    console.log(error)
+    throw error;
   }
 };
 
@@ -27,7 +27,7 @@ const createOne = async (req, res) => {
     await newAccount.save();
     res.send(newAccount);
   } catch (error) {
-    console.log(error)
+    throw error;
   }
 };
 

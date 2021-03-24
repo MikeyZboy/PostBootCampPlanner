@@ -57,8 +57,8 @@ const SignIn = (props) => {
         props.history.push('/home')
       }
     } catch (error) {
-      console.log(error)
       setFormError(true);
+      throw error
     }
   };
 

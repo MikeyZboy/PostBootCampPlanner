@@ -12,7 +12,6 @@ const Favicon = styled.img`
 `;
 
 const Lesson = (props) => {  
-  // console.log('lesson props', props)
     return (
       <div>
         <a value={props.lesson.id} href={props.lesson.link}>

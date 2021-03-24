@@ -28,7 +28,6 @@ const InProgressList = (props) => {
   }, []);
 
   const changeStatus = async (e, lesson) => {
-    console.log("changeStatus IPGL", e, lesson);
     let id = lesson.id;
     let formData = {
       title: lesson.title,

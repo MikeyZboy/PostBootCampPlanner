@@ -1,6 +1,5 @@
 import React from "react";
 import Goal from "../components/Goal";
-import Calendar from "../components/Calendar";
 import "../styles/Layout.css";
 
 export default (props) => {
@@ -17,7 +16,6 @@ export default (props) => {
         </div>
         <div className="main">
           {/* Let's Do A Pomodoro Timer w/Tasks! */}
-          {/* <Calendar /> */}
         </div>
       </div>
     );

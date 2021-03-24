@@ -147,7 +147,7 @@ const Achievements = (props) => {
       setClicked();
       e.target.reset();
     } catch (error) {
-      console.log(error);
+       throw error
     }
   };
 
@@ -166,7 +166,6 @@ const Achievements = (props) => {
     fetchAchievements();
   };
 
-  // --> clicking Upload Button to display file input
   const hiddenFileInput = React.useRef(null);
   const uploadClick = () => {
     hiddenFileInput.current.click();

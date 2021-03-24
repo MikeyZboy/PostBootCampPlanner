@@ -8,7 +8,6 @@ const getAll = async (req, res) => {
     });
     res.send(resources);
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
@@ -23,7 +22,6 @@ const createOne = async (req, res) => {
     let resourceLink = await Resource.create(resourceBody);
     res.send(resourceLink);
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
@@ -37,13 +35,11 @@ const updateOne = async (req, res) => {
     });
     res.send(updatedEntity);
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
 
 const deleteOne = async (req, res) => {
-  console.log("deleteOne hit:", req.body);
   try {
     let entityId = parseInt(req.params.id);
     await Resource.destroy({
@@ -57,7 +53,6 @@ const deleteOne = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };

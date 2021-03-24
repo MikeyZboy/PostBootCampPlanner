@@ -5,7 +5,6 @@ export const __GetAchievements = async () => {
     const res = await ApiClient.get("/achievements");
     return res.data;
   } catch (error) {
-    console.log(error)
     throw error;
   }
 };
@@ -15,7 +14,6 @@ export const __CreateAchievement = async (formData) => {
     const res = await ApiClient.post("/achievements", formData);
     return res.data;
   } catch (error) {
-    console.log(error)
     throw error;
   }
 };
@@ -25,7 +23,6 @@ export const __DeleteAchievement = async (id) => {
     const res = await ApiClient.delete(`/achievements/${id}`)
     return res.data
   } catch (error) {
-    console.log(error)
     throw error
   }
 }

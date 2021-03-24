@@ -18,7 +18,6 @@ export const __UpdateGoal = async (userData) => {
     );
     return res.data[1].goal;
   } catch (error) {
-    console.log(error)
     throw error;
   }
 };

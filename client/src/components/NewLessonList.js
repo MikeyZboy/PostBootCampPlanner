@@ -21,7 +21,6 @@ const NewLessonList = (props) => {
   const getLessons = async () => {
     let userLessons = await __GetLessons(props.account.id);
     setLessons(userLessons);
-    // console.log(" getLessons fired");
   };
 
   useEffect(() => {
@@ -29,7 +28,6 @@ const NewLessonList = (props) => {
   }, []);
 
   const changeStatus = async (e, lesson) => {
-    console.log('changeStatus NLL',e.target.value, lesson)
     let id = lesson.id;
     let formData = {
       title: lesson.title,
@@ -49,7 +47,7 @@ const NewLessonList = (props) => {
     setLessons(newLessons);
     getLessons();
   };
-  // console.log('NewLessonList', lessons)
+  
   return (
     <div>
       {lessons.length ? (

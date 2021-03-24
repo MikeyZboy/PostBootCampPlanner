@@ -45,7 +45,6 @@ const Goal = (props) => {
             contentEditable
           />
         </form>
-        {/* Pomodoro Timer! with useState/Effect to change the document title to counter*/}
       </div>
     );
 };

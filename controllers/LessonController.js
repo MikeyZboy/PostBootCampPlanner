@@ -7,19 +7,12 @@ const getAll = async (req, res) => {
       where: { account_id: entityId },
     });
     res.send(lessons);
-    console.log(
-      "LessonController,getAll, entityId,lessons:",
-      entityId,
-      lessons
-    );
   } catch (error) {
-    console.log(error)
     throw error;
   }
 };
 
 const createOne = async (req, res) => {
-  console.log("LessonController, createOne HIT:", req.body);
   const accountId = req.params.account_id;
   try {
     let lessonBody = {
@@ -29,11 +22,10 @@ const createOne = async (req, res) => {
     let lessonData = await Lesson.create(lessonBody);
     res.send(lessonData);
   } catch (error) {
-    console.log(error)
     throw error;
   }
 };
-// borrow from TodoController <-- myd project
+
 const getOne = async (req, res) => {
   try {
     let entityId = req.params.id;
@@ -45,7 +37,6 @@ const getOne = async (req, res) => {
 };
 
 const updateOne = async (req, res) => {
-  console.log('LessonController updateOne HIT, req.params.id, req.body,', req.params.id, req.body)
   try {
     let entity = parseInt(req.params.id);
     let updatedEntity = await Lesson.update(req.body, {
@@ -54,13 +45,11 @@ const updateOne = async (req, res) => {
     });
     res.send(updatedEntity);
   } catch (error) {
-    console.log(error)
     throw error;
   }
 };
 
 const deleteOne = async (req, res) => {
-  console.log('deleteOne:', req)
   try {
     let entityId = parseInt(req.params.id);
     await Lesson.destroy({
@@ -74,7 +63,6 @@ const deleteOne = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error)
     throw error;
   }
 };

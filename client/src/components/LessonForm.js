@@ -61,7 +61,6 @@ const LessonForm = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // e.target.reset()
     try {
       let formState = {
         title: title,
@@ -73,8 +72,8 @@ const LessonForm = (props) => {
       const newLesson = await __CreateLesson(formState);
       props.addLesson(newLesson);
     } catch (error) {
-      console.log(error)
       setFormError(true);
+      throw error
     }
   };
 

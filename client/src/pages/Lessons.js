@@ -79,7 +79,6 @@ const Lessons = (props) => {
   const addLesson = (lesson) => {
     setLessons([...lessons, lesson]);
     getLessons();
-    console.log('Lessons.js, addLesson HIT')
   };
 
   useEffect(() => {
@@ -88,18 +87,17 @@ const Lessons = (props) => {
 
   const changeStatus = async (e, lesson) => {
     let statusValue = e.target.value;
-    let id = props.account.id; //<-- should this be lesson id
+    let id = props.account.id; 
     let formData = {
       title: lesson.title,
       category: lesson.category,
       link: lesson.link,
       status: statusValue,
-      account_id: id, // <-- should this be lesson id, pushed to lessonservice?
+      account_id: id,
     };
     let updatedLessons = await __UpdateLesson(id, formData);
     setLessons(updatedLessons);
     getLessons();
-    console.log('lessons.js changeStatus HIT')
   };
 
   const removeLesson = async (lesson) => {
@@ -107,7 +105,6 @@ const Lessons = (props) => {
     const newLessons = await __DeleteLesson(id);
     setLessons(newLessons);
     getLessons();
-    console.log('lessons.js, removeLesson hit')
   };
 
   return (
@@ -135,17 +132,12 @@ const Lessons = (props) => {
               </AddLessonButton>
             )}
           </div>
-          {/* )} */}
-          {/* {account.lessons.length ? ( */}
             <NewLessonList
               account={account}
               getLessons={getLessons}
               changeStatus={changeStatus}
               removeLesson={removeLesson}
             />
-          {/* ) : (
-            <p>No new lessons in progress</p>
-          )} */}
         </Column>
         <Column>
           <h4>In Progress</h4>

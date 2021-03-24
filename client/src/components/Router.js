@@ -16,7 +16,6 @@ const Router = () => {
 
   const [account, setAccount] = useState(null);
   const [needsRefresh, setNeedsRefresh] = useState(false);
-  // const [authenticated, setAuthenticated] = useState(false)
 
   const retrieveAccount = async () => {
     const localAccountId = localStorage.getItem("account_id");
@@ -28,37 +27,12 @@ const Router = () => {
   };
 
   useEffect(() => {
-    // verifyTokenValid();
     retrieveAccount();
   }, []);
 
   const clearAccount = () => {
     setAccount(null);
   };
-
-  // const verifyTokenValid = async () => {
-  //   const token = localStorage.getItem('token')
-  //   if (token) {
-  //     try {
-  //       const session = await __CheckSession()
-  //       setAccount(session)
-  //       setAuthenticated(true)
-  //       // props.history.push('/home')
-  //     } catch (error) {
-  //       console.log(error)
-  //       setAuthenticated(false)
-  //       localStorage.clear()
-  //     }
-  //   }
-  // }
-
-  // const toggleAuthenticated = (value, user, done) => {
-  //   console.log("toggleAuthenticated HIT: value, user", toggleAuthenticated, value, user)
-  //   setAuthenticated(value)
-  //   setAccount()
-  //   done()
-  // }
-  
 
   return (
     <main>
@@ -77,7 +51,6 @@ const Router = () => {
             <SignIn
               {...props}
               setAccount={setAccount}
-              // toggleAuthenticated={toggleAuthenticated}
             />
           )}
         />

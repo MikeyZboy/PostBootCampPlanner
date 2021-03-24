@@ -28,7 +28,6 @@ const CompletedList = (props) => {
   }, []);
 
   const changeStatus = async (e, lesson) => {
-    console.log("changeStatus CL", e, lesson);
     let id = lesson.id;
     let formData = {
       title: lesson.title,

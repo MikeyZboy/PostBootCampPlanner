@@ -4,15 +4,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-
-    static associate(models) {
-      // User.hasOne(models.Account, {
-      //   foreignKey: 'userId',
-      //   as: 'user_id',
-      //   onDelete: 'cascade',
-      //   onUpdate: 'cascade'
-      // })  
-    }
+    static associate(models) {}
   };
   User.init({
     email: DataTypes.STRING,

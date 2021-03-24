@@ -24,7 +24,6 @@ export default () => {
 
   const clearAccount = async () => {
     localStorage.clear("account_id");
-    console.log("account cleared");
     setSignedOut(true);
   };
 
