@@ -11,7 +11,6 @@ const FormContainer = styled.div`
   width: 30%;
   margin: 0 auto;
   margin-top: 2em;
-  padding-top: 1em;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,11 +27,27 @@ const FormContainer = styled.div`
 
 const FormContent = styled.form`
   padding: 20px;
-  margin-top: 20px;
+  margin-top: 5px;
   margin: 50px auto;
   position: center;
 `;
 
+const SubmitButton = styled.button`
+  position: relative;
+  border: 2px solid gray;
+  box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 1em;
+  margin: 1em;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  font-family: "Roboto Mono", monospace;
+  font-weight: bolder;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+`;
 
 const SignUp = (props) => {
   const [firstName, setFirstName] = useState("");
@@ -146,7 +161,7 @@ const SignUp = (props) => {
           </label>
         </div>
         <div className="submit-button">
-          <button className="submit-button">Submit</button>
+          <SubmitButton className="submit-button">Submit</SubmitButton>
         </div>
         {formError ? (
           <alert>All Fields Required</alert>
