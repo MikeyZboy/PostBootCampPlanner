@@ -27,7 +27,16 @@ const Icon = styled.svg`
   }
 `;
 
-const AchievementsHolder = styled.div`
+const PreAchievementsHolder = styled.div`
+  position: relative;
+  padding: 1em;
+  margin-bottom: 1em;
+  height: auto;
+  width: 75vw;
+  border: none;
+`;
+
+const PostAchievementsHolder = styled.div`
   position: relative;
   padding: 1em;
   margin-bottom: 1em;
@@ -56,17 +65,19 @@ const FormHolder = styled.div`
 `;
 
 const UploadButton = styled.button`
-  width: 1fr;
-  font-size: 1.5em;
-  font-weight: 700;
-  margin: 1em;
+  max-width: 75vw;
+  font-size: 1.25em;
+  font-weight: 600;
+  margin: 0.5em;
   padding: 0.25em 1em;
-  border: 2px solid gray;
-  border-radius: 3px;
-  background: #194d44;
-  color: white;
+  border: none;
+  background: transparent;
+  color: #194d44;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: #194d44;
+    color: white;
+    border: 2px solid gray;
+    border-radius: 3px;
   }
 `;
 
@@ -118,6 +129,7 @@ const DeleteButton = styled.svg`
 const Achievements = (props) => {
   const { account } = props;
 
+  const [show, setShow] = useState(false)
   const [clicked, setClicked] = useState("none");
   const [achievements, setAchievements] = useState([]);
   const [newAchievement, setNewAchievement] = useState({
@@ -172,6 +184,10 @@ const Achievements = (props) => {
     toggleClick();
   };
 
+  const handleShow = () => {
+    show === false ? setShow(true) : setShow(false)
+  }
+
   const toggleClick = () => {
     setTimeout(() => {
       clicked === "none" ? setClicked("list-item") : setClicked("none");
@@ -193,8 +209,8 @@ const Achievements = (props) => {
         </h2>
       </BootCampDiv>
       <FormHolder>
-        <UploadButton onClick={uploadClick}>
-          Upload an Achievement
+        <UploadButton onClick={uploadClick} onMouseOver={handleShow} onMouseOut={handleShow}>
+          Post Something You're Proud Of!
           <input
             type="file"
             ref={hiddenFileInput}
@@ -225,11 +241,13 @@ const Achievements = (props) => {
         </form>
       </FormHolder>
         {!achievements.length ? (
-      <AchievementsHolder style={{border: `none`}}>
+          <PreAchievementsHolder>
+          { show && 
           <h3 style={{margin: `0 auto`}}>No Posts Yet</h3>
-      </AchievementsHolder>
+        }
+      </PreAchievementsHolder>
         ) : (
-       <AchievementsHolder>   
+       <PostAchievementsHolder>   
           {achievements.map((achievement, index) => (
             <AchievementCard key={index}>
               <h4 style={{ color: `#194d44` }}>{achievement.name}</h4>
@@ -242,7 +260,7 @@ const Achievements = (props) => {
               </DeleteButton>
             </AchievementCard>
           ))}
-      </AchievementsHolder>
+      </PostAchievementsHolder>
         )
         }
     </div>
