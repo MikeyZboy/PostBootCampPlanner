@@ -5,7 +5,6 @@ import { __RegisterUser } from '../services/UserService'
 import "../styles/Form.css"
 import "../styles/Buttons.css"
 import styled from 'styled-components'
-import { reset } from "nodemon";
 
 const FormContainer = styled.div`
   height: auto;
@@ -57,7 +56,7 @@ const EnlargeDiv = styled.div`
 `;
 
 const Alert = styled.p`
-  padding: 5px;
+  padding: 25px;
   display: block; 
 `;
 
@@ -67,13 +66,6 @@ const Link = styled.a`
 `;
 
 const SignUp = (props) => {
-  const [form, setForm] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    bootcamp: ''
-  })
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -81,14 +73,11 @@ const SignUp = (props) => {
   const [bootcamp, setBootcamp] = useState("");
   const [formError, setFormError] = useState(false);
   const [validSubmit, setValidSubmit] = useState(false);
-  const [ show, setShow ] = useState(false)
 
   const formFieldChange = (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
     if (fieldValue === "" || fieldValue === null) {
-      setShow(true)
-      setForm()
       setFormError(true);
       return;
     }
@@ -114,7 +103,6 @@ const SignUp = (props) => {
   const handleSubmit = async (event) => {
     console.log("handleSubmit hit");
     event.preventDefault();
-    try {
     const formState = {
       firstName: firstName,
       lastName: lastName,
@@ -122,14 +110,12 @@ const SignUp = (props) => {
       password: password,
       bootcamp: bootcamp,
     };
+    try {
       const accountResponse = await __RegisterUser(formState);
       props.setAccount(accountResponse);
       props.history.push("/home");
     } catch (error) {
-      setShow()
-      setForm()
       setFormError(true);
-      throw error
     }
   };
 
@@ -214,21 +200,22 @@ const SignUp = (props) => {
         <div className="submit-button">
           <SubmitButton className="submit-button">Submit</SubmitButton>
         </div>
-        {validSubmit &&
+        {validSubmit && (
           <EnlargeDiv>
             <Alert>Thanks for signing up!</Alert>
           </EnlargeDiv>
-        }
-        {show ? (
+        )}
+        {formError ? (
           <EnlargeDiv>
             <Alert>All Fields Required</Alert>
+            <NavLink to="/signin">
+              <Link>Have an account?</Link>
+            </NavLink>
           </EnlargeDiv>
         ) : (
-          <EnlargeDiv>
           <NavLink to="/signin">
             <Link>Have an account?</Link>
           </NavLink>
-          </EnlargeDiv>
         )}
       </FormContent>
     </FormContainer>

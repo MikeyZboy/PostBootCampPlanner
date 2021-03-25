@@ -32,6 +32,29 @@ const FormContent = styled.form`
   position: center;
 `;
 
+const EnlargeDiv = styled.div`
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
+const SubmitButton = styled.button`
+  position: relative;
+  border: 2px solid gray;
+  box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 1em;
+  margin: 1em;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  font-family: "Roboto Mono", monospace;
+  font-weight: bolder;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+`;
+
 const SignIn = (props) => {
 
   const { setAccount } = props;
@@ -65,8 +88,10 @@ const SignIn = (props) => {
   return (
     <FormContainer>
       <FormContent onSubmit={(e) => handleSubmit(e)}>
+        <EnlargeDiv>
         <h1 className="white">Sign In</h1>
-        <div className="form-input">
+        </EnlargeDiv>
+        <EnlargeDiv className="form-input">
           <label htmlFor="email" className="form-label">
             <TextInput
               placeholder="Email"
@@ -75,8 +100,8 @@ const SignIn = (props) => {
               onChange={emailField}
             />
           </label>
-        </div>
-        <div className="form-input">
+        </EnlargeDiv>
+        <EnlargeDiv className="form-input">
           <label htmlFor="password" className="form-label">
             <TextInput
               className="form-input"
@@ -86,10 +111,10 @@ const SignIn = (props) => {
               onChange={passwordField}
             />
           </label>
-        </div>
-        <div className="submit-button">
-          <button className="submit-button">Submit</button>
-        </div>
+        </EnlargeDiv>
+        <EnlargeDiv>
+          <SubmitButton>Submit</SubmitButton>
+        </EnlargeDiv>
       </FormContent>
     </FormContainer>
   );
