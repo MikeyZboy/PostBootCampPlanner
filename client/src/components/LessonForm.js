@@ -101,7 +101,7 @@ const LessonForm = (props) => {
           value={props.value}
           onChange={handleChange}
         />
-        <Button type="reset" onClick={(e)=> {handleSubmit(e)}}>
+        <Button type="reset" onSubmit={handleSubmit}>
           <FontAwesomeIcon icon={faPlus} />
         </Button>
       </InlineForm>

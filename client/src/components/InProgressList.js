@@ -74,14 +74,10 @@ const InProgressList = (props) => {
         <button onClick={(e) => removeLesson(e,lesson)}>REMOVE</button>
         </LessonCard>
       ) : (
-        <div>
-          Save for a FontAwesome Img
-        </div>
+        <></>
       )
       ))) : (
-        <div>
-            Save for a FontAwesome Img
-        </div>
+        <></>
       )
     }
     </div>

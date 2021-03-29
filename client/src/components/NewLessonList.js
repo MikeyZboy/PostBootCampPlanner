@@ -6,6 +6,8 @@ import {
   __UpdateLesson,
 } from "../services/LessonService";
 import styled from 'styled-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClipboardList } from '@fortawesome/free-solid-svg-icons'
 
 const LessonCard = styled.ul`
   position: relative;
@@ -72,11 +74,11 @@ const NewLessonList = (props) => {
               </button>
             </LessonCard>
           ) : (
-            <div>Save for a FontAwesome Img</div>
+            <></>
           )
         )
       ) : (
-        <div>Save for a FontAwesome Img</div>
+        <FontAwesomeIcon ico={faClipboardList}/>
       )}
     </div>
   );
