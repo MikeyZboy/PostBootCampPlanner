@@ -50,40 +50,32 @@ const InProgressList = (props) => {
 
   return (
     <div>
-      {lessons.length ? 
-      (lessons.map((lesson, index) => (
-        lesson.status === "In Progress" ? (
-        <LessonCard>
-          <Lesson
-            key={index}
-            lesson={lesson}
-            props={props}
-          />
-        <button
-          onClick={(e) => changeStatus(e, lesson)}
-          value={"Not Started"}
-        >
-          Not Started
-        </button>
-        <button
-          onClick={(e) => changeStatus(e, lesson)}
-          value={"Complete"}
-        >
-          Done!
-        </button>
-        <button onClick={(e) => removeLesson(e,lesson)}>REMOVE</button>
-        </LessonCard>
+      {lessons.length ? (
+        lessons.map((lesson, index) =>
+          lesson.status === "In Progress" ? (
+            <LessonCard>
+              <Lesson key={index} lesson={lesson} props={props} />
+              <button
+                onClick={(e) => changeStatus(e, lesson)}
+                value={"Not Started"}
+              >
+                Not Started
+              </button>
+              <button
+                onClick={(e) => changeStatus(e, lesson)}
+                value={"Complete"}
+              >
+                Done!
+              </button>
+              <button onClick={(e) => removeLesson(e, lesson)}>REMOVE</button>
+            </LessonCard>
+          ) : (
+            <></>
+          )
+        )
       ) : (
-        <div>
-          Save for a FontAwesome Img
-        </div>
-      )
-      ))) : (
-        <div>
-            Save for a FontAwesome Img
-        </div>
-      )
-    }
+        <></>
+      )}
     </div>
   );
 }

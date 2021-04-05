@@ -61,16 +61,19 @@ const CompletedList = (props) => {
               >
                 Still Working
               </button>
-              <button value={"Removed"} onClick={(e) => removeLesson(e, lesson)}>
+              <button
+                value={"Removed"}
+                onClick={(e) => removeLesson(e, lesson)}
+              >
                 REMOVE
               </button>
             </LessonCard>
           ) : (
-            <div>Save for a FontAwesome Img</div>
+            <></>
           )
         )
       ) : (
-        <div>Save for a FontAwesome Img</div>
+        <></>
       )}
     </div>
   );

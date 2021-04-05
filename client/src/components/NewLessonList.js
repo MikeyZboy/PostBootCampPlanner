@@ -56,7 +56,7 @@ const NewLessonList = (props) => {
             <LessonCard>
               <Lesson key={index} lesson={lesson} props={props} />
               <button
-                onClick={(e) => changeStatus(e,lesson)}
+                onClick={(e) => changeStatus(e, lesson)}
                 value={"In Progress"}
               >
                 Making Progress
@@ -67,16 +67,14 @@ const NewLessonList = (props) => {
               >
                 Done!
               </button>
-              <button onClick={(e) => removeLesson(e, lesson)}>
-                REMOVE
-              </button>
+              <button onClick={(e) => removeLesson(e, lesson)}>REMOVE</button>
             </LessonCard>
           ) : (
-            <div>Save for a FontAwesome Img</div>
+            <></>
           )
         )
       ) : (
-        <div>Save for a FontAwesome Img</div>
+        <></>
       )}
     </div>
   );

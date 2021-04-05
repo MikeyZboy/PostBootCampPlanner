@@ -46,14 +46,8 @@ const FormHolder = styled.div`
   background-color: #194d44;
 `;
 
-// const Button = styled.button`
-//   font-size: 1em;
-//   margin: 1em;
-//   padding: 0.25em 1em;
-//   color: transparent;
-// `;
-
 const AddLessonButton = styled.button`
+  margin-top: .5em;
   background-color: #194d44;
   color: white;
   border: 2px solid gray;
