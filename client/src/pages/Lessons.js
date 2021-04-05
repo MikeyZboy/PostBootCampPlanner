@@ -11,6 +11,8 @@ import {
 import "../styles/Layout.css";
 import "../styles/Card.css";
 import styled from "styled-components";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClipboardList, faChartLine, faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
 
 const ColumnsContainer = styled.section`
   position: relative;
@@ -44,18 +46,39 @@ const FormHolder = styled.div`
   background-color: #194d44;
 `;
 
-const Button = styled.button`
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  color: transparent;
-`;
+// const Button = styled.button`
+//   font-size: 1em;
+//   margin: 1em;
+//   padding: 0.25em 1em;
+//   color: transparent;
+// `;
 
 const AddLessonButton = styled.button`
   background-color: #194d44;
   color: white;
   border: 2px solid gray;
+  font-size: 1.25em;
+  font-weight: 600;
+  border-radius: 3px;
+  &:hover {
+    background-color: #194d44;
+    color: white;
+    border: 2px solid gray;
+  }
 `;
+
+const EnlargeDiv = styled.div`
+&:hover {
+   transform: scale(1.1);
+}
+`;
+
+const Icon = styled.svg`
+width: 40px;
+height: 40px;
+color: lightgray;
+`;
+
 
 const Lessons = (props) => {
   const { account } = props;
@@ -114,15 +137,20 @@ const Lessons = (props) => {
       </header>
       <ColumnsContainer className="main">
         <Column>
-          <h4>Not Started</h4>
-          <div>
+          <EnlargeDiv>
+            <h4>Not Started</h4>
+            <Icon>
+              <FontAwesomeIcon icon={faClipboardList} />
+            </Icon>
+          </EnlargeDiv>
+          <EnlargeDiv>
             {show === true ? (
               <FormHolder>
                 <p>Add Lesson</p>
                 <LessonForm
                   account={account}
                   addLesson={addLesson}
-                  onSubmit={(e)=>handleClick(e)}
+                  onSubmit={(e) => handleClick(e)}
                 />
               </FormHolder>
             ) : (
@@ -131,16 +159,21 @@ const Lessons = (props) => {
                 Add Lesson{" "}
               </AddLessonButton>
             )}
-          </div>
-            <NewLessonList
-              account={account}
-              getLessons={getLessons}
-              changeStatus={changeStatus}
-              removeLesson={removeLesson}
-            />
+          </EnlargeDiv>
+          <NewLessonList
+            account={account}
+            getLessons={getLessons}
+            changeStatus={changeStatus}
+            removeLesson={removeLesson}
+          />
         </Column>
         <Column>
-          <h4>In Progress</h4>
+          <EnlargeDiv>
+            <h4>In Progress</h4>
+            <Icon>
+              <FontAwesomeIcon icon={faChartLine} />
+            </Icon>
+          </EnlargeDiv>
           <InProgressList
             account={account}
             getLessons={getLessons}
@@ -149,7 +182,12 @@ const Lessons = (props) => {
           />
         </Column>
         <Column>
-          <h4>Complete</h4>
+          <EnlargeDiv>
+            <h4>Complete</h4>
+            <Icon>
+                <FontAwesomeIcon icon={faClipboardCheck} />
+            </Icon>
+          </EnlargeDiv>
           <CompletedList
             account={account}
             getLessons={getLessons}
