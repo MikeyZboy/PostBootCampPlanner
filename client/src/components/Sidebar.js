@@ -114,9 +114,16 @@ const LDTContainer = styled.div`
 `;
 
 const NavButtonsContainer = styled.div`
+  display: inline-block;
   padding: 10px;
   margin: 10px;
-  margin-top: 40px;
+`;
+
+const HideButtonsContainer = styled.div`
+  position: absolute;
+  margin: 10px;
+  top: 0;
+  left: 0;
 `;
 
 const MinimizedContainer = styled.div`
@@ -154,11 +161,7 @@ const Sidebar = () => {
     <div>
       {clicked ? (
         <SidebarContainer>
-          <LDTContainer>
-            <Logo src={PBCP} />
-            <DateTime />
-          </LDTContainer>
-          <NavButtonsContainer>
+          <HideButtonsContainer>
             <Icon
               onClick={(e) => handleClose(e)}
               style={{ display: `${sideBarCloseButton}` }}
@@ -168,7 +171,22 @@ const Sidebar = () => {
                 component={<SideBarCloseButton />}
               />
             </Icon>
-          </NavButtonsContainer>
+          </HideButtonsContainer>
+          <LDTContainer>
+            <Logo src={PBCP} />
+            <DateTime />
+          </LDTContainer>
+          {/* <NavButtonsContainer>
+            <Icon
+              onClick={(e) => handleClose(e)}
+              style={{ display: `${sideBarCloseButton}` }}
+            >
+              <FontAwesomeIcon
+                icon={faAngleDoubleLeft}
+                component={<SideBarCloseButton />}
+              />
+            </Icon>
+          </NavButtonsContainer> */}
           <SidebarMenu>
             <NavLink className="active" to="/home">
               <SidebarMenuItem>
@@ -202,10 +220,8 @@ const Sidebar = () => {
                 <SidebarMenuItemLabel>Achievements</SidebarMenuItemLabel>
               </SidebarMenuItem>
             </NavLink>
-          </SidebarMenu>
-          <SignOutButton>
             <NavLink className="active" to="/welcome">
-              <SidebarMenuItem>
+              <SidebarMenuItem style={{marginTop: `30px`}}>
                 <Icon style={{ transform: `scaleX(-1)` }}>
                   <FontAwesomeIcon
                     icon={faSignOutAlt}
@@ -215,7 +231,7 @@ const Sidebar = () => {
                 <SidebarMenuItemLabel>Sign Out</SidebarMenuItemLabel>
               </SidebarMenuItem>
             </NavLink>
-          </SignOutButton>
+          </SidebarMenu>
         </SidebarContainer>
       ) : (
         <MinimizedContainer>
