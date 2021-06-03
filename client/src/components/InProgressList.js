@@ -75,7 +75,8 @@ const InProgressList = (props) => {
         )
       ) : (
         <></>
-      )}
+      )
+    }
     </div>
   );
 }
