@@ -64,7 +64,7 @@ const ResourceForm = (props) => {
     };
 
     return (
-      <div>
+      // <div>
         <InlineForm onSubmit={handleSubmit}>
           <TextInput
             placeholder="Name"
@@ -88,7 +88,7 @@ const ResourceForm = (props) => {
             <FontAwesomeIcon icon={faPlus} />
           </Button>
         </InlineForm>
-      </div>
+      // </div>
     );
 }
 

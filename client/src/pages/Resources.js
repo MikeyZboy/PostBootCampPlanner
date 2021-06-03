@@ -10,16 +10,14 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
 const ResourcesContainer = styled.section`
-  position: relative;
-  height: 100vh;
-  width: 75vw;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-  color: grey;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0 auto;
   overflow: scroll;
   background-color: transparent;
 `;
@@ -45,21 +43,21 @@ const ResourceFormHolder = styled.div`
 `;
 
 const TopFormHolder = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  box-sizing: border-box;
+  // display: flex;
+  // flex-direction: column;
   grid-column: 1 / 5;
   grid-row: 1;
   margin: 0 auto;
-  height: 25%;
+  height: 10%;
   width: 75%;
-  text-align: center;
+  // text-align: center;
   color: white;
   font-size: large;
   border: 3px solid grey;
   border-radius: 15px;
-  align-items: center;
-  box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.2);
+  // align-items: center;
+  // box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.2);
   background-color: #194d44;
   overflow-y: hidden;
   &:hover {
