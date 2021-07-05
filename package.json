@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "nodemon server.js",
-    "build": "cd client && rm -rf build && npm install && npm run build",
+    "build": "cd client && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
