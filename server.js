@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const logger = require('morgan')
 const AppRouter = require("./routes/AppRouter");
 const helmet = require('helmet');
-const { Connection } = require("pg");
 const PORT = process.env.PORT || 3001;
 
 app.use(express.static(path.join(__dirname, 'client', 'build')))
@@ -16,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.disable('X-Powered-By')
 
 app.use("/api", AppRouter);
-app.get("*", (req, res) =>
+app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "client", "build", "index.html"))
 );
 
@@ -28,6 +27,5 @@ app.listen(PORT, async () => {
     } catch (error) {
         throw new Error('Connection error')
     }
-
 })
 
