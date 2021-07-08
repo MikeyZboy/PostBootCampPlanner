@@ -1,15 +1,17 @@
-const app = require("express")();
+const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser");
 const logger = require('morgan')
 const AppRouter = require("./routes/AppRouter");
 const helmet = require('helmet');
+const path = require("path")
+
 const PORT = process.env.PORT;
+const app = express();
 
 app.use(express.static(path.join(__dirname, 'client', 'build')))
+app.use(helmet({ contentSecurityPolicy: false}))
 app.use(cors());
 app.use(logger('dev'))
-app.use(helmet({ contentSecurityPolicy: false}))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.disable('X-Powered-By')
