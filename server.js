@@ -10,8 +10,8 @@ app.use(express.static(path.join(__dirname, 'client', 'build')))
 app.use(cors());
 app.use(logger('dev'))
 app.use(helmet({ contentSecurityPolicy: false}))
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.disable('X-Powered-By')
 
 app.use("/api", AppRouter);

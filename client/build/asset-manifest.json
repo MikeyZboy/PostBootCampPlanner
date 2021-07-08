@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1fcf37bc.chunk.css",
+    "main.js": "/static/js/main.04af45c4.chunk.js",
+    "main.js.map": "/static/js/main.04af45c4.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.c012fedc.js",
+    "runtime-main.js.map": "/static/js/runtime-main.c012fedc.js.map",
+    "static/js/2.d3e644bf.chunk.js": "/static/js/2.d3e644bf.chunk.js",
+    "static/js/2.d3e644bf.chunk.js.map": "/static/js/2.d3e644bf.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.1fcf37bc.chunk.css.map": "/static/css/main.1fcf37bc.chunk.css.map",
+    "static/js/2.d3e644bf.chunk.js.LICENSE.txt": "/static/js/2.d3e644bf.chunk.js.LICENSE.txt",
+    "static/media/PBCPlogo.6e52455c.png": "/static/media/PBCPlogo.6e52455c.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c012fedc.js",
+    "static/js/2.d3e644bf.chunk.js",
+    "static/css/main.1fcf37bc.chunk.css",
+    "static/js/main.04af45c4.chunk.js"
+  ]
+}
