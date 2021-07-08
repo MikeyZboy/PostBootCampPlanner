@@ -4,7 +4,8 @@
   "description": "Links: [Github](https://github.com/MikeyZboy) | [Linkedin](https://www.linkedin.com/in/mikezahuta/)",
   "main": "index.js",
   "engines": {
-    "node": "14.x"
+    "node": "14.x",
+    "npm": "7.18.1"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
