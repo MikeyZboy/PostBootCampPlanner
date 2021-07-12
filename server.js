@@ -1,9 +1,10 @@
-const app = require("express")();
+const express = require('express')
 const cors = require("cors");
-const bodyParser = require("body-parser");
 const logger = require('morgan')
 const AppRouter = require("./routes/AppRouter");
 const helmet = require('helmet');
+
+const app = express();
 const PORT = process.env.PORT;
 
 app.use(express.static(path.join(__dirname, 'client', 'build')))
