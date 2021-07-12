@@ -3,6 +3,7 @@ const cors = require("cors");
 const logger = require('morgan')
 const AppRouter = require("./routes/AppRouter");
 const helmet = require('helmet');
+const path = require('path')
 
 const PORT = process.env.PORT;
 const app = express();
