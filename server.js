@@ -4,8 +4,8 @@ const logger = require('morgan')
 const AppRouter = require("./routes/AppRouter");
 const helmet = require('helmet');
 
-const app = express();
 const PORT = process.env.PORT;
+const app = express();
 
 app.use(express.static(path.join(__dirname, 'client', 'build')))
 app.use(cors());
@@ -20,12 +20,4 @@ app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "client", "build", "index.html"))
 );
 
-app.listen(PORT || 3001, async () => {
-  try {
-    await connection;
-    console.log("Database connected");
-    console.log(`App Listening On Port: ${PORT}`);
-  } catch (error) {
-    throw new Error("Connection error");
-  }
-});
+app.listen(PORT, () => console.log(`Server started on Port: ${PORT}`));
