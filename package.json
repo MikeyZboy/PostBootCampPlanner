@@ -16,6 +16,7 @@
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "caniuse-lite": "^1.0.30001242",
+    "config-js": "^1.1.15",
     "cors": "^2.8.5",
     "dotenv": "^8.6.0",
     "express": "^4.17.1",
